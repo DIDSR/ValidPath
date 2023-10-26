@@ -1,4 +1,25 @@
-"""Whole Slide Annotation Extractor"""
+"""
+#
+# ---------------------------------------------------------------------------
+# Created on Fri Feb  4 11:42:52 2023
+#
+# @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
+#----------------------------------------------------------------------------
+# Title:        Whole Slide Image Processing Toolbox - Annotation Extractor module
+#
+# Description:  This is the AnnotationExtractor module for the whole slide  
+#               image processing toolbox. It is includes AnnotationExtractor 
+#               class and several methods.
+#
+#
+# Methods:      make_folder
+#               extract_ann
+#
+# version ='3.0'
+# ---------------------------------------------------------------------------
+"""
+
+
 import cv2
 import numpy as np
 import os

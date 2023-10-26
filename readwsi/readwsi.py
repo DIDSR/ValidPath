@@ -1,3 +1,30 @@
+"""
+#
+# ---------------------------------------------------------------------------
+# Created on Fri Feb  4 11:42:52 2023
+#
+# @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
+#----------------------------------------------------------------------------
+# Title:        Whole Slide Image Processing Toolbox - reader module
+#
+# Description:  This is the reader module for the whole slide image processing 
+#               toolbox. It is includes ReadWsi class and several methods
+#               
+#
+#
+# Methods:      wsi_reader
+#               patch_extraction_of_tissue
+#               extract_region
+#               extract_bounds
+#               wsi_xml_list
+#               patch_extraction
+#               patch_extraction_with_normalized_tiles
+#
+# version ='3.0'
+# ---------------------------------------------------------------------------
+"""
+
+
 import cv2
 from skimage.io import imsave, imread
 from PIL import Image
