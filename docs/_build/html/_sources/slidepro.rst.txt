@@ -1,0 +1,30 @@
+slidepro package
+================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   slidepro.annotation
+   slidepro.wsi
+
+Submodules
+----------
+
+slidepro.main module
+--------------------
+
+.. automodule:: slidepro.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: slidepro
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>wsi package &mdash; SlidePro 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="main module" href="main.html" /> 
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_SharedWithUsers msdt:dt="string">Kahaki, Seyed</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_SharedWithUsers>
+<mso:SharedWithUsers msdt:dt="string">811;#Kahaki, Seyed</mso:SharedWithUsers>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> SlidePro
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">slidepro</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="annotation.html">annotation package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">wsi package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-wsi.normalization">wsi.normalization module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wsi.normalization.match_hist"><code class="docutils literal notranslate"><span class="pre">match_hist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wsi.normalization.norm_HnE"><code class="docutils literal notranslate"><span class="pre">norm_HnE()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wsi.normalization.patch_norm"><code class="docutils literal notranslate"><span class="pre">patch_norm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wsi.normalization.plot_imgs"><code class="docutils literal notranslate"><span class="pre">plot_imgs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wsi.normalization.vis_hist"><code class="docutils literal notranslate"><span class="pre">vis_hist()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-wsi.reader">wsi.reader module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wsi.reader.wsi_reader"><code class="docutils literal notranslate"><span class="pre">wsi_reader()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wsi.reader.wsi_xml_list"><code class="docutils literal notranslate"><span class="pre">wsi_xml_list()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-wsi.segmentation">wsi.segmentation module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#wsi.segmentation.norm_HnE"><code class="docutils literal notranslate"><span class="pre">norm_HnE()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-wsi">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SlidePro</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">slidepro</a></li>
+      <li class="breadcrumb-item active">wsi package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/wsi.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wsi-package">
+<h1>wsi package<a class="headerlink" href="#wsi-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-wsi.normalization">
+<span id="wsi-normalization-module"></span><h2>wsi.normalization module<a class="headerlink" href="#module-wsi.normalization" title="Permalink to this heading"></a></h2>
+<p>Whole Slide Image Normalization Module of the WSI package</p>
+<p>Several Normalization techniques are implemented in this module</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsi.normalization.match_hist">
+<span class="sig-prename descclassname"><span class="pre">wsi.normalization.</span></span><span class="sig-name descname"><span class="pre">match_hist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">visualize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsi/normalization.html#match_hist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsi.normalization.match_hist" title="Permalink to this definition"></a></dt>
+<dd><p>This code normalizes images.
+It manipulates the pixels of an input image so that its histogram matches the histogram of the reference image. 
+If the images have multiple channels, the matching is done independently for each channel, as long as the number of channels is equal in the input image and the reference.
+Histogram matching can be used as a lightweight normalisation for image processing, such as feature matching, 
+especially in circumstances where the images have been taken from different sources or in different conditions (i.e. lighting).</p>
+<dl class="simple">
+<dt>Package Needed:</dt><dd><p>skimage</p>
+</dd>
+<dt>Installation:</dt><dd><p>pip install scikit-image</p>
+</dd>
+<dt>Workflow based on the following method:</dt><dd><p>Histogram Matching, Written by Paul Bourke, January 2011
+<a class="reference external" href="http://paulbourke.net/miscellaneous/equalisation/">http://paulbourke.net/miscellaneous/equalisation/</a></p>
+</dd>
+<dt>Original code:</dt><dd><p><a class="reference external" href="https://github.com/scikit-image/scikit-image/blob/v0.19.2/skimage/exposure/histogram_matching.py">https://github.com/scikit-image/scikit-image/blob/v0.19.2/skimage/exposure/histogram_matching.py</a>
+<a class="reference external" href="https://scikit-image.org/docs/stable/auto_examples/color_exposure/plot_histogram_matching.html">https://scikit-image.org/docs/stable/auto_examples/color_exposure/plot_histogram_matching.html</a></p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>source<span class="classifier">ndarray</span></dt><dd><p>Input image. Can be gray-scale or in color.</p>
+</dd>
+<dt>target<span class="classifier">ndarray</span></dt><dd><p>Image to match histogram of. Must have the same number of channels as image.</p>
+</dd>
+<dt>channel_axis<span class="classifier">int or None, optional</span></dt><dd><p>If None, the image is assumed to be a grayscale (single channel) image. Otherwise, this parameter indicates which axis of the array corresponds to channels.</p>
+</dd>
+<dt>multichannel :bool, optional</dt><dd><p>Apply the matching separately for each channel. This argument is deprecated: specify channel_axis instead.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>source_matched<span class="classifier">ndarray</span></dt><dd><p>Transformed input image.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsi.normalization.norm_HnE">
+<span class="sig-prename descclassname"><span class="pre">wsi.normalization.</span></span><span class="sig-name descname"><span class="pre">norm_HnE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Io</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">240</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.15</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsi/normalization.html#norm_HnE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsi.normalization.norm_HnE" title="Permalink to this definition"></a></dt>
+<dd><p>This code normalizes staining appearance of H&amp;E stained images.
+It also separates the hematoxylin and eosing stains in to different images.</p>
+<p>Workflow based on the following papers:
+A method for normalizing histology slides for quantitative analysis. 
+M. Macenko et al., ISBI 2009
+<a class="reference external" href="http://wwwx.cs.unc.edu/~mn/sites/default/files/macenko2009.pdf">http://wwwx.cs.unc.edu/~mn/sites/default/files/macenko2009.pdf</a></p>
+<p>Efficient nucleus detector in histopathology images. J.P. Vink et al., J Microscopy, 2013</p>
+<p>Original MATLAB code:
+<a class="reference external" href="https://github.com/mitkovetta/staining-normalization/blob/master/normalizeStaining.m">https://github.com/mitkovetta/staining-normalization/blob/master/normalizeStaining.m</a></p>
+<p>Other useful references:
+<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5226799/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5226799/</a>
+<a class="reference external" href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169875">https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169875</a></p>
+<p>PROPOSED WORKFLOW:</p>
+<blockquote>
+<div><p>Input: RGB image</p>
+<p>Step 1: Convert RGB to OD (optical density)</p>
+<p>Step 2: Remove data with OD intensity less than β</p>
+<p>Step 3: Calculate  singular value decomposition (SVD) on the OD tuples</p>
+<p>Step 4: Create plane from the SVD directions corresponding to the</p>
+<p>two largest singular values</p>
+<p>Step 5: Project data onto the plane, and normalize to unit length</p>
+<p>Step 6: Calculate angle of each point wrt the first SVD direction</p>
+<p>Step 7: Find robust extremes (αth and (100−α)th 7 percentiles) of the
+angle</p>
+<p>Step 8: Convert extreme values back to OD space</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>img<span class="classifier">ndarray</span></dt><dd><p>Input image. Can be gray-scale or in color</p>
+</dd>
+<dt>Io<span class="classifier">int, default value = 240</span></dt><dd><p>Transmitted light intensity, Normalizing factor for image intensities</p>
+</dd>
+<dt>alpha<span class="classifier">int, default value = 1</span></dt><dd><p>As recommend in the paper. tolerance for the pseudo-min and pseudo-max (default: 1)</p>
+</dd>
+<dt>beta<span class="classifier">float, default value = 0.15</span></dt><dd><p>As recommended in the paper. OD threshold for transparent pixels (default: 0.15)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Inorm<span class="classifier">ndarray</span></dt><dd><p>Normalized Stain Vector</p>
+</dd>
+<dt>H<span class="classifier">ndarray</span></dt><dd><p>H components</p>
+</dd>
+<dt>E<span class="classifier">ndarray</span></dt><dd><p>E component</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsi.normalization.patch_norm">
+<span class="sig-prename descclassname"><span class="pre">wsi.normalization.</span></span><span class="sig-name descname"><span class="pre">patch_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patch_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'H_E'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">patch_ext</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsi/normalization.html#patch_norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsi.normalization.patch_norm" title="Permalink to this definition"></a></dt>
+<dd><p>This function perform patch normalization for all patches inside subfolders.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>patch_dir<span class="classifier">str</span></dt><dd><p>Input directory. This folder contains subfolders and each subfolder contains image patches.</p>
+</dd>
+<dt>output_dir<span class="classifier">str</span></dt><dd><p>Output directory. Same struture as the input folders will be generated inside this directory.</p>
+</dd>
+<dt>method<span class="classifier">str, optional</span></dt><dd><p>To specify the Normalization method. currently, two methods inclding ‘H_E’ and ‘histogram_matching’ are implimented</p>
+</dd>
+<dt>patch_ext :str, optional</dt><dd><p>Apply the matching separately for each channel. This argument is deprecated: specify channel_axis instead.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsi.normalization.plot_imgs">
+<span class="sig-prename descclassname"><span class="pre">wsi.normalization.</span></span><span class="sig-name descname"><span class="pre">plot_imgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matched</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsi/normalization.html#plot_imgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsi.normalization.plot_imgs" title="Permalink to this definition"></a></dt>
+<dd><p>This function plots the source image, target image, and matched image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>source<span class="classifier">ndarray</span></dt><dd><p>Input image. Can be gray-scale or in color.</p>
+</dd>
+<dt>target<span class="classifier">ndarray</span></dt><dd><p>Image to match histogram of. Must have the same number of channels as image.</p>
+</dd>
+<dt>channel_axis<span class="classifier">int or None, optional</span></dt><dd><p>If None, the image is assumed to be a grayscale (single channel) image. Otherwise, this parameter indicates which axis of the array corresponds to channels.</p>
+</dd>
+<dt>multichannel :bool, optional</dt><dd><p>Apply the matching separately for each channel. This argument is deprecated: specify channel_axis instead.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsi.normalization.vis_hist">
+<span class="sig-prename descclassname"><span class="pre">wsi.normalization.</span></span><span class="sig-name descname"><span class="pre">vis_hist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matched</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsi/normalization.html#vis_hist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsi.normalization.vis_hist" title="Permalink to this definition"></a></dt>
+<dd><p>To illustrate the effect of the histogram matching, this function plot for each RGB channel, 
+the histogram and the cumulative histogram.</p>
+<p>Original code:
+<a class="reference external" href="https://scikit-image.org/docs/stable/auto_examples/color_exposure/plot_histogram_matching.html">https://scikit-image.org/docs/stable/auto_examples/color_exposure/plot_histogram_matching.html</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>source<span class="classifier">ndarray</span></dt><dd><p>Input image. Can be gray-scale or in color.</p>
+</dd>
+<dt>target<span class="classifier">ndarray</span></dt><dd><p>Image to match histogram of. Must have the same number of channels as image.</p>
+</dd>
+<dt>channel_axis<span class="classifier">int or None, optional</span></dt><dd><p>If None, the image is assumed to be a grayscale (single channel) image. Otherwise, this parameter indicates which axis of the array corresponds to channels.</p>
+</dd>
+<dt>multichannel :bool, optional</dt><dd><p>Apply the matching separately for each channel. This argument is deprecated: specify channel_axis instead.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-wsi.reader">
+<span id="wsi-reader-module"></span><h2>wsi.reader module<a class="headerlink" href="#module-wsi.reader" title="Permalink to this heading"></a></h2>
+<p>Whole Slide Image Reader</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsi.reader.wsi_reader">
+<span class="sig-prename descclassname"><span class="pre">wsi.reader.</span></span><span class="sig-name descname"><span class="pre">wsi_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">WSI_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsi/reader.html#wsi_reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsi.reader.wsi_reader" title="Permalink to this definition"></a></dt>
+<dd><p>This code read a WSI and return the WSI object.
+This code can read the WSIs with the following formats:
+Aperio (.svs, .tif)
+Hamamatsu (.vms, .vmu, .ndpi)
+Leica (.scn)
+MIRAX (.mrxs)
+Philips (.tiff)
+Sakura (.svslide)
+Trestle (.tif)
+Ventana (.bif, .tif)
+Generic tiled TIFF (.tif)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>WSI_path<span class="classifier">str</span></dt><dd><p>The address to the WSI file.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>wsi_obj<span class="classifier">obj</span></dt><dd><p>WSI object</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="wsi.reader.wsi_xml_list">
+<span class="sig-prename descclassname"><span class="pre">wsi.reader.</span></span><span class="sig-name descname"><span class="pre">wsi_xml_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wsis_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsi/reader.html#wsi_xml_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsi.reader.wsi_xml_list" title="Permalink to this definition"></a></dt>
+<dd><p>This code process the WSIs and XML list and returns these lists.
+Only WSI are included if there is an XML file with the same name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>wsis_dir<span class="classifier">str</span></dt><dd><p>Input Directory which has the original WSIs and XML files</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>WSIs<span class="classifier">list</span></dt><dd><p>List of included WSIs</p>
+</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">xml_</span></a><span class="classifier">list</span></dt><dd><p>List of XML files associated with included WSIs</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-wsi.segmentation">
+<span id="wsi-segmentation-module"></span><h2>wsi.segmentation module<a class="headerlink" href="#module-wsi.segmentation" title="Permalink to this heading"></a></h2>
+<p>Whole Slide Image Normalization</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="wsi.segmentation.norm_HnE">
+<span class="sig-prename descclassname"><span class="pre">wsi.segmentation.</span></span><span class="sig-name descname"><span class="pre">norm_HnE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Io</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">240</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">beta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.15</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/wsi/segmentation.html#norm_HnE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#wsi.segmentation.norm_HnE" title="Permalink to this definition"></a></dt>
+<dd><p>This code normalizes staining appearance of H&amp;E stained images.
+It also separates the hematoxylin and eosing stains in to different images.</p>
+<p>Workflow based on the following papers:
+A method for normalizing histology slides for quantitative analysis. 
+M. Macenko et al., ISBI 2009
+<a class="reference external" href="http://wwwx.cs.unc.edu/~mn/sites/default/files/macenko2009.pdf">http://wwwx.cs.unc.edu/~mn/sites/default/files/macenko2009.pdf</a></p>
+<p>Efficient nucleus detector in histopathology images. J.P. Vink et al., J Microscopy, 2013</p>
+<p>Original MATLAB code:
+<a class="reference external" href="https://github.com/mitkovetta/staining-normalization/blob/master/normalizeStaining.m">https://github.com/mitkovetta/staining-normalization/blob/master/normalizeStaining.m</a></p>
+<p>Other useful references:
+<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5226799/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5226799/</a>
+<a class="reference external" href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169875">https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0169875</a></p>
+<p>PROPOSED WORKFLOW:</p>
+<blockquote>
+<div><p>Input: RGB image</p>
+<p>Step 1: Convert RGB to OD (optical density)</p>
+<p>Step 2: Remove data with OD intensity less than β</p>
+<p>Step 3: Calculate  singular value decomposition (SVD) on the OD tuples</p>
+<p>Step 4: Create plane from the SVD directions corresponding to the</p>
+<p>two largest singular values</p>
+<p>Step 5: Project data onto the plane, and normalize to unit length</p>
+<p>Step 6: Calculate angle of each point wrt the first SVD direction</p>
+<p>Step 7: Find robust extremes (αth and (100−α)th 7 percentiles) of the
+angle</p>
+<p>Step 8: Convert extreme values back to OD space</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>img<span class="classifier">ndarray</span></dt><dd><p>Input image. Can be gray-scale or in color</p>
+</dd>
+<dt>Io<span class="classifier">int, default value = 240</span></dt><dd><p>Transmitted light intensity, Normalizing factor for image intensities</p>
+</dd>
+<dt>alpha<span class="classifier">int, default value = 1</span></dt><dd><p>As recommend in the paper. tolerance for the pseudo-min and pseudo-max (default: 1)</p>
+</dd>
+<dt>beta<span class="classifier">float, default value = 0.15</span></dt><dd><p>As recommended in the paper. OD threshold for transparent pixels (default: 0.15)</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>Inorm<span class="classifier">ndarray</span></dt><dd><p>Normalized Stain Vector</p>
+</dd>
+<dt>H<span class="classifier">ndarray</span></dt><dd><p>H components</p>
+</dd>
+<dt>E<span class="classifier">ndarray</span></dt><dd><p>E component</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-wsi">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-wsi" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="main.html" class="btn btn-neutral float-left" title="main module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Seyed Kahaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

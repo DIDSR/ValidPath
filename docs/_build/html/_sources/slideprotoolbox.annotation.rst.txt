@@ -1,0 +1,37 @@
+slideprotoolbox.annotation package
+==================================
+
+Submodules
+----------
+
+slideprotoolbox.annotation.ann\_extractor module
+------------------------------------------------
+
+.. automodule:: slideprotoolbox.annotation.ann_extractor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+slideprotoolbox.annotation.patch\_clustering module
+---------------------------------------------------
+
+.. automodule:: slideprotoolbox.annotation.patch_clustering
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+slideprotoolbox.annotation.patch\_extractor module
+--------------------------------------------------
+
+.. automodule:: slideprotoolbox.annotation.patch_extractor
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: slideprotoolbox.annotation
+   :members:
+   :undoc-members:
+   :show-inheritance:
