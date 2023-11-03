@@ -47,96 +47,7 @@ import PIL
 
 class ReadWsi:
     
-    def patch_extraction_of_tissue(slidepath,patch_size ,output_folder, number_of_patches=1 , vis = False):
-        
-        # vis   =   visualize state , if it is True == output will be displayed
-        
-        img_array = []
-        
-        #Minimum tissue area
-        min_tissue_size =10000
-        #Max height and width for the size of slide with selected level
-        max_img_size =10000
-        #Gaussian smoothing sigma
-        smooth_sigma = 13
-        #Thresholding value
-        thresh_val =0.8
-        
-        s_level, d_factor ,slide_shape  = TissueSegmentation.test_locate_tissue_seperately(slidepath,output_folder,
-                                                                                   min_tissue_size,max_img_size,smooth_sigma,thresh_val)
-        cnts = TissueSegmentation.test_locate_tissue(slidepath,min_tissue_size,max_img_size,smooth_sigma,thresh_val)
-        
-        
-        Slide = openslide.OpenSlide(slidepath)
-        region = (0, 0)
-        level = s_level
-        factor = d_factor
-        w_ = slide_shape[0]
-        h_ = slide_shape[1]
-        size = (slide_shape[0], slide_shape[1])
 
-
-        list_of_polygons= []
-        for i,cnt in enumerate(cnts) :
-            lst_of_tuples = [] 
-            x=[]
-            y=[] 
-
-            for j,cn in enumerate(cnt):
-
-                x.append(cn[0][0])
-                y.append(cn[0][1])
-            lst_of_tuples = list(zip(x,y))
-            list_of_polygons.append(lst_of_tuples)
-
-        #for num_p in range(number_of_patches) : 
-        num_p = 0
-        while num_p !=  number_of_patches:    
-            n = 1
-            while n>0:
-                rand_x = random.randint(1,w_)
-                rand_y = random.randint(1,h_)
-                point = Point(rand_x,rand_y)
-                polygon =  Polygon(lst_of_tuples)                                # Polygon([(0, 0), (0, 1), (1, 1), (1, 0)])
-                is_correct = polygon.contains(point) 
-                if is_correct == True:
-                    n = -1
-                    break
-
-
-            spointx, spointy = rand_x*factor, rand_y*factor #multipled by factor to get the original co-ordinates as in WSI and not the as per the level 
-
-
-            patchimg = Slide.read_region((spointx, spointy), level, (patch_size, patch_size))                        
-            #patchimg.convert('RGB')
-
-           # cv2.imwrite(f"C:/Users/masoud/data/patch_{str(num_p)}.tif", np.array(patchimg))
-            temp_tile_RGB = patchimg.convert('RGB')
-            temp_tile_np = np.array(temp_tile_RGB)
-            if temp_tile_np.mean() < 220 and temp_tile_np.std() > 15:
-                tiff.imsave(output_folder + f"/patch_{str(num_p)}.tif", temp_tile_np)
-                print(output_folder+ f"/patch_{str(num_p)}.tif")
-                #print("-------------", type(patchimg))
-                num_p += 1
-        
-                
-                img_array.append(temp_tile_np)
-       
-        l = [ 4,number_of_patches]
-        min_ = min(l)
-        
-        if vis ==True :
-            fig,axes = plt.subplots(nrows = 1, ncols = min_)
-      
-            for i,x in enumerate(img_array) :
-                if i==4 :
-                    break
-                
-           
-                axes[i].imshow(x)
-                
-                
-            plt.show()
 
             
             
@@ -230,7 +141,13 @@ class ReadWsi:
 
         return (wsi_obj)
 
-    def patch_extraction(wsi_obj,patch_size,output_folder,random_state,patch_number=-1):
+
+
+            
+            
+            
+class WSIpatch_extractor:
+    def patch_extraction(wsi_obj,patch_size,output_folder,random_state,visualize,intensity_check,patch_number=-1):
         """
         this function  Generate object for tiles using the DeepZoomGenerator and divided 
         the svs file into tiles of size 256 with no overlap.
@@ -266,15 +183,15 @@ class ReadWsi:
         cols, rows = tiles.level_tiles[MaxTileLevel]
        
         
-        tile_path = output_folder+"images/saved_tiles/"
-        orig_tile_dir_name = output_folder+"images/saved_tiles/original_tiles/"
-        norm_tile_dir_name = output_folder+"images/saved_tiles/normalized_tiles/"
-        H_tile_dir_name = output_folder+"images/saved_tiles/H_tiles/"
-        E_tile_dir_name = output_folder+"images/saved_tiles/E_tiles/"
+        tile_path = output_folder+"Imagepatches/"
+        orig_tile_dir_name = output_folder+"Imagepatches/original_tiles/"
+        norm_tile_dir_name = output_folder+"Imagepatches/normalized_tiles/"
+        H_tile_dir_name = output_folder+"Imagepatches/H_tiles/"
+        E_tile_dir_name = output_folder+"Imagepatches/E_tiles/"
 
-        MYDIRs = [output_folder+"images/saved_tiles/", output_folder+"images/saved_tiles/original_tiles/",
-                  output_folder+"images/saved_tiles/normalized_tiles/",output_folder+"images/saved_tiles/H_tiles/",
-                  output_folder+"images/saved_tiles/E_tiles/"]
+        MYDIRs = [output_folder+"Imagepatches/", output_folder+"Imagepatches/original_tiles/",
+                  output_folder+"Imagepatches/normalized_tiles/",output_folder+"Imagepatches/H_tiles/",
+                  output_folder+"Imagepatches/E_tiles/"]
             
         for dr in MYDIRs:
             CHECK_FOLDER = os.path.isdir(dr)
@@ -290,7 +207,7 @@ class ReadWsi:
         co = 2
         axes=[]
         
-        fig = plt.figure(figsize=(18, 10))
+        #fig = plt.figure(figsize=(18, 10))
         
         counter = 0 
         flag_counter = True
@@ -317,11 +234,14 @@ class ReadWsi:
                 temp_tile_RGB = temp_tile.convert('RGB')
                 temp_tile_np = np.array(temp_tile_RGB)
                 # Save original tile
-           
                 
-                if temp_tile_np.mean() < 230 and temp_tile_np.std() > 15:
-                    
-                    tiff.imsave(tile_path + tile_name + "_original.tif", temp_tile_np)
+                if intensity_check:
+                    intensity_cond = temp_tile_np.mean() < 230 and temp_tile_np.std() > 15
+                else: 
+                    intensity_cond = True
+                if intensity_cond:
+                    print("Saving" + orig_tile_dir_name + tile_name + "_original.tif")
+                    tiff.imsave(orig_tile_dir_name + tile_name + "_original.tif", temp_tile_np)
                    # fig = plt.figure(figsize=(7, 7))
                     #fig.add_subplot(ro, co, 1)
                     #plt.imshow(temp_tile_np)
@@ -331,11 +251,13 @@ class ReadWsi:
                    # fig = plt.figure(figsize=(7, 7))
                     #plt.plot(temp_tile_np)
                     #plt.figure(i+1)
-                    plt.rcParams.update({'font.size': 8})
-                    axes.append( fig.add_subplot(ro, co, counter+1) )
-                    subplot_title=("patch number :" + str(counter+1))
-                    axes[-1].set_title(subplot_title)  
-                    plt.imshow(temp_tile_np)
+                    # plt.rcParams.update({'font.size': 8})
+                    # axes.append( fig.add_subplot(ro, co, counter+1) )
+                    # subplot_title=("patch number :" + str(counter+1))
+                    # axes[-1].set_title(subplot_title)  
+                    if visualize ==1:
+                        plt.imshow(temp_tile_np)
+                        plt.show()
                     
                     if patch_number >0 :
                         counter  += 1
@@ -347,8 +269,102 @@ class ReadWsi:
                        # sw =True
                        # break
        # return (temp_tile_np)
-        fig.tight_layout(pad=1)
-        plt.show()
+        #fig.tight_layout(pad=1)
+        #plt.show()
+        
+        
+    def patch_extraction_of_tissue(slidepath,patch_size ,output_folder, number_of_patches=1 , vis = False):
+        
+        # vis   =   visualize state , if it is True == output will be displayed
+        
+        img_array = []
+        
+        #Minimum tissue area
+        min_tissue_size =10000
+        #Max height and width for the size of slide with selected level
+        max_img_size =10000
+        #Gaussian smoothing sigma
+        smooth_sigma = 13
+        #Thresholding value
+        thresh_val =0.8
+        
+        s_level, d_factor ,slide_shape  = TissueSegmentation.test_locate_tissue_seperately(slidepath,output_folder,
+                                                                                   min_tissue_size,max_img_size,smooth_sigma,thresh_val)
+        cnts = TissueSegmentation.test_locate_tissue(slidepath,min_tissue_size,max_img_size,smooth_sigma,thresh_val)
+        
+        
+        Slide = openslide.OpenSlide(slidepath)
+        region = (0, 0)
+        level = s_level
+        factor = d_factor
+        w_ = slide_shape[0]
+        h_ = slide_shape[1]
+        size = (slide_shape[0], slide_shape[1])
+
+
+        list_of_polygons= []
+        for i,cnt in enumerate(cnts) :
+            lst_of_tuples = [] 
+            x=[]
+            y=[] 
+
+            for j,cn in enumerate(cnt):
+
+                x.append(cn[0][0])
+                y.append(cn[0][1])
+            lst_of_tuples = list(zip(x,y))
+            list_of_polygons.append(lst_of_tuples)
+
+        #for num_p in range(number_of_patches) : 
+        num_p = 0
+        while num_p !=  number_of_patches:    
+            n = 1
+            while n>0:
+                rand_x = random.randint(1,w_)
+                rand_y = random.randint(1,h_)
+                point = Point(rand_x,rand_y)
+                polygon =  Polygon(lst_of_tuples)                                # Polygon([(0, 0), (0, 1), (1, 1), (1, 0)])
+                is_correct = polygon.contains(point) 
+                if is_correct == True:
+                    n = -1
+                    break
+
+
+            spointx, spointy = rand_x*factor, rand_y*factor #multipled by factor to get the original co-ordinates as in WSI and not the as per the level 
+
+
+            patchimg = Slide.read_region((spointx, spointy), level, (patch_size, patch_size))                        
+            #patchimg.convert('RGB')
+
+           # cv2.imwrite(f"C:/Users/masoud/data/patch_{str(num_p)}.tif", np.array(patchimg))
+            temp_tile_RGB = patchimg.convert('RGB')
+            temp_tile_np = np.array(temp_tile_RGB)
+            if temp_tile_np.mean() < 220 and temp_tile_np.std() > 15:
+                tiff.imsave(output_folder + f"/patch_{str(num_p)}.tif", temp_tile_np)
+                print(output_folder+ f"/patch_{str(num_p)}.tif")
+                #print("-------------", type(patchimg))
+                num_p += 1
+        
+                
+                img_array.append(temp_tile_np)
+       
+        l = [ 4,number_of_patches]
+        min_ = min(l)
+        
+        if vis ==True :
+            fig,axes = plt.subplots(nrows = 1, ncols = min_)
+      
+            for i,x in enumerate(img_array) :
+                if i==4 :
+                    break
+                
+           
+                axes[i].imshow(x)
+                
+                
+            plt.show()
+            
+            
     def patch_extraction_with_normalized_tiles(wsi_obj,patch_size,output_folder,random_state=True ,patch_number=-1):
             """
             this function  Generate object for tiles using the DeepZoomGenerator and divided 
@@ -384,13 +400,13 @@ class ReadWsi:
             cols, rows = tiles.level_tiles[MaxTileLevel]
             
             
-            orig_tile_dir_name = output_folder+"images/saved_tiles/original_tiles/"
-            norm_tile_dir_name = output_folder+"images/saved_tiles/normalized_tiles/"
-            H_tile_dir_name = output_folder+"images/saved_tiles/H_tiles/"
-            E_tile_dir_name = output_folder+"images/saved_tiles/E_tiles/"
+            orig_tile_dir_name = output_folder+"Imagepatches/original_tiles/"
+            norm_tile_dir_name = output_folder+"Imagepatches/normalized_tiles/"
+            H_tile_dir_name = output_folder+"Imagepatches/H_tiles/"
+            E_tile_dir_name = output_folder+"Imagepatches/E_tiles/"
             
-            MYDIRs = [output_folder+"images/saved_tiles/original_tiles/",output_folder+"images/saved_tiles/normalized_tiles/",
-                output_folder+"images/saved_tiles/H_tiles/",output_folder+"images/saved_tiles/E_tiles/"]
+            MYDIRs = [output_folder+"Imagepatches/original_tiles/",output_folder+"Imagepatches/normalized_tiles/",
+                output_folder+"Imagepatches/H_tiles/",output_folder+"Imagepatches/E_tiles/"]
             
             for dr in MYDIRs:
                 CHECK_FOLDER = os.path.isdir(dr)

@@ -15,7 +15,7 @@ import os
 os.environ['path'] ="D:\\openslide-win64-20171122\\bin"+";"+os.environ['path']
 import openslide
 
-#TEST_PATH = os.path.abspath(os.path.dirname(r'C:\Users\masoud\data'))   #root directory path
+#TEST_PATH = os.path.abspath(os.path.dirname(r'C:\Users\data'))   #root directory path
 #PRJ_PATH = os.path.dirname(TEST_PATH)
 #sys.path.insert(0, PRJ_PATH)
 

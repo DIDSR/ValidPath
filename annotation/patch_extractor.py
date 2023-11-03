@@ -1,5 +1,5 @@
 """
-Created on Mon Nov  6 11:23:07 2021
+Created on Mon Nov  6 11:23:07 2023
 
 
 @author: SeyedM.MousaviKahaki (mousavikahaki@gmail.com)
@@ -31,113 +31,77 @@ from PIL import Image
 import glob
 import h5py
 from skimage.io import imsave, imread
-from skimage.transform import resize
-from pathlib import Path
-import sys
+#from skimage.transform import resize
+
+#import sys
 import pandas as pd
-from scipy import misc
+#from scipy import misc
 import matplotlib.pyplot as plt
 
-from skimage.metrics import structural_similarity as compare_ssim
+#from skimage.metrics import structural_similarity as compare_ssim
 
-
-
-
-# ##############################  inputs
-# png_extract = parameters.PatchGenerator_png_extract
-# hdf5 = False #parameters.PatchGenerator_hdf5
-# open_dataset= parameters.PatchGenerator_open_dataset
-# Aplha = parameters.PatchGenerator_Aplha
-# INPUTDIR = parameters.PatchGenerator_INPUTDIR
-# OUTPUTDIR = parameters.PatchGenerator_OUTPUTDIR
-
-# INPUTDIR = 'Oklahoma_Extracted_New_FixedCircle_processed_Augmented_combined/'
-# OUTPUTDIR = 'C:/DATA/Oklahoma_extracted_cutted_Augmented/'
-# DatasetFile = 'C:/DATA/Aperio_dataset_v9.csv'
-
-# INPUTDIR = 'AperioAnnotations_NonCancer/'
-# OUTPUTDIR = 'C:/DATA/AperioAnnotations_NonCancer_Patches/'
-# DatasetFile = 'C:/DATA/Aperio_dataset_v9.csv'
-
-INPUTDIR = '2_extracted_cutted_Augmented/3DHistech/ExtractedAnnotation/'
-OUTPUTDIR = 'C:/DATA/2_extracted_cutted_Augmented/3DHistech/'
-DatasetFile = 'C:/DATA/Aperio_dataset_v9.csv'
-
-hdf5_file= OUTPUTDIR+"dataset.hdf5"
-root_directory = glob.glob(r'C:/DATA/'+INPUTDIR+'*')
-
-##############################  Number of Random Patches Per Region
-# Number_of_Patches = parameters.PatchGenerator_Number_of_Patches
-Number_of_Patches = 36
-##############################  input patch size  y==width   x==height
-# input_x = parameters.PatchGenerator_input_x   
-# input_y = parameters.PatchGenerator_input_y
-
-##############################
-cwd = os.getcwd()
-
-
-# # Create folders if there aren't
-# hdf5_dir = Path("data\\hdf5_files\\")
-# hdf5_dir.mkdir(parents=True, exist_ok=True)
-# png_dir = Path("data/png_files/")
-# hdf5_dir.mkdir(parents=True, exist_ok=True)
-
-png_dir = Path(OUTPUTDIR+"data/png_files/")
-png_dir.mkdir(parents=True, exist_ok=True)
-
-# path to str -We need them ahead
-# png_dir=r"data/png_files/"
-#hdf5_dir=r"data\\hdf5_files\\"
-png_dir=OUTPUTDIR+"data/png_files/"
-
-
-Dataset_ = pd.read_csv(DatasetFile)
-
-#for on all folders
-def gen_patch(INPUTDIR,input_x,input_y,Number_of_Patches,hdf5_file,DatasetFile,hdf5,png_extract,open_dataset,Aplha,OUTPUTDIR):
-    """
-    This function a number of pactches from extracted annotations.
-    It can save the extracted annottions to the output directory as defined in inputs.
-    Before running this function, please call annotation.ann_extractor.extract_ann(save_dir, XMLs, WSIs) to generate annotations. 
-    The output directory will be generated based on the strucutr of the input directories.
-    IF the WSI Magnification is 13X or 20X, this code will automaticall convert to 20X.
-          
-    :Parameters:
-        root_directory : str
-            Output Directory to save the extracted annotations
-            
-        WSIs : list
-            List of included WSIs
-            
-        XMLs : list
-            List of XML files associated with included WSIs
-            
-    :Returns:
-        None : None
-            None.
-    """
-    root_directory = glob.glob(r'C:/DATA/'+INPUTDIR+'*')
-    for filename in root_directory:
-    
-        groupname = filename.split("\\")[-1]
+class PatchExtractor :
+    def __init__(self):
+        pass
+    #for on all folders
+    def gen_patch(INPUTDIR,PatchSize,Number_of_Patches,intensity_check,OUTPUTDIR):
+        """
+        This function a number of pactches from extracted annotations.
+        It can save the extracted annottions to the output directory as defined in inputs.
+        Before running this function, please call annotation.ann_extractor.extract_ann(save_dir, XMLs, WSIs) to generate annotations. 
+        The output directory will be generated based on the strucutr of the input directories.
+        IF the WSI Magnification is 13X or 20X, this code will automaticall convert to 20X.
+              
+        :Parameters:
+            root_directory : str
+                Output Directory to save the extracted annotations
+                
+            WSIs : list
+                List of included WSIs
+                
+            XMLs : list
+                List of XML files associated with included WSIs
+                
+        :Returns:
+            None : None
+                None.
+        """
+        chck_group_name=True
+        open_dataset = True 
+        save_hdf5 = False
+        save_png = True
+        input_x = PatchSize[0]
+        input_y = PatchSize[1]
+        hdf5_file= OUTPUTDIR+"dataset.hdf5"
+        root_directory = glob.glob(r''+INPUTDIR+'*')
+        print(">>>>>>>>>")
+        print(root_directory)
+        png_dir = OUTPUTDIR+"data/png_files/"
+        if not os.path.exists(png_dir):
+            os.makedirs(png_dir)
+                
+        print(png_dir)
         
-        # Find Magnification
-        FName = groupname.upper() + '.SVS' 
-        try:
+        for filename in root_directory:
+        
+            groupname = filename.split("\\")[-1]
+            
+            # Find Magnification
+            #FName = groupname.upper() + '.SVS' 
+            FName = groupname.upper()
+            # try:
             # For Aperio
             # Magnification = Dataset_[Dataset_['Filename of initial Aperio slide'] == FName]['SVS Magnification'].item()
             # For 3DHistech
-            Magnification = 13#Dataset_[Dataset_['Filename of initial 3D Histech slide'] == FName]['SVS Magnification'].item()
-            if Magnification == 40:
-                print(groupname+' Magnification  is 40')
-            elif Magnification == 13:
-                print(groupname+' Magnification  is 13')
-            else:
-                print('Magnification is 20')
+            # Magnification = 40#Dataset_[Dataset_['Filename of initial 3D Histech slide'] == FName]['SVS Magnification'].item()
+            # if Magnification == 40:
+                # print(groupname+' Magnification  is 40')
+            # elif Magnification == 13:
+                # print(groupname+' Magnification  is 13')
+            # else:
+                # print('Magnification is 20')
            
-            chck_group_name=True
-                
+              
            
            
             files = glob.glob( filename + r"\*.jpg")
@@ -162,15 +126,20 @@ def gen_patch(INPUTDIR,input_x,input_y,Number_of_Patches,hdf5_file,DatasetFile,h
               
             
                 img = cv2.imread(fl, cv2.IMREAD_COLOR)
-                if Magnification == 13:
-                    print(groupname+' Rescaling 13X to 20X')
-                    scale = 0.65
-                    img = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
+                plt.imshow(img)
+                plt.show()
+                # if Magnification == 13:
+                    # print(groupname+' Rescaling 13X to 20X')
+                    # scale = 0.65
+                    # img = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
                     
-                elif Magnification == 40:
-                    print(groupname+' Rescaling 40X to 20X')
-                    scale = 0.5
-                    img = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
+                # elif Magnification == 40:
+                    # print(groupname+' Rescaling 40X to 20X')
+                    # scale = 0.5
+                    # img = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
+                    
+                    
+                    
                     # img1 = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
                     # fig, axs = plt.subplots(1,2,figsize=(15,10))
                     # axs[0].imshow(img),axs[0].axis('off')
@@ -202,8 +171,8 @@ def gen_patch(INPUTDIR,input_x,input_y,Number_of_Patches,hdf5_file,DatasetFile,h
                     # cv2.PSNR(img, imgcv2_INTER_CUBIC)
                     # (score, diff) = compare_ssim(img, imgcv2_INTER_CUBIC, full=True,multichannel=True)
                     
-                else:
-                    print('Processing 20X')
+                # else:
+                    # print('Processing 20X')
                 
                 if np.mean(img) > 250:
                     continue
@@ -231,10 +200,10 @@ def gen_patch(INPUTDIR,input_x,input_y,Number_of_Patches,hdf5_file,DatasetFile,h
                     breakLimit = 500
                     breakCount = 0
                     while done : 
-                        print("Trying Extract: "+ name + "Break Count: " + str(breakCount))
+                        #print("Trying Extract: "+ name + "Break Count: " + str(breakCount))
                         breakCount = breakCount + 1
                         if breakCount > breakLimit:
-                            print(">>>>>>>>>>> BREAK on "+ name)
+                            #print(">>>>>>>>>>> BREAK on "+ name)
                             break
                         coords = [(random.random()*rows, random.random()*cols)]
                         x=int(coords[0][0])
@@ -247,6 +216,10 @@ def gen_patch(INPUTDIR,input_x,input_y,Number_of_Patches,hdf5_file,DatasetFile,h
                     
                         x_end=x+input_x
                         y_end=y+input_y
+                        
+                        # print(img[x, y])
+                        # print(img[x, y_end])
+                        # print(img[x_end, y] )
                     
                         try:
                             color_chk1 = img[x, y] > [230,230,230]#== [255,255,255]
@@ -254,19 +227,33 @@ def gen_patch(INPUTDIR,input_x,input_y,Number_of_Patches,hdf5_file,DatasetFile,h
                             color_chk3 = img[x_end, y] > [230,230,230]#== [255,255,255]
                             color_chk4 = img[x_end, y_end] > [230,230,230]#== [255,255,255]
                             color_chk5 = img[round((x+x_end)/2), round((y+y_end)/2)] > [230,230,230]
+                            
+                            # print(color_chk1)
+                            # print(color_chk2)
+                            # print(color_chk3)
                         except:
                             continue
-                        if any(color_chk1) == any(color_chk2) == any(color_chk3) == any(color_chk5)== False :
+                        if intensity_check:
+                            intensity_cond = any(color_chk1) == any(color_chk2) == any(color_chk3) == False
+                        else:
+                            intensity_cond = True
+                        
+                        # Check three corner have high intensity
+                        if intensity_cond :
+                            #print("HEEEEEEEEEEEEERE")
                         # if any(color_chk1) == any(color_chk2) == any(color_chk3) == any(color_chk4) == any(color_chk5)== False : 
                         # if any(color_chk1) == any(color_chk2) == False : 
                             cropped_image = img[x:x_end, y:y_end]
                             
-                            
+                            # plt.imshow(cropped_image)
+                            # plt.show()
                             #create png files of patches
-                            if png_extract==True:
+                            if save_png==True:
                                 png_file = Path(OUTPUTDIR+"data/png_files/"+groupname+"/")
                                 png_file.mkdir(parents=True, exist_ok=True)
-                                print("Crearing "+png_dir +groupname+"/"+end_name+".png")
+                                print(png_dir)
+                                end_name = end_name + "_x_" + str(x) + "_y_" + str(y)
+                                print("Creating "+png_dir +groupname+"/"+end_name+".png")
                                 try:
                                     cv2.imwrite(png_dir + groupname + "/" +end_name+".png", cropped_image)
                                 except:
@@ -274,7 +261,7 @@ def gen_patch(INPUTDIR,input_x,input_y,Number_of_Patches,hdf5_file,DatasetFile,h
                                 
                               
                             #create a hdf5 file of all patches
-                            if(hdf5==True):
+                            if(save_hdf5==True):
                                 if open_dataset==True:    
                                     dataset = h5py.File(hdf5_file, 'a')
                                     open_dataset=False
@@ -291,10 +278,10 @@ def gen_patch(INPUTDIR,input_x,input_y,Number_of_Patches,hdf5_file,DatasetFile,h
                                 print(end_name+"_is new dataset on  "+groupname+" group")
                                
                             done=False 
-        except:
-            print("Can not Process "+FName)
-    if(hdf5==True):
-        dataset.close()
+            # except:
+                # print("Can not Process "+FName)
+        if(save_hdf5==True):
+            dataset.close()
 	
 	
 	
