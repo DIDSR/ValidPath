@@ -52,11 +52,11 @@ class Uncertainty_Analysis:
         pass
 
 
-    def basic_metric (self, y_pred ,y_truth ,tag ) :
+    def get_report (self, y_pred ,y_truth ,tag, plot_roc) :
 
 
         
-        visualization =True
+        
 
         cmtx = pd.DataFrame(
             confusion_matrix(y_truth.round(), y_pred.round(), labels=[1, 0]), 
@@ -92,51 +92,33 @@ class Uncertainty_Analysis:
         auc_keras = self.auc_keras_(fpr_keras, tpr_keras)
 
        
-        auc, ci, lower_upper_q, auc_cov, auc_std = self.Delong_CI(y_pred ,y_truth)
+        auc_delong, ci_delong, lower_upper_q, auc_delong_cov, auc_std = self.Delong_CI(y_pred ,y_truth)
 
-        
+        ########## Print All Together
+        print('####################')
+        print("Results for "+tag)
+        print(cmtx)
+        print("Precision: ",precision)
+        print("Precision_CI: ",Precision_CI)
+        print("Recall: ",recall)
+        print("Recall_CI: ",Recall_CI)
+        # print("F1 Score: ",f1_score1)
+        # print("Cohen_Kappa Score: ",cohen_kappa_score1)
+        print("Delong Method")
+        print('AUC:', auc_delong)
+        print('AUC COV:', auc_delong_cov)
+        print('95% AUC CI:', ci_delong)
+        # ### Bootstrap
+        bootstrapped_scores, confidence_lower, confidence_upper = self.bootstrapping(y_truth, y_pred)
 
         #out_ = (y_pred, y_truth,tag,precision,Precision_CI,recall,Recall_CI, auc ,auc_cov ,ci , fpr_keras, tpr_keras ,auc_keras ,cmtx)
         
-        if visualization ==True :
-            # ### Bootstrap
-
-
-        
-
-            bootstrapped_scores, confidence_lower, confidence_upper = self.bootstrapping(y_truth, y_pred)
-
-
-            # ### Classification Report
-
-
-
-
-            ########## Print All Together
-            print('####################')
-            print("Results for "+tag)
-            print(cmtx)
-            print("Precision: ",precision)
-            print("Precision_CI: ",Precision_CI)
-            print("Recall: ",recall)
-            print("Recall_CI: ",Recall_CI)
-            # print("F1 Score: ",f1_score1)
-            # print("Cohen_Kappa Score: ",cohen_kappa_score1)
-            print("Delong Method")
-            print('AUC:', auc)
-            print('AUC COV:', auc_cov)
-            print('95% AUC CI:', ci)
-
-
+        if plot_roc ==True :
             # ### AUC Plot
-
-
-
-
             plt.figure(1)
-            plt.plot([0, 1], [0, 1], 'k--', label="chance level (AUC = 0.5)")
+            plt.plot([0, 1], [0, 1], 'k--')
             plt.plot(fpr_keras, tpr_keras, label='keras (AUC = {:.3f})'.format(auc_keras))
-            # plt.plot(precision, recall, label='Keras (area = {:.3f})'.format(auc_keras))
+            #plt.plot(precision, recall, label='Keras (area = {:.3f})'.format(auc_keras))
             # plt.plot(fpr_rf, tpr_rf, label='RF (area = {:.3f})'.format(auc_rf))
             plt.xlabel('False positive rate')
             plt.ylabel('True positive rate')
@@ -144,8 +126,8 @@ class Uncertainty_Analysis:
             plt.legend(loc='best')
             plt.show()
             
-        else :
-            return (y_pred, y_truth,tag,precision,Precision_CI,recall,Recall_CI, auc ,auc_cov ,ci , fpr_keras, tpr_keras ,auc_keras ,cmtx)
+        
+        return (precision,Precision_CI,recall,Recall_CI, auc_delong ,auc_delong_cov ,ci_delong , fpr_keras, tpr_keras ,auc_keras ,cmtx)
 
     def auc_keras_(self, fpr_keras, tpr_keras):
         auc_keras = auc(fpr_keras, tpr_keras)
