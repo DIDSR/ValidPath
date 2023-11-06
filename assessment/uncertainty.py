@@ -3,27 +3,17 @@ from scipy.stats import sem
 from sklearn.metrics import roc_auc_score
 import scipy.stats
 from scipy import stats
-#from tensorflow.keras.optimizers import Adam, SGD
-import matplotlib.pyplot as plt
-from keras.models import load_model
 import os, os.path
-import cv2
-import glob
 import pandas as pd
 #from tensorflow.python.keras.applications.resnet import ResNet50, preprocess_input
 # from keras.preprocessing import image
 from sklearn import preprocessing
 from sklearn.preprocessing import StandardScaler, LabelEncoder
-from keras.models import Sequential
-from keras.layers import Dense
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
-from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import StratifiedKFold
 from sklearn.pipeline import Pipeline
 from sklearn.feature_selection import VarianceThreshold
-from keras.layers import Input, Conv2D, Flatten, Dense, Conv2DTranspose, Reshape, Lambda, Activation, BatchNormalization, LeakyReLU, Dropout
-from datetime import datetime
 from keras.callbacks import EarlyStopping
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
@@ -34,8 +24,6 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif, f_regression
 from sklearn.svm import LinearSVC
 from sklearn.feature_selection import SelectFromModel
-import pickle
-import json
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
 from scipy.stats import norm
 from sklearn.metrics import auc
@@ -49,13 +37,16 @@ import matplotlib.pyplot as plt
 
 class Uncertainty_Analysis:
     def __init__(self):
+        self.perform_Delong = False
+        self.perform_Bootstrap = False
+        self.plot_roc = False
+        self.tag = 'My Results'
         pass
 
 
-    def get_report (self, y_pred ,y_truth ,tag, plot_roc) :
+    def get_report (self, y_pred ,y_truth) :
 
 
-        
         
 
         cmtx = pd.DataFrame(
@@ -91,12 +82,14 @@ class Uncertainty_Analysis:
 
         auc_keras = self.auc_keras_(fpr_keras, tpr_keras)
 
-       
-        auc_delong, ci_delong, lower_upper_q, auc_delong_cov, auc_std = self.Delong_CI(y_pred ,y_truth)
+        if self.perform_Delong:
+            auc_delong, ci_delong, lower_upper_q, auc_delong_cov, auc_std = self.Delong_CI(y_pred ,y_truth)
+        else:
+            auc_delong = ci_delong = lower_upper_q = auc_delong_cov = auc_std = []
 
         ########## Print All Together
         print('####################')
-        print("Results for "+tag)
+        print("Results for "+self.tag)
         print(cmtx)
         print("Precision: ",precision)
         print("Precision_CI: ",Precision_CI)
@@ -109,11 +102,13 @@ class Uncertainty_Analysis:
         print('AUC COV:', auc_delong_cov)
         print('95% AUC CI:', ci_delong)
         # ### Bootstrap
-        bootstrapped_scores, confidence_lower, confidence_upper = self.bootstrapping(y_truth, y_pred)
-
+        if self.perform_Bootstrap:
+            bootstrapped_scores, confidence_lower, confidence_upper = self.bootstrapping(y_truth, y_pred)
+        else:
+            bootstrapped_scores =  confidence_lower =  confidence_upper = {}
         #out_ = (y_pred, y_truth,tag,precision,Precision_CI,recall,Recall_CI, auc ,auc_cov ,ci , fpr_keras, tpr_keras ,auc_keras ,cmtx)
         
-        if plot_roc ==True :
+        if self.plot_roc ==True :
             # ### AUC Plot
             plt.figure(1)
             plt.plot([0, 1], [0, 1], 'k--')
