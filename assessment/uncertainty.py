@@ -97,10 +97,11 @@ class Uncertainty_Analysis:
         print("Recall_CI: ",Recall_CI)
         # print("F1 Score: ",f1_score1)
         # print("Cohen_Kappa Score: ",cohen_kappa_score1)
-        print("Delong Method")
-        print('AUC:', auc_delong)
-        print('AUC COV:', auc_delong_cov)
-        print('95% AUC CI:', ci_delong)
+        if self.perform_Delong:
+            print("Delong Method")
+            print('AUC:', auc_delong)
+            print('AUC COV:', auc_delong_cov)
+            print('95% AUC CI:', ci_delong)
         # ### Bootstrap
         if self.perform_Bootstrap:
             bootstrapped_scores, confidence_lower, confidence_upper = self.bootstrapping(y_truth, y_pred)
