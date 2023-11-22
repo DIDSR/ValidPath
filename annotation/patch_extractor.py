@@ -66,6 +66,7 @@ class PatchExtractor :
             None : None
                 None.
         """
+        std_threshold = 15
         chck_group_name=True
         open_dataset = True 
         save_hdf5 = False
@@ -174,7 +175,7 @@ class PatchExtractor :
                 # else:
                     # print('Processing 20X')
                 
-                if np.mean(img) > 250:
+                if np.mean(img) > intensity_threshold:
                     continue
                 
                 # cv2.imshow('graycsale image',img)
@@ -233,6 +234,11 @@ class PatchExtractor :
                             # print(color_chk3)
                         except:
                             continue
+                        # if intensity_check:
+                            # intensity_cond = img.mean() < intensity_threshold and img.std() > std_threshold
+                        # else: 
+                            # intensity_cond = True
+                        
                         if intensity_check:
                             intensity_cond = any(color_chk1) == any(color_chk2) == any(color_chk3) == False
                         else:
