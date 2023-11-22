@@ -44,7 +44,7 @@ class PatchExtractor :
     def __init__(self):
         pass
     #for on all folders
-    def gen_patch(INPUTDIR,PatchSize,Number_of_Patches,intensity_check,OUTPUTDIR):
+    def gen_patch(INPUTDIR,PatchSize,Number_of_Patches,intensity_check,intensity_threshold,OUTPUTDIR):
         """
         This function a number of pactches from extracted annotations.
         It can save the extracted annottions to the output directory as defined in inputs.
@@ -222,11 +222,11 @@ class PatchExtractor :
                         # print(img[x_end, y] )
                     
                         try:
-                            color_chk1 = img[x, y] > [230,230,230]#== [255,255,255]
-                            color_chk2 = img[x, y_end] > [230,230,230]#== [255,255,255]
-                            color_chk3 = img[x_end, y] > [230,230,230]#== [255,255,255]
-                            color_chk4 = img[x_end, y_end] > [230,230,230]#== [255,255,255]
-                            color_chk5 = img[round((x+x_end)/2), round((y+y_end)/2)] > [230,230,230]
+                            color_chk1 = img[x, y] > [intensity_threshold,intensity_threshold,intensity_threshold]#== [255,255,255]
+                            color_chk2 = img[x, y_end] > [intensity_threshold,intensity_threshold,intensity_threshold]#== [255,255,255]
+                            color_chk3 = img[x_end, y] > [intensity_threshold,intensity_threshold,intensity_threshold]#== [255,255,255]
+                            color_chk4 = img[x_end, y_end] > [intensity_threshold,intensity_threshold,intensity_threshold]#== [255,255,255]
+                            color_chk5 = img[round((x+x_end)/2), round((y+y_end)/2)] > [intensity_threshold,intensity_threshold,intensity_threshold]
                             
                             # print(color_chk1)
                             # print(color_chk2)

@@ -147,7 +147,7 @@ class ReadWsi:
             
             
 class WSIpatch_extractor:
-    def patch_extraction(wsi_obj,patch_size,output_folder,random_state,visualize,intensity_check,patch_number=-1):
+    def patch_extraction(wsi_obj,patch_size,output_folder,random_state,visualize,intensity_check,intensity_threshold,std_threshold,patch_number=-1):
         """
         this function  Generate object for tiles using the DeepZoomGenerator and divided 
         the svs file into tiles of size 256 with no overlap.
@@ -236,7 +236,7 @@ class WSIpatch_extractor:
                 # Save original tile
                 
                 if intensity_check:
-                    intensity_cond = temp_tile_np.mean() < 230 and temp_tile_np.std() > 15
+                    intensity_cond = temp_tile_np.mean() < intensity_threshold and temp_tile_np.std() > std_threshold
                 else: 
                     intensity_cond = True
                 if intensity_cond:
@@ -276,7 +276,8 @@ class WSIpatch_extractor:
     def patch_extraction_of_tissue(slidepath,patch_size ,output_folder, number_of_patches=1 , vis = False):
         
         # vis   =   visualize state , if it is True == output will be displayed
-        
+        std_threshold = 15
+        intensity_threshold = 250
         img_array = []
         
         #Minimum tissue area
@@ -339,7 +340,7 @@ class WSIpatch_extractor:
            # cv2.imwrite(f"C:/Users/masoud/data/patch_{str(num_p)}.tif", np.array(patchimg))
             temp_tile_RGB = patchimg.convert('RGB')
             temp_tile_np = np.array(temp_tile_RGB)
-            if temp_tile_np.mean() < 220 and temp_tile_np.std() > 15:
+            if temp_tile_np.mean() < intensity_threshold and temp_tile_np.std() > std_threshold:
                 tiff.imsave(output_folder + f"/patch_{str(num_p)}.tif", temp_tile_np)
                 print(output_folder+ f"/patch_{str(num_p)}.tif")
                 #print("-------------", type(patchimg))
@@ -394,7 +395,8 @@ class WSIpatch_extractor:
             # Total number of tiles in the tiles object
             print("Total number of tiles = : ", tiles.tile_count)
             #print(">>>>>>>>>>>>>>>>")
-          
+            std_threshold = 15
+            intensity_threshold = 250
             MaxTileLevel = len(tiles.level_tiles) - 1
             ###### processing and saving each tile to local directory
             cols, rows = tiles.level_tiles[MaxTileLevel]
@@ -447,7 +449,7 @@ class WSIpatch_extractor:
                     
                     
 
-                    if temp_tile_np.mean() < 230 and temp_tile_np.std() > 15:
+                    if temp_tile_np.mean() < intensity_threshold and temp_tile_np.std() > std_threshold:
                        # print("Processing tile number:", tile_name)
                         norm_img, H_img, E_img = normalization.norm_HnE(temp_tile_np, Io=240, alpha=1, beta=0.15)
                         # Save original tile
