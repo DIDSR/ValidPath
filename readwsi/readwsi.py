@@ -73,7 +73,7 @@ class ReadWsi:
         
         size = (size_h,size_w)
         
-        location = ( bounds[3] , bounds[1] )
+        location = ( bounds[0] , bounds[1] )
         
         return wsi_obj.read_region(location,level,size).convert('RGB')
         
