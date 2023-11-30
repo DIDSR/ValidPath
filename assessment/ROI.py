@@ -91,7 +91,7 @@ class ROI_Generator:
 
         f = []
         for (dirpath, dirnames, filenames) in walk(input_DIR):
-            print("Processing "+filenames)
+            #print("Processing "+filenames)
             f.extend(filenames)
             break
 
