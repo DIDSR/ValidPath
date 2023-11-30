@@ -83,7 +83,7 @@ class ROI_Generator:
                 fd.write(out)
                 
                 
-    def generate_map_file(input_DIR,output_DIR, file_Name,tag_name):            
+    def generate_map_file(self,input_DIR,output_DIR, file_Name,tag_name):            
         #Generate Excel file
         #img_files_dir = 'C:/DATA/6_ML_Patches/ML_Patches/HighRanked/'
         #img_files_dir = 'C:/DATA/6_ML_Patches/ML_Patches/LowRanked/'
