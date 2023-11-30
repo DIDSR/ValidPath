@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.stats import sem
+#from scipy.stats import sem
 from sklearn.metrics import roc_auc_score
 import scipy.stats
 from scipy import stats
@@ -7,23 +7,23 @@ import os, os.path
 import pandas as pd
 #from tensorflow.python.keras.applications.resnet import ResNet50, preprocess_input
 # from keras.preprocessing import image
-from sklearn import preprocessing
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import StratifiedKFold
-from sklearn.pipeline import Pipeline
-from sklearn.feature_selection import VarianceThreshold
-from keras.callbacks import EarlyStopping
+#from sklearn import preprocessing
+#from sklearn.preprocessing import StandardScaler, LabelEncoder
+#from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
+#from sklearn.model_selection import cross_val_score
+#from sklearn.model_selection import StratifiedKFold
+#from sklearn.pipeline import Pipeline
+#from sklearn.feature_selection import VarianceThreshold
+#from keras.callbacks import EarlyStopping
 from sklearn.metrics import roc_curve
-from sklearn.metrics import auc
-from sklearn.ensemble import RandomForestClassifier
+#from sklearn.metrics import auc
+#from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.feature_selection import SelectKBest
-from sklearn.feature_selection import f_classif, f_regression
-from sklearn.svm import LinearSVC
-from sklearn.feature_selection import SelectFromModel
+#from sklearn.feature_selection import SelectKBest
+#from sklearn.feature_selection import f_classif, f_regression
+#from sklearn.svm import LinearSVC
+#from sklearn.feature_selection import SelectFromModel
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
 from scipy.stats import norm
 from sklearn.metrics import auc
