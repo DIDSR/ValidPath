@@ -11,6 +11,8 @@ class ROI_Generator:
         pass
         
     def make_region(self, x , y , id , txt,path_size,Regions):
+        print(x)
+        print(path_size)
         Region  = et.SubElement(Regions, 'Region')
         Region.set("Type", "1" ) # type "1" :  means it is rect
         Region.set("Id", str(id))
@@ -36,6 +38,7 @@ class ROI_Generator:
         Vertex.set('Z', str(0))  
 
     def create_xml(self,input_DIR, file_path  ,path_size , save_xml_path):
+        
 
         csv_file = pd.read_csv(input_DIR+file_path,index_col='WSI')
 
@@ -83,12 +86,12 @@ class ROI_Generator:
                 fd.write(out)
                 
                 
-    def generate_map_file(self,input_DIR,output_DIR, file_Name,tag_name):            
+    def generate_map_file(self, input_DIR,output_DIR, file_Name,tag_name):            
         #Generate Excel file
         #img_files_dir = 'C:/DATA/6_ML_Patches/ML_Patches/HighRanked/'
         #img_files_dir = 'C:/DATA/6_ML_Patches/ML_Patches/LowRanked/'
         
-
+        print(input_DIR)
         f = []
         for (dirpath, dirnames, filenames) in walk(input_DIR):
             #print("Processing "+filenames)
