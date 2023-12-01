@@ -202,7 +202,7 @@ class AnnotationExtractor :
                                                    int(bounds[region_number][1])),#new------------------------------------
                                                   0, (final_x[region_number],final_y[region_number]))#new------------------------------------
                         # plt.imshow(PAS)#new------------------------------------
-
+                    coord = (int(bounds[region_number][0]),int(bounds[region_number][1]))
                     # PAS = pas_img.read_region((int(bounds[region_number][0]),int(bounds[region_number][1])), 0, (final_x[region_number],final_y[region_number]))
                     PAS = np.array(PAS)[:,:,0:3]
                     for channel in range(3):
@@ -211,7 +211,8 @@ class AnnotationExtractor :
                         PAS[:,:,channel] = PAS_
                     subdir = '{}/{}/'.format(save_dir,basename)
                     self.make_folder(subdir)
-                    imsave(subdir + basename + '_anno_' + str(annotationID) +"_reg_"+str(region_number+1)+lbl+ '.jpg', PAS) 
+                    #imsave(subdir + basename + '_anno_' + str(annotationID) +"_reg_"+str(region_number+1)+lblmber+1)+lbl+ "_coord_" + str(coord[0]) + "_" + str(coord[1]) + '.jpg', PAS) 
+                    imsave(subdir + basename + '_anno_' + str(annotationID) +"_reg_"+str(region_number+1)+lbl+ "_coord_" + str(coord[0]) + "_" + str(coord[1]) + '.jpg', PAS) 
                     print('saved <region> of annotationID : ' + str(annotationID))
                     region_number = region_number + 1
                     

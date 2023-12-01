@@ -85,7 +85,10 @@ class PatchExtractor :
         
         for filename in root_directory:
         
-            groupname = filename.split("\\")[-1]
+            #groupname = filename.split("\\")[-1]
+            #groupname = filename.split("\\")[-1]
+            #groupname = filename.split("/")[-1]
+            groupname = os.path.basename(filename)
             
             # Find Magnification
             #FName = groupname.upper() + '.SVS' 
