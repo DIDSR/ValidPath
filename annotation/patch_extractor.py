@@ -194,7 +194,8 @@ class PatchExtractor :
                 #extract patches
                 for rng in range(Number_of_Patches):
              
-                    end_name =name+"_patchnumber_"+str(rng) 
+                    #end_name =name+"_patchnumber_"+str(rng) 
+                    
                
                     
                     done = True
@@ -223,10 +224,10 @@ class PatchExtractor :
                         # print(img[x_end, y] )
                     
                         try:
-                            color_chk1 = img[x, y] > [intensity_threshold,intensity_threshold,intensity_threshold]#== [255,255,255]
-                            color_chk2 = img[x, y_end] > [intensity_threshold,intensity_threshold,intensity_threshold]#== [255,255,255]
-                            color_chk3 = img[x_end, y] > [intensity_threshold,intensity_threshold,intensity_threshold]#== [255,255,255]
-                            color_chk4 = img[x_end, y_end] > [intensity_threshold,intensity_threshold,intensity_threshold]#== [255,255,255]
+                            color_chk1 = img[x, y] > [intensity_threshold,intensity_threshold,intensity_threshold]
+                            color_chk2 = img[x, y_end] > [intensity_threshold,intensity_threshold,intensity_threshold]
+                            color_chk3 = img[x_end, y] > [intensity_threshold,intensity_threshold,intensity_threshold]
+                            color_chk4 = img[x_end, y_end] > [intensity_threshold,intensity_threshold,intensity_threshold]
                             color_chk5 = img[round((x+x_end)/2), round((y+y_end)/2)] > [intensity_threshold,intensity_threshold,intensity_threshold]
                             
                             # print(color_chk1)
@@ -258,7 +259,7 @@ class PatchExtractor :
                                 png_file = Path(OUTPUTDIR+"data/png_files/"+groupname+"/")
                                 png_file.mkdir(parents=True, exist_ok=True)
                                 print(png_dir)
-                                end_name = end_name + "_x_" + str(x) + "_y_" + str(y)
+                                end_name = str(rng)+"_"+groupname + "_x_" + str(x) + "_y_" + str(y) + "_a_" + "100.00"
                                 print("Creating "+png_dir +groupname+"/"+end_name+".png")
                                 try:
                                     cv2.imwrite(png_dir + groupname + "/" +end_name+".png", cropped_image)
