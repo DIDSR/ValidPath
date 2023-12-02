@@ -94,12 +94,12 @@ class AnnotationExtractor :
                 final_y=[] 
                 annotationID=annotation.attrib.get('Id') #annotationID+1
                 Regions = root.findall("./Annotation[@Id='" + str(annotationID) + "']/Regions/Region")
-                print("there is ",len(Regions) , "Regions in this annotation")
+                print("there are ",len(Regions) , "Regions in this annotation")
                 bounds = []
                 masks = []  
                 lbl = annotation.attrib['Name']
                 region_number=0
-                print('opening: a region of' + WSIs[idx])
+                print('opening: a region of ' + WSIs[idx])
                 pas_img = openslide.OpenSlide(WSIs[idx])
                 sw= True
                 for num , Region in enumerate(Regions):
