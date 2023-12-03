@@ -29,7 +29,7 @@ import cv2
 from skimage.io import imsave, imread
 from PIL import Image
 import os
-os.environ['path'] ="D:\\openslide-win64-20171122\\bin"+";"+os.environ['path']
+#os.environ['path'] ="D:\\openslide-win64-20171122\\bin"+";"+os.environ['path']
 from glob import glob
 import openslide
 import numpy as np
