@@ -6,7 +6,7 @@ import os
 from lxml import etree as et
 from os import walk
 
-class ROI_Generator:
+class Annotation_Generator:
     def __init__(self):
         pass
         
