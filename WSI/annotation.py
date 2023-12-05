@@ -35,7 +35,7 @@ from skimage.io import imsave, imread
 from PIL import Image
 import math
 
-highsize = True
+highsize = False
 
 class AnnotationExtractor :
     def __init__(self):

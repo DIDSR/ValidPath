@@ -402,7 +402,16 @@ class PatchExtractor :
     def __init__(self):
         pass
     #for on all folders
-    def gen_patch(INPUTDIR,PatchSize,Number_of_Patches,intensity_check,intensity_threshold,OUTPUTDIR):
+    
+    def find_between(self, s, first, last ):
+        try:
+            start = s.index( first ) + len( first )
+            end = s.index( last, start )
+            return s[start:end]
+        except ValueError:
+            return ""
+    
+    def gen_patch(self, INPUTDIR,PatchSize,Number_of_Patches,intensity_check,intensity_threshold,OUTPUTDIR):
         """
         This function a number of pactches from extracted annotations.
         It can save the extracted annottions to the output directory as defined in inputs.
@@ -425,8 +434,7 @@ class PatchExtractor :
                 None.
         """
         
-        print(INPUTDIR)
-        print("<<<<<<<<<")
+        
         std_threshold = 15
         chck_group_name=True
         open_dataset = True 
@@ -475,7 +483,18 @@ class PatchExtractor :
             # exclude mask images
             # i=0
             for r in files:
-                #print(r)
+                print("r >>>>>>>>>>>>")
+                print(r)
+                subr = self.find_between( r, "_coord_", "." )
+                
+                xx = subr.split("_")[1]
+                yy = subr.split("_")[0]
+                
+                print("subr >>>>>>>>>>>>")
+                print(xx)
+                print(yy)
+                
+                
                 a= r.split("\\")[-1]
                 b= a.split(".")[0]
                 c=b.find("mask")
@@ -616,6 +635,9 @@ class PatchExtractor :
                         # if any(color_chk1) == any(color_chk2) == False : 
                             cropped_image = img[x:x_end, y:y_end]
                             
+                            # add location of annotation (xx,yy) to patch location (x,y)
+                            yFinal = int(xx) + x
+                            xFinal = int(yy) + y
                             # plt.imshow(cropped_image)
                             # plt.show()
                             #create png files of patches
@@ -623,7 +645,8 @@ class PatchExtractor :
                                 png_file = Path(OUTPUTDIR+"data/png_files/"+groupname+"/")
                                 png_file.mkdir(parents=True, exist_ok=True)
                                 print(png_dir)
-                                end_name = str(rng)+"_"+groupname + "_x_" + str(x) + "_y_" + str(y) + "_a_" + "100.00"
+                                #end_name = str(rng)+"_"+groupname + "_x_" + str(x) + "_y_" + str(y) + "_a_" + "100.00"
+                                end_name = str(rng)+"_"+groupname + "_x_" + str(xFinal) + "_y_" + str(yFinal) + "_a_" + "100.00"
                                 print("Creating "+png_dir +groupname+"/"+end_name+".png")
                                 try:
                                     cv2.imwrite(png_dir + groupname + "/" +end_name+".png", cropped_image)
