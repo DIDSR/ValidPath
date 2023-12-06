@@ -69,17 +69,22 @@ To install a python package with specific version of a package using pip, you ca
 pip install lxml==4.9.1
 ```
 Please follow the same procedure to install these python packages:
-- lxml==4.9.1, 
-- cv2== 4.5.3, 
-- openslide-python==1.1.2, 
-- scikit-image==0.18.1, 
-- Shapely==1.7.1, 
-- sharepy==2.0.0.
-- matplotlib==3.6.2 
-- Pillow==9.3.0
-- tifffile==2022.10.10
-- mpmath==1.2.1
-- For the full list of the requirements, please see the requirement.txt file in the project root directory
+•	lxml==4.9.1
+•	opencv-python==4.8.1.78
+•	openslide-python==1.1.2
+•	scikit-image==0.18.1
+•	Shapely==1.7.1
+•	sharepy==2.0.0
+•	matplotlib==3.6.2 
+•	Pillow==9.3.0
+•	tifffile==2022.10.10
+•	mpmath==1.2.1
+•	random
+•	glob
+•	pandas
+•	numpy
+•	For the full list of the requirements, please see the requirement.txt file in the project root directory 
+
   
 In order to check the current package version installed on you system, you can use “pip freeze” or “.___version___” as follows:
 ```sh
