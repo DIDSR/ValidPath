@@ -8,7 +8,7 @@
 
 <h1 align="center"> </h1>
 <p align="center">
-  <h1 align="center">Digital Pathology Toolbox developed at DIDSR</h1>
+  <h1 align="center">DIDSR Digital Pathology Toolbox</h1>
 </p>
 <p align="center">
   <img src="img/CAH_Carcinoma.png">
