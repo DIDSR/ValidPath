@@ -1,4 +1,25 @@
-
+"""
+#
+# ---------------------------------------------------------------------------
+# Created on Fri Oct  5 12:52:32 2023
+#
+# @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
+#----------------------------------------------------------------------------
+# Title:        Whole Slide Image Processing Toolbox - Annotation File Generation Module
+#
+# Description:  This is the Annotation File Generator module for the whole slide  
+#               image processing toolbox. It is includes Annotation_Generator 
+#               class and several methods.
+#
+# Classes:      Annotation_Generator
+#
+# Methods:      make_region
+#               create_xml
+#               generate_map_file
+#
+# version ='3.0'
+# ---------------------------------------------------------------------------
+"""
 
 
 import pandas as pd
@@ -11,6 +32,26 @@ class Annotation_Generator:
         pass
         
     def make_region(self, x , y , id , txt,path_size,Regions):
+        """
+        This method extracts different types for annotations from Whole Slide Images.
+        It can save the extracted annottions to the output directory as defined in inputs.
+        This code also handles several annotations per slide. 
+        The output directory will be generated based on the strucutr of the input directories.
+
+        :Parameters:
+            save_dir : str
+                Output Directory to save the extracted annotations
+
+            WSIs : list
+                List of included WSIs
+
+            XMLs : list
+                List of XML files associated with included WSIs
+
+        :Returns:
+            None : None
+                None.
+        """
         print(x)
         print(path_size)
         Region  = et.SubElement(Regions, 'Region')

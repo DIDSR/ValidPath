@@ -5,12 +5,13 @@
 #
 # @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
 #----------------------------------------------------------------------------
-# Title:        Whole Slide Image Processing Toolbox - Annotation Extractor module
+# Title:        Whole Slide Image Processing Toolbox - Annotation  module
 #
 # Description:  This is the AnnotationExtractor module for the whole slide  
 #               image processing toolbox. It is includes AnnotationExtractor 
 #               class and several methods.
 #
+# Classes:      AnnotationExtractor
 #
 # Methods:      make_folder
 #               extract_ann
@@ -19,16 +20,11 @@
 # ---------------------------------------------------------------------------
 """
 
-
 import cv2
 import numpy as np
 import os
-
-os.environ['path'] ="D:\\openslide-win64-20171122\\bin"+";"+os.environ['path']
 import openslide
-
 import lxml.etree as ET
-
 import matplotlib.pyplot as plt
 from glob import glob
 from skimage.io import imsave, imread
@@ -44,7 +40,7 @@ class AnnotationExtractor :
     
     def make_folder(self,directory):
         """
-        This function creates a directory if not exist.
+        This method creates a directory if not exist.
 
         :Parameters:
             directory : str
@@ -59,7 +55,7 @@ class AnnotationExtractor :
 
     def extract_ann(self,save_dir,XMLs,WSIs,vis=False,save_mask=False):
         """
-        This function extracts different types for annotations from Whole Slide Images.
+        This method extracts different types for annotations from Whole Slide Images.
         It can save the extracted annottions to the output directory as defined in inputs.
         This code also handles several annotations per slide. 
         The output directory will be generated based on the strucutr of the input directories.

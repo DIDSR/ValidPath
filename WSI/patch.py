@@ -5,20 +5,20 @@
 #
 # @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
 #----------------------------------------------------------------------------
-# Title:        Whole Slide Image Processing Toolbox - reader module
+# Title:        Whole Slide Image Processing Toolbox - patch module
 #
-# Description:  This is the reader module for the whole slide image processing 
-#               toolbox. It is includes ReadWsi class and several methods
+# Description:  This is the patch module for the whole slide image processing 
+#               toolbox. It is includes two classes and several methods
 #               
-#
-#
-# Methods:      wsi_reader
+# Classes:
+#               WSIpatch_extractor
+#               PatchExtractor
+#       
+# Methods:      patch_extraction
 #               patch_extraction_of_tissue
-#               extract_region
-#               extract_bounds
-#               wsi_xml_list
-#               patch_extraction
 #               patch_extraction_with_normalized_tiles
+#               find_between
+#               gen_patch
 #
 # version ='3.0'
 # ---------------------------------------------------------------------------
