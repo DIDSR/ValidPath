@@ -10,15 +10,13 @@
 # Description:  This is the reader module for the whole slide image processing 
 #               toolbox. It is includes ReadWsi class and several methods
 #               
-#
+# Classes:      WSIReader
+#               
 #
 # Methods:      wsi_reader
-#               patch_extraction_of_tissue
 #               extract_region
 #               extract_bounds
 #               wsi_xml_list
-#               patch_extraction
-#               patch_extraction_with_normalized_tiles
 #
 # version ='3.0'
 # ---------------------------------------------------------------------------
@@ -46,21 +44,52 @@ from shapely.geometry import Polygon, Point
 import PIL
 
 class WSIReader:
-    
-
-
-            
-            
-            
-    def extract_region(wsi_obj,location,level,size):
+    """
+        This Class process the WSIs.
         
+      
+        :Methods:
+            wsi_reader
+            extract_region
+            extract_bounds
+            wsi_xml_list
+        """
+        
+    def extract_region(wsi_obj,location,level,size):
+        """
+        This method process the WSIs and extract regions.
+        
+      
+        :Parameters:
+        wsi_obj : obj
+            recieve the WSI object
+            
+        :Returns:
+        IMG : Image
+            Image data
+        """
         # level = The number of levels in the slide.
         #Levels are numbered from 0 (highest resolution) to level_count - 1 (lowest resolution).
         
         return wsi_obj.read_region(location,level,size).convert('RGB')
     
     def extract_bounds(wsi_obj,bounds,level):
-    
+        """
+        This method process the WSIs and extract image.
+        
+      
+        :Parameters:
+        wsi_obj : obj
+            recieve the WSI object
+        bounds : tuple
+            recieve the locations for extracting image from WSI
+        level : int
+            WSI level to extract image from
+            
+        :Returns:
+        IMG : Image
+            Image data
+        """
 
         # Specify the bounds in terms of rectangle (left, top, right, bottom)
         
@@ -115,25 +144,25 @@ class WSIReader:
 
     def wsi_reader(WSI_path):
         """
-    This code read a WSI and return the WSI object.
-    This code can read the WSIs with the following formats:
-    Aperio (.svs, .tif)
-    Hamamatsu (.vms, .vmu, .ndpi)
-    Leica (.scn)
-    MIRAX (.mrxs)
-    Philips (.tiff)
-    Sakura (.svslide)
-    Trestle (.tif)
-    Ventana (.bif, .tif)
-    Generic tiled TIFF (.tif)
-      
-    :Parameters:
-        WSI_path : str
-            The address to the WSI file.
-            
-    :Returns:
-        wsi_obj : obj
-            WSI object
+        This code read a WSI and return the WSI object.
+        This code can read the WSIs with the following formats:
+        Aperio (.svs, .tif)
+        Hamamatsu (.vms, .vmu, .ndpi)
+        Leica (.scn)
+        MIRAX (.mrxs)
+        Philips (.tiff)
+        Sakura (.svslide)
+        Trestle (.tif)
+        Ventana (.bif, .tif)
+        Generic tiled TIFF (.tif)
+          
+        :Parameters:
+            WSI_path : str
+                The address to the WSI file.
+                
+        :Returns:
+            wsi_obj : obj
+                WSI object
 
         """
 
