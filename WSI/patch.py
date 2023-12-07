@@ -141,6 +141,7 @@ class WSIpatch_extractor:
                 temp_tile_np = np.array(temp_tile_RGB)
                 # Save original tile
                 
+                # to check intensity mean and intensity standard deviation of the tiles (To exclude non-informative tiles)
                 if intensity_check:
                     intensity_cond = temp_tile_np.mean() < intensity_threshold and temp_tile_np.std() > std_threshold
                 else: 
@@ -246,6 +247,8 @@ class WSIpatch_extractor:
            # cv2.imwrite(f"C:/Users/masoud/data/patch_{str(num_p)}.tif", np.array(patchimg))
             temp_tile_RGB = patchimg.convert('RGB')
             temp_tile_np = np.array(temp_tile_RGB)
+            
+            # to check intensity mean and intensity standard deviation of the tiles (To exclude non-informative tiles)
             if temp_tile_np.mean() < intensity_threshold and temp_tile_np.std() > std_threshold:
                 tiff.imsave(output_folder + f"/patch_{str(num_p)}.tif", temp_tile_np)
                 print(output_folder+ f"/patch_{str(num_p)}.tif")
@@ -354,7 +357,7 @@ class WSIpatch_extractor:
                     temp_tile_np = np.array(temp_tile_RGB)
                     
                     
-
+                    # to check intensity mean and intensity standard deviation of the tiles (To exclude non-informative tiles)
                     if temp_tile_np.mean() < intensity_threshold and temp_tile_np.std() > std_threshold:
                        # print("Processing tile number:", tile_name)
                         norm_img, H_img, E_img = normalization.norm_HnE(temp_tile_np, Io=240, alpha=1, beta=0.15)
@@ -556,7 +559,8 @@ class PatchExtractor :
                     
                 # else:
                     # print('Processing 20X')
-                
+                    
+                # to check intensity mean and intensity standard deviation of the tiles (To exclude non-informative tiles)
                 if np.mean(img) > intensity_threshold:
                     continue
                 
@@ -604,7 +608,8 @@ class PatchExtractor :
                         # print(img[x, y])
                         # print(img[x, y_end])
                         # print(img[x_end, y] )
-                    
+                        
+                        # to include patches with high intensity in corner of the patches
                         try:
                             color_chk1 = img[x, y] > [intensity_threshold,intensity_threshold,intensity_threshold]
                             color_chk2 = img[x, y_end] > [intensity_threshold,intensity_threshold,intensity_threshold]
