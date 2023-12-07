@@ -564,6 +564,13 @@ class PatchExtractor :
                 if np.mean(img) > intensity_threshold:
                     continue
                 
+                
+                # Don't use regions that are too small
+                print(img.shape)
+                min_acceptable_height, min_acceptable_width = 2*input_y, 2*input_x
+                if img.shape[0] < min_acceptable_height or img.shape[1] < min_acceptable_width:
+                    continue
+
                 # cv2.imshow('graycsale image',img)
                 # cv2.waitKey(0)
                 # cv2.destroyAllWindows()
