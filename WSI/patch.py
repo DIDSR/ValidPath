@@ -456,25 +456,10 @@ class PatchExtractor :
         
         for filename in root_directory:
         
-            #groupname = filename.split("\\")[-1]
-            #groupname = filename.split("\\")[-1]
-            #groupname = filename.split("/")[-1]
             groupname = os.path.basename(filename)
             
-            # Find Magnification
-            #FName = groupname.upper() + '.SVS' 
             FName = groupname.upper()
-            # try:
-            # For Aperio
-            # Magnification = Dataset_[Dataset_['Filename of initial Aperio slide'] == FName]['SVS Magnification'].item()
-            # For 3DHistech
-            # Magnification = 40#Dataset_[Dataset_['Filename of initial 3D Histech slide'] == FName]['SVS Magnification'].item()
-            # if Magnification == 40:
-                # print(groupname+' Magnification  is 40')
-            # elif Magnification == 13:
-                # print(groupname+' Magnification  is 13')
-            # else:
-                # print('Magnification is 20')
+
            
               
            
