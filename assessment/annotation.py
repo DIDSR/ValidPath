@@ -17,7 +17,7 @@
 #               create_xml
 #               generate_map_file
 #
-# version ='3.0'
+# version ='1.0'
 # ---------------------------------------------------------------------------
 """
 
@@ -129,8 +129,7 @@ class Annotation_Generator:
                 
     def generate_map_file(self, input_DIR,output_DIR, file_Name,tag_name):            
         #Generate Excel file
-        #img_files_dir = 'C:/DATA/6_ML_Patches/ML_Patches/HighRanked/'
-        #img_files_dir = 'C:/DATA/6_ML_Patches/ML_Patches/LowRanked/'
+
         
         print(input_DIR)
         f = []

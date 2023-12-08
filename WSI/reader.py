@@ -48,8 +48,6 @@ def wsi_xml_list (wsis_dir):
 
 
     """
-
-    #WSIs_ = glob('C:/DATA/0_Washu-3DHistech/*.svs')
     
     WSIs_ = glob(wsis_dir+'/*.svs')
 

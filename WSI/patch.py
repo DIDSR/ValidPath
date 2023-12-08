@@ -20,7 +20,7 @@
 #               find_between
 #               gen_patch
 #
-# version ='3.0'
+# version ='1.0'
 # ---------------------------------------------------------------------------
 """
 
@@ -485,18 +485,11 @@ class PatchExtractor :
             # exclude mask images
             # i=0
             for r in files:
-                print("r >>>>>>>>>>>>")
-                print(r)
                 subr = self.find_between( r, "_coord_", "." )
                 
                 xx = subr.split("_")[1]
                 yy = subr.split("_")[0]
-                
-                print("subr >>>>>>>>>>>>")
-                print(xx)
-                print(yy)
-                
-                
+
                 a= r.split("\\")[-1]
                 b= a.split(".")[0]
                 c=b.find("mask")
@@ -504,9 +497,7 @@ class PatchExtractor :
                 #     rt=files.pop()[i]\
                 if(c==-1):
                     files_clean.append(r)
-                # i=i+1
-         
-          
+
             # for on  all images in a folder
             for fl in files_clean:
               
@@ -514,91 +505,35 @@ class PatchExtractor :
                 img = cv2.imread(fl, cv2.IMREAD_COLOR)
                 plt.imshow(img)
                 plt.show()
-                # if Magnification == 13:
-                    # print(groupname+' Rescaling 13X to 20X')
-                    # scale = 0.65
-                    # img = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
-                    
-                # elif Magnification == 40:
-                    # print(groupname+' Rescaling 40X to 20X')
-                    # scale = 0.5
-                    # img = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
-                    
-                    
-                    
-                    # img1 = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
-                    # fig, axs = plt.subplots(1,2,figsize=(15,10))
-                    # axs[0].imshow(img),axs[0].axis('off')
-                    # axs[0].set_title('Original')
-                    # axs[1].imshow(img1),axs[1].axis('off')
-                    # axs[1].set_title('imgcv2_INTER_AREA')
-                    
-                    # imgcv2_INTER_CUBIC = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_CUBIC)
-                    # imgcv2_INTER_AREA = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
-                    # imgcv2_INTER_LANCZOS4 = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_LANCZOS4)
-                    # imgcv2_INTER_NEAREST = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_NEAREST)
-                    # imgcv2_INTER_LINEAR = cv2.resize(img, (0,0), fx=scale, fy=scale, interpolation=cv2.INTER_LINEAR)
-                    
-                    # fig, axs = plt.subplots(2,3,figsize=(15,10))
-                    # # fig.suptitle('Different Interpolations')
-                    # axs[0, 0].imshow(img),axs[0,0].axis('off')
-                    # axs[0, 0].set_title('Original')
-                    # axs[0, 1].imshow(imgcv2_INTER_CUBIC),axs[0,1].axis('off')
-                    # axs[0, 1].set_title('CUBIC')
-                    # axs[0, 2].imshow(imgcv2_INTER_AREA),axs[0,2].axis('off')
-                    # axs[0, 2].set_title('AREA')
-                    # axs[1, 0].imshow(imgcv2_INTER_LANCZOS4),axs[1,0].axis('off')
-                    # axs[1, 0].set_title('LANCZOS4')
-                    # axs[1, 1].imshow(imgcv2_INTER_NEAREST),axs[1,1].axis('off')
-                    # axs[1, 1].set_title('NEAREST')
-                    # axs[1, 2].imshow(imgcv2_INTER_LINEAR),axs[1,2].axis('off')
-                    # axs[1, 2].set_title('LINEAR')
-                    
-                    # cv2.PSNR(img, imgcv2_INTER_CUBIC)
-                    # (score, diff) = compare_ssim(img, imgcv2_INTER_CUBIC, full=True,multichannel=True)
-                    
-                # else:
-                    # print('Processing 20X')
-                    
+    
                 # to check intensity mean and intensity standard deviation of the tiles (To exclude non-informative tiles)
                 if np.mean(img) > intensity_threshold:
                     continue
-                
-                
+
                 # Don't use regions that are too small
                 print(img.shape)
                 min_acceptable_height, min_acceptable_width = 2*input_y, 2*input_x
                 if img.shape[0] < min_acceptable_height or img.shape[1] < min_acceptable_width:
                     continue
-
-                # cv2.imshow('graycsale image',img)
-                # cv2.waitKey(0)
-                # cv2.destroyAllWindows()
-        
-                
+              
                 rows,cols = img.shape[0], img.shape[1]
                 
                 b=fl.split('\\')[-1]
           
                 name=b.split('.')[0]
-                
-             
-               
+
                 #extract patches
                 for rng in range(Number_of_Patches):
              
                     #end_name =name+"_patchnumber_"+str(rng) 
-                    
-               
-                    
+
                     done = True
                     breakLimit = 500
                     breakCount = 0
                     while done : 
-                        #print("Trying Extract: "+ name + "Break Count: " + str(breakCount))
+                        
                         breakCount = breakCount + 1
                         if breakCount > breakLimit:
-                            #print(">>>>>>>>>>> BREAK on "+ name)
                             break
                         coords = [(random.random()*rows, random.random()*cols)]
                         x=int(coords[0][0])
@@ -612,9 +547,6 @@ class PatchExtractor :
                         x_end=x+input_x
                         y_end=y+input_y
                         
-                        # print(img[x, y])
-                        # print(img[x, y_end])
-                        # print(img[x_end, y] )
                         
                         # to include patches with high intensity in corner of the patches
                         try:
@@ -624,15 +556,8 @@ class PatchExtractor :
                             color_chk4 = img[x_end, y_end] > [intensity_threshold,intensity_threshold,intensity_threshold]
                             color_chk5 = img[round((x+x_end)/2), round((y+y_end)/2)] > [intensity_threshold,intensity_threshold,intensity_threshold]
                             
-                            # print(color_chk1)
-                            # print(color_chk2)
-                            # print(color_chk3)
                         except:
                             continue
-                        # if intensity_check:
-                            # intensity_cond = img.mean() < intensity_threshold and img.std() > std_threshold
-                        # else: 
-                            # intensity_cond = True
                         
                         if intensity_check:
                             intensity_cond = any(color_chk1) == any(color_chk2) == any(color_chk3) == False
@@ -640,10 +565,7 @@ class PatchExtractor :
                             intensity_cond = True
                         
                         # Check three corner have high intensity
-                        if intensity_cond :
-                            #print("HEEEEEEEEEEEEERE")
-                        # if any(color_chk1) == any(color_chk2) == any(color_chk3) == any(color_chk4) == any(color_chk5)== False : 
-                        # if any(color_chk1) == any(color_chk2) == False : 
+                        if intensity_cond : 
                             cropped_image = img[x:x_end, y:y_end]
                             
                             # add location of annotation (xx,yy) to patch location (x,y)
@@ -663,8 +585,7 @@ class PatchExtractor :
                                     cv2.imwrite(png_dir + groupname + "/" +end_name+".png", cropped_image)
                                 except:
                                     continue
-                                
-                              
+  
                             #create a hdf5 file of all patches
                             if(save_hdf5==True):
                                 if open_dataset==True:    
@@ -676,15 +597,12 @@ class PatchExtractor :
                                     print(groupname+"_is-->>>>> new group name.")
                                     grp = dataset.create_group(groupname);
                                     chck_group_name=False
-                                    
-                        
-                                
+
                                 dset = grp.create_dataset(end_name, data=cropped_image)
                                 print(end_name+"_is new dataset on  "+groupname+" group")
                                
                             done=False 
-            # except:
-                # print("Can not Process "+FName)
+
         if(save_hdf5==True):
             dataset.close()
 	

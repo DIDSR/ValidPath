@@ -16,7 +16,7 @@
 # Methods:      make_folder
 #               extract_ann
 #
-# version ='3.0'
+# version ='1.0'
 # ---------------------------------------------------------------------------
 """
 
@@ -76,16 +76,15 @@ class AnnotationExtractor :
         """
         plt.rcParams.update({'font.size': 6})
 
-        # go though all WSI
+        # go over all WSI
         for idx, XML in enumerate(XMLs):
-           # print(idx, XML)
             annotationID=0
             tree = ET.parse(XML)
             root = tree.getroot()
             annot = root.findall("./Annotation")
             
             for annotation in annot:
-                #print(annotation)
+                
                 final_x=[]
                 final_y=[] 
                 annotationID=annotation.attrib.get('Id') #annotationID+1
@@ -102,10 +101,8 @@ class AnnotationExtractor :
                     
                     if vis==True and save_mask ==False and sw==True  :
                         #fig,axes = plt.subplots(nrows = 1, ncols = len(Regions))
-                        
                         #fig.tight_layout(pad=5.0)
-                        sw = False
-                        
+                        sw = False    
                     if vis==True and save_mask ==True and sw==True  :
                         #fig,axes = plt.subplots(nrows = len(Regions), ncols = 2)
                         #fig.tight_layout(pad=5.0)
@@ -119,45 +116,37 @@ class AnnotationExtractor :
                         x.append(int(np.float32(Vertex.attrib['X'])))
                         y.append(int(np.float32(Vertex.attrib['Y'])))
                       
-                    x1=x  #new------------------------------------
-                    y1=y  ##new------------------------------------
-                    if highsize== True:#new------------------------------------
-                        x = [ math.floor(number/4) for number in x]#new------------------------------------
-                        y = [math.floor(number/4) for number in y]#new------------------------------------
+                    x1=x  
+                    y1=y  
+                    if highsize== True:
+                        x = [ math.floor(number/4) for number in x]
+                        y = [math.floor(number/4) for number in y]
 
-
-                    # x_center = min(x) + ((max(x)-min(x))/2)
-                    # y_center = min(y) + ((max(y)-min(y))/2)
                     final_x.append(max(x) - min(x))
                     final_y.append(max(y) - min(y))
-                    # bound_x = x_center - final_x[region_number] /2
-                    # bound_y = y_center-final_y[region_number]/2
-                    bounds.append([min(x1), min(y1)])#new------------------------------------
 
-                    # bounds.append([min(x), min(y)])
+                    bounds.append([min(x1), min(y1)])
+
                     points = np.stack([np.asarray(x), np.asarray(y)], axis=1)
                     points[:,1] = np.int32(np.round(points[:,1] - min(y) )) 
                     points[:,0] = np.int32(np.round(points[:,0] - min(x) ))
                     mask = np.zeros([final_y[region_number], final_x[region_number]], dtype=np.int8)
-                    #plt.imshow(mask)
-
-
-                    # cv2.fillPoly(mask, [points], color=(255,255,255))
-                    if(len(x)>3):                                        #polygon
+                    
+                    if(len(x)>3): #polygon
                         print("....poly")
                         cv2.fillPoly(mask, [points], color=(255,255,255))
 
-                    if(len(x)==2):                            # cirlce or ellipse
+                    if(len(x)==2): # cirlce or ellipse
 
                         x_c_int = int(points[1,0]/2)
                         y_c_int =int(points[1,1]/2)
                         center_coordinates=(x_c_int,y_c_int)
 
-                        if(points[:,0][1]==points[:,1][1]):        #cirlce
+                        if(points[:,0][1]==points[:,1][1]): #cirlce
                             print("....circle ")
                             cv2.circle(img=mask, center =center_coordinates, radius=x_c_int , color =(255,255,255), thickness=-1)
 
-                        else:                                       # ellipse
+                        else: # ellipse
                             print("....ellipse ")
 
                             axesLength = (x_c_int, y_c_int)
@@ -165,9 +154,7 @@ class AnnotationExtractor :
                             startAngle = 0
                             endAngle = 360
                             image = cv2.ellipse(mask, center_coordinates, axesLength, angle, startAngle, endAngle, (255,255,255), thickness=-1)
-                   ##### <-----new block
-
-
+                   
 
                     basename = os.path.basename(XML)
                     basename = os.path.splitext(basename)[0]
@@ -181,23 +168,22 @@ class AnnotationExtractor :
                             #fig = plt.figure(figsize=(2, 2))
                             plt.imshow(mask)
                             plt.show()
-                            
                             #axes[num,1].imshow(mask)
                             #axes[num,1].set_title('Mask number : {}'.format(num))
                         
                     masks.append(mask)
          
                     mask = masks[region_number]
-                    if highsize== True:         #new------------------------------------
-                        PAS = pas_img.read_region((int(bounds[region_number][0]),  #new------------------------------------
-                                                   int(bounds[region_number][1])), #new------------------------------------
-                                                  1,(final_x[region_number],final_y[region_number]))#new------------------------------------
-                        # plt.imshow(PAS)#new------------------------------------
-                    else:#new------------------------------------
-                        PAS = pas_img.read_region((int(bounds[region_number][0]),#new------------------------------------
-                                                   int(bounds[region_number][1])),#new------------------------------------
-                                                  0, (final_x[region_number],final_y[region_number]))#new------------------------------------
-                        # plt.imshow(PAS)#new------------------------------------
+                    if highsize== True:
+                        PAS = pas_img.read_region((int(bounds[region_number][0]),  
+                                                   int(bounds[region_number][1])), 
+                                                  1,(final_x[region_number],final_y[region_number]))
+                        # plt.imshow(PAS)
+                    else:
+                        PAS = pas_img.read_region((int(bounds[region_number][0]),
+                                                   int(bounds[region_number][1])),
+                                                  0, (final_x[region_number],final_y[region_number]))
+                        # plt.imshow(PAS)
                     coord = (int(bounds[region_number][0]),int(bounds[region_number][1]))
                     # PAS = pas_img.read_region((int(bounds[region_number][0]),int(bounds[region_number][1])), 0, (final_x[region_number],final_y[region_number]))
                     PAS = np.array(PAS)[:,:,0:3]

@@ -1,38 +1,16 @@
 import numpy as np
-#from scipy.stats import sem
 from sklearn.metrics import roc_auc_score
 import scipy.stats
 from scipy import stats
 import os, os.path
 import pandas as pd
-#from tensorflow.python.keras.applications.resnet import ResNet50, preprocess_input
-# from keras.preprocessing import image
-#from sklearn import preprocessing
-#from sklearn.preprocessing import StandardScaler, LabelEncoder
-#from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
-#from sklearn.model_selection import cross_val_score
-#from sklearn.model_selection import StratifiedKFold
-#from sklearn.pipeline import Pipeline
-#from sklearn.feature_selection import VarianceThreshold
-#from keras.callbacks import EarlyStopping
 from sklearn.metrics import roc_curve
-#from sklearn.metrics import auc
-#from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import precision_recall_curve
 from sklearn.metrics import classification_report, confusion_matrix
-#from sklearn.feature_selection import SelectKBest
-#from sklearn.feature_selection import f_classif, f_regression
-#from sklearn.svm import LinearSVC
-#from sklearn.feature_selection import SelectFromModel
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
 from scipy.stats import norm
 from sklearn.metrics import auc
 import matplotlib.pyplot as plt 
-
-
-
-
-
 
 
 class Uncertainty_Analysis:
@@ -57,7 +35,7 @@ class Uncertainty_Analysis:
 
 
         ###############  Precision
-        precision = precision_score(y_truth.round(), y_pred.round()) #  average=Nonefor precision from each class
+        precision = precision_score(y_truth.round(), y_pred.round())
         ############### Recall
         recall = recall_score(y_truth.round(), y_pred.round())
         # ############### F1 score
@@ -107,15 +85,12 @@ class Uncertainty_Analysis:
             bootstrapped_scores, confidence_lower, confidence_upper = self.bootstrapping(y_truth, y_pred)
         else:
             bootstrapped_scores =  confidence_lower =  confidence_upper = {}
-        #out_ = (y_pred, y_truth,tag,precision,Precision_CI,recall,Recall_CI, auc ,auc_cov ,ci , fpr_keras, tpr_keras ,auc_keras ,cmtx)
-        
+                
         if self.plot_roc ==True :
             # ### AUC Plot
             plt.figure(1)
             plt.plot([0, 1], [0, 1], 'k--')
             plt.plot(fpr_keras, tpr_keras, label='keras (AUC = {:.3f})'.format(auc_keras))
-            #plt.plot(precision, recall, label='Keras (area = {:.3f})'.format(auc_keras))
-            # plt.plot(fpr_rf, tpr_rf, label='RF (area = {:.3f})'.format(auc_rf))
             plt.xlabel('False positive rate')
             plt.ylabel('True positive rate')
             plt.title('ROC curve')
@@ -146,13 +121,10 @@ class Uncertainty_Analysis:
         return p_hat - z_score * std, p_hat + z_score * std
     
     def Delong_CI(self, y_pred ,y_truth):
-        #Original Code found in: https://github.com/yandexdataschool/roc_comparison
+        #adopted from: github.com/yandexdataschool/roc_comparison
         alpha = .95
-        # y_pred = y_pred0[:,0]#np.array([0.21, 0.32, 0.63, 0.35, 0.92, 0.79, 0.82, 0.99, 0.04])
-        # y_true = y_truth#np.array([0,    1,    0,    0,    1,    1,    0,    1,    0   ])
-
-        y_true = np.array(y_truth)#np.array([0,    1,    0,    0,    1,    1,    0,    1,    0   ])
-
+        
+        y_true = np.array(y_truth)
 
         auc, auc_cov = self.delong_roc_variance(
             y_true,
@@ -170,9 +142,8 @@ class Uncertainty_Analysis:
         return auc, ci, lower_upper_q, auc_cov, auc_std
     
     
-    # AUC comparison adapted from
-    # https://github.com/Netflix/vmaf/
-    # Adopted from https://stackoverflow.com/questions/19124239/scikit-learn-roc-curve-with-confidence-intervals
+    # AUC comparison adapted from github.com/Netflix/vmaf/
+    # stackoverflow.com/questions/19124239/scikit-learn-roc-curve-with-confidence-intervals
     def compute_midrank(self,x):
         """Computes midranks.
         Args:
@@ -226,9 +197,6 @@ class Uncertainty_Analysis:
             return self.fastDeLong_no_weights(predictions_sorted_transposed, label_1_count)
         else:
             return self.fastDeLong_weights(predictions_sorted_transposed, label_1_count, sample_weight)
-        
-        
-    
     
     def fastDeLong_weights(self, predictions_sorted_transposed, label_1_count, sample_weight):
         """
