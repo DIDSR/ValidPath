@@ -457,14 +457,14 @@ class PatchExtractor :
         for filename in root_directory:
         
             groupname = os.path.basename(filename)
-            
-            FName = groupname.upper()
+            #FName = groupname.upper()
 
-           
-              
-           
-           
             files = glob( filename + r"\*.jpg")
+            #files = glob( filename + r"\*.jpg")
+            # adjustment for compatibility with linux (because "\" is the wrong type of slash for unix):
+            files = glob(os.path.join(filename, "*.jpg"))
+            #import pdb; pdb.set_trace()
+            #files = [f.upper() for f in files]
         
             files_clean = []
             # exclude mask images
