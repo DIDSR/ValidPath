@@ -88,7 +88,8 @@ class WSIpatch_extractor:
         
         cols, rows = tiles.level_tiles[MaxTileLevel]
        
-        
+        #print(tiles)
+        #import pdb; pdb.set_trace()
         tile_path = output_folder+"Imagepatches/"
         orig_tile_dir_name = output_folder+"Imagepatches/original_tiles/"
         norm_tile_dir_name = output_folder+"Imagepatches/normalized_tiles/"
@@ -133,10 +134,19 @@ class WSIpatch_extractor:
         #    for col in range(cols):
                 
                 
-                tile_name = str(col) + "_" + str(row)
+                #tile_name = str(col) + "_" + str(row)
                 # tile_name = os.path.join(tile_dir, '%d_%d' % (col, row))
                 # print("Now processing tile with title: ", tile_name)
                 temp_tile = tiles.get_tile(MaxTileLevel, (col, row))
+                #getting the coordinates
+                temp_tile_coor = tiles.get_tile_coordinates(MaxTileLevel, (col, row))
+                xx = temp_tile_coor[0][0]
+                yy = temp_tile_coor[0][1]
+                
+                
+                tile_name = str(counter)+"_"+str(0) + "_x_" + str(xx) + "_y_" + str(yy) + "_a_" + "100.00"
+                
+                
                 temp_tile_RGB = temp_tile.convert('RGB')
                 temp_tile_np = np.array(temp_tile_RGB)
                 # Save original tile
