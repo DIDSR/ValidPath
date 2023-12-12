@@ -459,7 +459,6 @@ class PatchExtractor :
             groupname = os.path.basename(filename)
             #FName = groupname.upper()
 
-            files = glob( filename + r"\*.jpg")
             #files = glob( filename + r"\*.jpg")
             # adjustment for compatibility with linux (because "\" is the wrong type of slash for unix):
             files = glob(os.path.join(filename, "*.jpg"))
