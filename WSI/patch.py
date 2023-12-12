@@ -91,14 +91,15 @@ class WSIpatch_extractor:
         #print(tiles)
         #import pdb; pdb.set_trace()
         tile_path = output_folder+"Imagepatches/"
-        orig_tile_dir_name = output_folder+"Imagepatches/original_tiles/"
-        norm_tile_dir_name = output_folder+"Imagepatches/normalized_tiles/"
-        H_tile_dir_name = output_folder+"Imagepatches/H_tiles/"
-        E_tile_dir_name = output_folder+"Imagepatches/E_tiles/"
+        orig_tile_dir_name = output_folder+"Imagepatches/"
+        #norm_tile_dir_name = output_folder+"Imagepatches/normalized_tiles/"
+        #H_tile_dir_name = output_folder+"Imagepatches/H_tiles/"
+        #E_tile_dir_name = output_folder+"Imagepatches/E_tiles/"
 
-        MYDIRs = [output_folder+"Imagepatches/", output_folder+"Imagepatches/original_tiles/",
-                  output_folder+"Imagepatches/normalized_tiles/",output_folder+"Imagepatches/H_tiles/",
-                  output_folder+"Imagepatches/E_tiles/"]
+        # MYDIRs = [output_folder+"Imagepatches/", output_folder+"Imagepatches/original_tiles/",
+                  # output_folder+"Imagepatches/normalized_tiles/",output_folder+"Imagepatches/H_tiles/",
+                  # output_folder+"Imagepatches/E_tiles/"]
+        MYDIRs = [output_folder+"Imagepatches/"]
             
         for dr in MYDIRs:
             CHECK_FOLDER = os.path.isdir(dr)
@@ -157,8 +158,8 @@ class WSIpatch_extractor:
                 else: 
                     intensity_cond = True
                 if intensity_cond:
-                    print("Saving" + orig_tile_dir_name + tile_name + "_original.tif")
-                    tiff.imsave(orig_tile_dir_name + tile_name + "_original.tif", temp_tile_np)
+                    print("Saving" + orig_tile_dir_name + tile_name + ".tif")
+                    tiff.imsave(orig_tile_dir_name + tile_name + ".tif", temp_tile_np)
                    # fig = plt.figure(figsize=(7, 7))
                     #fig.add_subplot(ro, co, 1)
                     #plt.imshow(temp_tile_np)
@@ -458,7 +459,7 @@ class PatchExtractor :
         root_directory = glob(r''+INPUTDIR+'*')
         print(">>>>>>>>>")
         print(root_directory)
-        png_dir = OUTPUTDIR+"data/png_files/"
+        png_dir = OUTPUTDIR+"Imagepatches/"
         if not os.path.exists(png_dir):
             os.makedirs(png_dir)
                 
@@ -569,7 +570,7 @@ class PatchExtractor :
                             # plt.show()
                             #create png files of patches
                             if save_png==True:
-                                png_file = Path(OUTPUTDIR+"data/png_files/"+groupname+"/")
+                                png_file = Path(OUTPUTDIR+"Imagepatches/"+groupname+"/")
                                 png_file.mkdir(parents=True, exist_ok=True)
                                 print(png_dir)
                                 #end_name = str(rng)+"_"+groupname + "_x_" + str(x) + "_y_" + str(y) + "_a_" + "100.00"
