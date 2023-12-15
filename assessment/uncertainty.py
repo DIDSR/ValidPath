@@ -72,8 +72,6 @@ class Uncertainty_Analysis:
         print("Precision_CI: ",Precision_CI)
         print("Recall: ",recall)
         print("Recall_CI: ",Recall_CI)
-        # print("F1 Score: ",f1_score1)
-        # print("Cohen_Kappa Score: ",cohen_kappa_score1)
         if self.perform_Delong:
             print("Delong Method")
             print('AUC:', auc_delong)
@@ -120,7 +118,10 @@ class Uncertainty_Analysis:
         return p_hat - z_score * std, p_hat + z_score * std
     
     def Delong_CI(self, y_pred ,y_truth):
-        #adopted from: github.com/yandexdataschool/roc_comparison
+        # A Python implementation of an algorithm for computing the statistical significance of comparing two sets of predictions by ROC AUC. 
+        #Also can compute variance of a single ROC AUC estimate. X. Sun and W. Xu, "Fast Implementation of DeLong’s Algorithm for Comparing the 
+        #Areas Under Correlated Receiver Operating Characteristic Curves," in IEEE Signal Processing Letters, vol. 21, no. 11, pp. 1389-1393, Nov. 2014, 
+        #doi: 10.1109/LSP.2014.2337313.
         alpha = .95
         
         y_true = np.array(y_truth)
@@ -140,8 +141,6 @@ class Uncertainty_Analysis:
         ci[ci > 1] = 1
         return auc, ci, lower_upper_q, auc_cov, auc_std
     
-    
-    # AUC comparison adapted from github.com/Netflix/vmaf/
     # stackoverflow.com/questions/19124239/scikit-learn-roc-curve-with-confidence-intervals
     def compute_midrank(self,x):
         """Computes midranks.
@@ -335,8 +334,7 @@ class Uncertainty_Analysis:
     def bootstrapping(self, y_true, y_pred):
     
         print("Original ROC area: {:0.3f}".format(roc_auc_score(y_true, y_pred)))
-
-        #n_bootstraps = 1000
+        
         rng_seed = 42  # control reproducibility
         bootstrapped_scores = []
 
