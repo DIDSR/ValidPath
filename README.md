@@ -21,17 +21,17 @@
 ## Getting Started
 
 ### General Information
-**`WSIToolbox`** is a python-based package for developers and scientist who are interested in digital pathology. The main goal of developing this tool is to help stakeholders, graduate students, and pathologist to speed up their projects.  For more information please contact: **[seyed.kahaki@fda.hhs.gov](mailto:seyed.kahaki@fda.hhs.gov)**.
+**`WSIToolbox`** is a python-based package for developers and scientists who are interested in digital pathology. The main goal of developing this tool is to help stakeholders, graduate students, and pathologists to speed up their projects.  For more information please contact: **[seyed.kahaki@fda.hhs.gov](mailto:seyed.kahaki@fda.hhs.gov)**.
 
 We are continuously working on this toolbox, and we welcome any contributions.
 
 ### Modules
 There are several modules in this package including
-1.	WSI Handler: includes functions and classes for general wsi analysis such as read whole slide images, tissue segmentation, and normalization.
-2.	Annotation Extraction: this module includes several functions for processing annotations such as annotation extraction.
-3.	Patch Extraction: which assist pathologist and developers in extracting image patches from whole slide images region of interest.
-4.	Annotation File Generator: Mapping back the ROIs into the image scope visualizer for the pathologist validation process
-5.	Performance Assessment: including different modules for assessing the performance of ML models.
+1.	WSI Handler: Includes functions and classes for general WSI analysis such as reading whole slide images, tissue segmentation, and normalization.
+2.	Annotation Extraction: Includes several functions for processing annotations such as annotation extraction.
+3.	Patch Extraction: Assists pathologists and developers in extracting image patches from a whole slide image's region of interest.
+4.	Annotation File Generator: Maps ROIs back into the image scope visualizer for the pathologist validation process
+5.	Performance Assessment: Includes different modules for assessing the performance of ML models.
 
 ### Information for Developers
 Code Documentation:
@@ -48,7 +48,7 @@ Please refer to the code documentation and email  **[seyed.kahaki@fda.hhs.gov](m
 6. Performance Assessmet: including different methods for assessing the performance of ML models
 
 ## Installation
-This section will help you to install the packages WSIToolbox.
+This section will help you to install the packages needed for WSIToolbox.
 
 ### Install Python package
 
@@ -60,7 +60,7 @@ To understand better how the programs work, study the jupyter notebooks referred
 
 ### Pre-requirements
 
-In order to use WSIToolbox, you need to install some python package. It is recommended to install the same version specified in this section (and in the requirement.txt). WSIToolbox was tested on the following environment: 
+In order to use WSIToolbox, you need to install some additional python packages. It is recommended to install the same version specified in this section (and in the requirement.txt). WSIToolbox was tested on the following environment: 
 - Linux System (Tested on Ubuntu 18.04.3 LTS)
 - Python 3.8
   
@@ -123,7 +123,7 @@ or
 ```sh
   $ conda create -n WSIToolbox-dev python=3.8 
   $ conda activate WSIToolbox-dev
-  $ pip install -r requirements_dev.txt
+  $ pip install -r requirements.txt
 ```
 7.	To use the packages installed in the environment, run the command:
 ```sh
