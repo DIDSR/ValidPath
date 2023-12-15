@@ -19,13 +19,12 @@ class Uncertainty_Analysis:
         self.perform_Bootstrap = False
         self.plot_roc = False
         self.tag = 'My Results'
+        self.n_bootstraps = 1000
         pass
 
 
     def get_report (self, y_pred ,y_truth) :
 
-
-        
 
         cmtx = pd.DataFrame(
             confusion_matrix(y_truth.round(), y_pred.round(), labels=[1, 0]), 
@@ -329,7 +328,7 @@ class Uncertainty_Analysis:
             ground_truth, sample_weight)
         predictions_sorted_transposed = predictions[np.newaxis, order]
         aucs, delongcov = self.fastDeLong(predictions_sorted_transposed, label_1_count, ordered_sample_weight)
-        assert len(aucs) == 1, 
+        assert len(aucs) == 1
         return aucs[0], delongcov
         
         
@@ -337,12 +336,12 @@ class Uncertainty_Analysis:
     
         print("Original ROC area: {:0.3f}".format(roc_auc_score(y_true, y_pred)))
 
-        n_bootstraps = 1000
+        #n_bootstraps = 1000
         rng_seed = 42  # control reproducibility
         bootstrapped_scores = []
 
         rng = np.random.RandomState(rng_seed)
-        for i in range(n_bootstraps):
+        for i in range(self.n_bootstraps):
             # bootstrap by sampling with replacement on the prediction indices
             indices = rng.randint(0, len(y_pred), len(y_pred))
             if len(np.unique(y_true[indices])) < 2:
