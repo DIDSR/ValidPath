@@ -329,7 +329,7 @@ class Uncertainty_Analysis:
             ground_truth, sample_weight)
         predictions_sorted_transposed = predictions[np.newaxis, order]
         aucs, delongcov = self.fastDeLong(predictions_sorted_transposed, label_1_count, ordered_sample_weight)
-        assert len(aucs) == 1, "There is a bug in the code, please forward this to the developers"
+        assert len(aucs) == 1, 
         return aucs[0], delongcov
         
         
