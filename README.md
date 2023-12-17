@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">PyPath: Whole Slide Image Processing and Machine Learning Performance Assessment Tool</h1>
+  <h1 align="center">PyDPath: Whole Slide Image Processing and Machine Learning Performance Assessment Tool</h1>
 </p>
 
 <p align="center">
@@ -44,7 +44,7 @@ Please refer to the code documentation and email  **[seyed.kahaki@fda.hhs.gov](m
 2. Extract Annotations: Extract annotations and masks from Whole Slide Images
 3. Patch Extraction: Extract patch images from annotated regions
 4. Color Normalization: Color normalization of extracted patches
-5. Annotation Generator: (To be Added)
+5. Annotation Generator: Generate Aperio ImageScope Annotation file
 6. Performance Assessmet: including different methods for assessing the performance of ML models
 
 ## Installation
