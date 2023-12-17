@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">This tool is under developement</h1>
+  <h1 align="center">PyPath: Whole Slide Image Processing and Machine Learning Performance Assessment Tool</h1>
 </p>
 
 <p align="center">
