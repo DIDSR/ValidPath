@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">PyDPath: Whole Slide Image Processing and Machine Learning Performance Assessment Tool</h1>
+  <h1 align="center">ValidPath: Whole Slide Image Processing and Machine Learning Performance Assessment Tool</h1>
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 ## Getting Started
 
 ### General Information
-**`PyDPath`** is a python-based package for developers and scientists who are interested in digital pathology. The main goal of developing this tool is to help stakeholders, graduate students, and pathologists to speed up their projects.  For more information please contact: **[seyed.kahaki@fda.hhs.gov](mailto:seyed.kahaki@fda.hhs.gov)**.
+**`ValidPath`** is a python-based package for developers and scientists who are interested in digital pathology. The main goal of developing this tool is to help stakeholders, graduate students, and pathologists to speed up their projects.  For more information please contact: **[seyed.kahaki@fda.hhs.gov](mailto:seyed.kahaki@fda.hhs.gov)**.
 
 We are continuously working on this toolbox, and we welcome any contributions.
 
@@ -48,11 +48,11 @@ Please refer to the code documentation and email  **[seyed.kahaki@fda.hhs.gov](m
 6. Performance Assessmet: including different methods for assessing the performance of ML models
 
 ## Installation
-This section will help you to install the packages needed for PyDPath.
+This section will help you to install the packages needed for ValidPath.
 
 ### Install Python package
 
-If you wish to use our python package, perhaps without developing them further, run the command pip install PyDPath or pip install --ignore-installed --upgrade PyDPath to upgrade from an existing installation (This will be enabled when the first version is ready and submitted to pypi).
+If you wish to use our python package, perhaps without developing them further, run the command pip install ValidPath or pip install --ignore-installed --upgrade ValidPath to upgrade from an existing installation (This will be enabled when the first version is ready and submitted to pypi).
 
 Detailed installation instructions can be found in the [documentation](Link to Installation Guide dependencies).
 
@@ -60,11 +60,11 @@ To understand better how the programs work, study the jupyter notebooks referred
 
 ### Pre-requirements
 
-In order to use PyDPath, you need to install some additional python packages. It is recommended to install the same version specified in this section (and in the requirement.txt). PyDPath was tested on the following environment: 
+In order to use ValidPath, you need to install some additional python packages. It is recommended to install the same version specified in this section (and in the requirement.txt). ValidPath was tested on the following environment: 
 - Linux System (Tested on Ubuntu 18.04.3 LTS)
 - Python 3.8
   
-To install a python package with specific version of a package using pip, you can use the syntax “pip install package==version” in the command line. For example in PyDPath we are using lxml which is one of the fastest and feature-rich libraries for processing XML and HTML in Python. To install lxml version 4.9.1, run the following command:
+To install a python package with specific version of a package using pip, you can use the syntax “pip install package==version” in the command line. For example in ValidPath we are using lxml which is one of the fastest and feature-rich libraries for processing XML and HTML in Python. To install lxml version 4.9.1, run the following command:
 ```sh
 pip install lxml==4.9.1
 ```
@@ -100,40 +100,40 @@ or
 
 ### Prepare for development (this is optional)
 
-Prepare a computer as a convenient platform for further development of the Python package PyDPath and related programs as follows.
+Prepare a computer as a convenient platform for further development of the Python package ValidPath and related programs as follows.
 1.	Install the dependencies based on this guide (Link to Installation Guide dependencies)
 2.	Open a terminal window
 ```sh
-    $ cd PyDPath ROOT DIRECTORY
+    $ cd ValidPath ROOT DIRECTORY
 ```
-4.	Download a complete copy of the ** PyDPath **.
+4.	Download a complete copy of the ** ValidPath **.
 ```sh
   $ git clone https://github.com/DIDSR/wsi_processing_toolbox
 ```
-5.	Change directory to PyDPath
+5.	Change directory to ValidPath
 ```sh
-  $ cd PyDPath
+  $ cd ValidPath
 ```
-6.	Create virtual environment for ** PyDPath** using
+6.	Create virtual environment for ** ValidPath** using
 ```sh
   $ conda env create -f requirements.dev.conda.yml
-  $ conda activate PyDPath-dev
+  $ conda activate ValidPath-dev
 ```
 or
 ```sh
-  $ conda create -n PyDPath-dev python=3.8 
-  $ conda activate PyDPath-dev
+  $ conda create -n ValidPath-dev python=3.8 
+  $ conda activate ValidPath-dev
   $ pip install -r requirements.txt
 ```
 7.	To use the packages installed in the environment, run the command:
 ```sh
-$ conda activate PyDPath-dev
+$ conda activate ValidPath-dev
 ```
 
 
 ### Cite this repository
 
-If you find that PyDPath is useful or if you use it in your project, please consider citing this paper:
+If you find that ValidPath is useful or if you use it in your project, please consider citing this paper:
 
 ```
 @article{
