@@ -1,4 +1,4 @@
-slidepro
+ValidPath
 ========
 
 .. toctree::
