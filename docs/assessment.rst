@@ -4,7 +4,7 @@ annotation package
 Submodules
 ----------
 
-assessment.annotation
+assessment.annotation module
 --------------------------------
 
 .. automodule:: assessment.annotation
@@ -12,7 +12,7 @@ assessment.annotation
    :undoc-members:
    :show-inheritance:
 
-assessment.uncertainty
+assessment.uncertainty module
 -----------------------------------
 
 .. automodule:: assessment.uncertainty

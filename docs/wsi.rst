@@ -12,7 +12,7 @@ WSI.readwsi module
    :undoc-members:
    :show-inheritance:
 
-WSI.annotation
+WSI.annotation module
 -----------------
 
 .. automodule:: WSI.annotation
