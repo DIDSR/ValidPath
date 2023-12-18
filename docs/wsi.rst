@@ -1,29 +1,29 @@
-wsi package
+WSI package
 ===========
 
 Submodules
 ----------
 
-wsi.normalization module
+WSI.readwsi module
 ------------------------
 
-.. automodule:: wsi.normalization
+.. automodule:: WSI.readwsi
    :members:
    :undoc-members:
    :show-inheritance:
 
-wsi.reader module
+WSI.annotation
 -----------------
 
-.. automodule:: wsi.reader
+.. automodule:: WSI.annotation
    :members:
    :undoc-members:
    :show-inheritance:
 
-wsi.segmentation module
+WSI.patch module
 -----------------------
 
-.. automodule:: wsi.segmentation
+.. automodule:: WSI.patch
    :members:
    :undoc-members:
    :show-inheritance:
@@ -31,7 +31,7 @@ wsi.segmentation module
 Module contents
 ---------------
 
-.. automodule:: wsi
+.. automodule:: WSI
    :members:
    :undoc-members:
    :show-inheritance:

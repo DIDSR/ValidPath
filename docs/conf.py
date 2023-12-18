@@ -9,8 +9,8 @@ import os
 import sys
 sys.path.insert(0,os.path.abspath(".."))
 
-project = 'SlidePro'
-copyright = '2022, Seyed Kahaki'
+project = 'ValidPath'
+copyright = '2023, Seyed Kahaki'
 author = 'Seyed Kahaki'
 release = '1.0.0'
 

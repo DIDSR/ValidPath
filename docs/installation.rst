@@ -4,7 +4,7 @@ This installation guide provides a detailed explanation and step by step guide t
 
 Required Components
 --------------
-Please follow the instructions below to install required dependencies for slideprotoolbox.
+Please follow the instructions below to install required dependencies for ValidPath.
 
 Installation Using Anaconda is Recommended
 ============================
@@ -28,13 +28,13 @@ After installing Anaconda, you can install the SlidePro toolbox using this comma
 
 .. code-block:: console
 
-    $ conda install -c conda-forge slideprotoolbox
+    $ conda install -c conda-forge ValidPath
 
 
 Direct Installation of SlidePro
 ==================
 
-You can install required packages and then use pip to install the slideprotoolbox.
+You can install required packages and then use pip to install the ValidPath.
 
 Windows
 ^^^^^^^
@@ -73,8 +73,8 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone https://github.com/mousavikahaki/slidepro.git
-
+    $ git clone https://github.com/mousavikahaki/ValidPath.git
+	
 after downloading the source code of the slidepro toolbox, you can install it using the following command:
 
 .. code-block:: console
@@ -82,4 +82,4 @@ after downloading the source code of the slidepro toolbox, you can install it us
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/mousavikahaki/slidepro.git
+.. _Github repo: https://github.com/mousavikahaki/ValidPath.git

@@ -4,6 +4,6 @@ slidepro
 .. toctree::
    :maxdepth: 4
 
-   annotation
+   assessment
    main
-   wsi
+   WSI
