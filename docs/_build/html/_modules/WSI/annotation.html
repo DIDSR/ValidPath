@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WSI.annotation &mdash; ValidPath 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ValidPath
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">ValidPath</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ValidPath</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">WSI.annotation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for WSI.annotation</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">#</span>
+<span class="sd"># ---------------------------------------------------------------------------</span>
+<span class="sd"># Created on Fri Feb  4 11:42:52 2023</span>
+<span class="sd">#</span>
+<span class="sd"># @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
+<span class="sd">#----------------------------------------------------------------------------</span>
+<span class="sd"># Title:        Whole Slide Image Processing Toolbox - Annotation  module</span>
+<span class="sd">#</span>
+<span class="sd"># Description:  This is the AnnotationExtractor module for the whole slide  </span>
+<span class="sd">#               image processing toolbox. It is includes AnnotationExtractor </span>
+<span class="sd">#               class and several methods.</span>
+<span class="sd">#</span>
+<span class="sd"># Classes:      AnnotationExtractor</span>
+<span class="sd">#</span>
+<span class="sd"># Methods:      make_folder</span>
+<span class="sd">#               extract_ann</span>
+<span class="sd">#</span>
+<span class="sd"># version =&#39;1.0&#39;</span>
+<span class="sd"># ---------------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1">#import openslide</span>
+<span class="kn">import</span> <span class="nn">lxml.etree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imsave</span><span class="p">,</span> <span class="n">imread</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">highsize</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="AnnotationExtractor"><a class="viewcode-back" href="../../WSI.html#WSI.annotation.AnnotationExtractor">[docs]</a><span class="k">class</span> <span class="nc">AnnotationExtractor</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    
+<div class="viewcode-block" id="AnnotationExtractor.make_folder"><a class="viewcode-back" href="../../WSI.html#WSI.annotation.AnnotationExtractor.make_folder">[docs]</a>    <span class="k">def</span> <span class="nf">make_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">directory</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method creates a directory if not exist.</span>
+
+<span class="sd">        :Parameters:</span>
+<span class="sd">            directory : str</span>
+<span class="sd">                Directory to be created.</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            None : None</span>
+<span class="sd">                None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AnnotationExtractor.extract_ann"><a class="viewcode-back" href="../../WSI.html#WSI.annotation.AnnotationExtractor.extract_ann">[docs]</a>    <span class="k">def</span> <span class="nf">extract_ann</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">save_dir</span><span class="p">,</span><span class="n">XMLs</span><span class="p">,</span><span class="n">WSIs</span><span class="p">,</span><span class="n">vis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">save_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method extracts different types for annotations from Whole Slide Images.</span>
+<span class="sd">        It can save the extracted annottions to the output directory as defined in inputs.</span>
+<span class="sd">        This code also handles several annotations per slide. </span>
+<span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
+
+<span class="sd">        :Parameters:</span>
+<span class="sd">            save_dir : str</span>
+<span class="sd">                Output Directory to save the extracted annotations</span>
+
+<span class="sd">            WSIs : list</span>
+<span class="sd">                List of included WSIs</span>
+
+<span class="sd">            XMLs : list</span>
+<span class="sd">                List of XML files associated with included WSIs</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            None : None</span>
+<span class="sd">                None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">})</span>
+
+        <span class="c1"># go over all WSI</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">XML</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">XMLs</span><span class="p">):</span>
+            <span class="n">annotationID</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">XML</span><span class="p">)</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+            <span class="n">annot</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;./Annotation&quot;</span><span class="p">)</span>
+            
+            <span class="k">for</span> <span class="n">annotation</span> <span class="ow">in</span> <span class="n">annot</span><span class="p">:</span>
+                
+                <span class="n">final_x</span><span class="o">=</span><span class="p">[]</span>
+                <span class="n">final_y</span><span class="o">=</span><span class="p">[]</span> 
+                <span class="n">annotationID</span><span class="o">=</span><span class="n">annotation</span><span class="o">.</span><span class="n">attrib</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Id&#39;</span><span class="p">)</span> <span class="c1">#annotationID+1</span>
+                <span class="n">Regions</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;./Annotation[@Id=&#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">annotationID</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39;]/Regions/Region&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;there are &quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">Regions</span><span class="p">)</span> <span class="p">,</span> <span class="s2">&quot;Regions in this annotation&quot;</span><span class="p">)</span>
+                <span class="n">bounds</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">masks</span> <span class="o">=</span> <span class="p">[]</span>  
+                <span class="n">lbl</span> <span class="o">=</span> <span class="n">annotation</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span>
+                <span class="n">region_number</span><span class="o">=</span><span class="mi">0</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;opening: a region of &#39;</span> <span class="o">+</span> <span class="n">WSIs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+                <span class="n">pas_img</span> <span class="o">=</span> <span class="n">openslide</span><span class="o">.</span><span class="n">OpenSlide</span><span class="p">(</span><span class="n">WSIs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+                <span class="n">sw</span><span class="o">=</span> <span class="kc">True</span>
+                <span class="k">for</span> <span class="n">num</span> <span class="p">,</span> <span class="n">Region</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Regions</span><span class="p">):</span>
+                    
+                    <span class="k">if</span> <span class="n">vis</span><span class="o">==</span><span class="kc">True</span> <span class="ow">and</span> <span class="n">save_mask</span> <span class="o">==</span><span class="kc">False</span> <span class="ow">and</span> <span class="n">sw</span><span class="o">==</span><span class="kc">True</span>  <span class="p">:</span>
+                        <span class="c1">#fig,axes = plt.subplots(nrows = 1, ncols = len(Regions))</span>
+                        <span class="c1">#fig.tight_layout(pad=5.0)</span>
+                        <span class="n">sw</span> <span class="o">=</span> <span class="kc">False</span>    
+                    <span class="k">if</span> <span class="n">vis</span><span class="o">==</span><span class="kc">True</span> <span class="ow">and</span> <span class="n">save_mask</span> <span class="o">==</span><span class="kc">True</span> <span class="ow">and</span> <span class="n">sw</span><span class="o">==</span><span class="kc">True</span>  <span class="p">:</span>
+                        <span class="c1">#fig,axes = plt.subplots(nrows = len(Regions), ncols = 2)</span>
+                        <span class="c1">#fig.tight_layout(pad=5.0)</span>
+                        <span class="n">sw</span> <span class="o">=</span> <span class="kc">False</span>
+                        
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Region numer &quot;</span><span class="p">,</span><span class="n">num</span><span class="p">)</span>
+                    <span class="n">Vertices</span> <span class="o">=</span> <span class="n">Region</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s2">&quot;./Vertices/Vertex&quot;</span><span class="p">)</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">y</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">Vertex</span> <span class="ow">in</span> <span class="n">Vertices</span><span class="p">:</span>
+                        <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">Vertex</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">])))</span>
+                        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">Vertex</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">])))</span>
+                      
+                    <span class="n">x1</span><span class="o">=</span><span class="n">x</span>  
+                    <span class="n">y1</span><span class="o">=</span><span class="n">y</span>  
+                    <span class="k">if</span> <span class="n">highsize</span><span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="n">x</span> <span class="o">=</span> <span class="p">[</span> <span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">number</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+                        <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">number</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">y</span><span class="p">]</span>
+
+                    <span class="n">final_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+                    <span class="n">final_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+                    <span class="n">bounds</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">min</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">y1</span><span class="p">)])</span>
+
+                    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">))</span> 
+                    <span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">))</span>
+                    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">final_y</span><span class="p">[</span><span class="n">region_number</span><span class="p">],</span> <span class="n">final_x</span><span class="p">[</span><span class="n">region_number</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+                    
+                    <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">):</span> <span class="c1">#polygon</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;....poly&quot;</span><span class="p">)</span>
+                        <span class="n">cv2</span><span class="o">.</span><span class="n">fillPoly</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="p">[</span><span class="n">points</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">))</span>
+
+                    <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="mi">2</span><span class="p">):</span> <span class="c1"># cirlce or ellipse</span>
+
+                        <span class="n">x_c_int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="n">y_c_int</span> <span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="n">center_coordinates</span><span class="o">=</span><span class="p">(</span><span class="n">x_c_int</span><span class="p">,</span><span class="n">y_c_int</span><span class="p">)</span>
+
+                        <span class="k">if</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">points</span><span class="p">[:,</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span> <span class="c1">#cirlce</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;....circle &quot;</span><span class="p">)</span>
+                            <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">img</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">center</span> <span class="o">=</span><span class="n">center_coordinates</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="n">x_c_int</span> <span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="n">thickness</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+                        <span class="k">else</span><span class="p">:</span> <span class="c1"># ellipse</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;....ellipse &quot;</span><span class="p">)</span>
+
+                            <span class="n">axesLength</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_c_int</span><span class="p">,</span> <span class="n">y_c_int</span><span class="p">)</span>
+                            <span class="n">angle</span> <span class="o">=</span><span class="mi">0</span>
+                            <span class="n">startAngle</span> <span class="o">=</span> <span class="mi">0</span>
+                            <span class="n">endAngle</span> <span class="o">=</span> <span class="mi">360</span>
+                            <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">ellipse</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">center_coordinates</span><span class="p">,</span> <span class="n">axesLength</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">startAngle</span><span class="p">,</span> <span class="n">endAngle</span><span class="p">,</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">),</span> <span class="n">thickness</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+                   
+
+                    <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">XML</span><span class="p">)</span>
+                    <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">basename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">subdirm</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span><span class="n">basename</span><span class="p">)</span>
+                    
+                    <span class="k">if</span> <span class="n">save_mask</span> <span class="o">==</span> <span class="kc">True</span> <span class="p">:</span>
+                        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">subdirm</span><span class="o">+</span><span class="n">basename</span><span class="o">+</span><span class="s2">&quot;_anno_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">annotationID</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_reg_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">region_number</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_mask_&quot;</span><span class="o">+</span><span class="n">lbl</span><span class="o">+</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span><span class="n">mask</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;saved &lt;mask&gt;&#39;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">subdirm</span><span class="o">+</span><span class="n">basename</span><span class="o">+</span><span class="s2">&quot;_anno_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">annotationID</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_reg_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">region_number</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_mask_&quot;</span><span class="o">+</span><span class="n">lbl</span><span class="o">+</span><span class="s2">&quot;.jpg&quot;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">vis</span><span class="o">==</span><span class="kc">True</span> <span class="p">:</span>
+                            <span class="c1">#fig = plt.figure(figsize=(2, 2))</span>
+                            <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+                            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+                            <span class="c1">#axes[num,1].imshow(mask)</span>
+                            <span class="c1">#axes[num,1].set_title(&#39;Mask number : {}&#39;.format(num))</span>
+                        
+                    <span class="n">masks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+         
+                    <span class="n">mask</span> <span class="o">=</span> <span class="n">masks</span><span class="p">[</span><span class="n">region_number</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">highsize</span><span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                        <span class="n">PAS</span> <span class="o">=</span> <span class="n">pas_img</span><span class="o">.</span><span class="n">read_region</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="n">region_number</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>  
+                                                   <span class="nb">int</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="n">region_number</span><span class="p">][</span><span class="mi">1</span><span class="p">])),</span> 
+                                                  <span class="mi">1</span><span class="p">,(</span><span class="n">final_x</span><span class="p">[</span><span class="n">region_number</span><span class="p">],</span><span class="n">final_y</span><span class="p">[</span><span class="n">region_number</span><span class="p">]))</span>
+                        <span class="c1"># plt.imshow(PAS)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">PAS</span> <span class="o">=</span> <span class="n">pas_img</span><span class="o">.</span><span class="n">read_region</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="n">region_number</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                                                   <span class="nb">int</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="n">region_number</span><span class="p">][</span><span class="mi">1</span><span class="p">])),</span>
+                                                  <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">final_x</span><span class="p">[</span><span class="n">region_number</span><span class="p">],</span><span class="n">final_y</span><span class="p">[</span><span class="n">region_number</span><span class="p">]))</span>
+                        <span class="c1"># plt.imshow(PAS)</span>
+                    <span class="n">coord</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="n">region_number</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span><span class="nb">int</span><span class="p">(</span><span class="n">bounds</span><span class="p">[</span><span class="n">region_number</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="c1"># PAS = pas_img.read_region((int(bounds[region_number][0]),int(bounds[region_number][1])), 0, (final_x[region_number],final_y[region_number]))</span>
+                    <span class="n">PAS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">PAS</span><span class="p">)[:,:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                        <span class="n">PAS_</span> <span class="o">=</span> <span class="n">PAS</span><span class="p">[:,:,</span><span class="n">channel</span><span class="p">]</span>
+                        <span class="n">PAS_</span><span class="p">[</span><span class="n">masks</span><span class="p">[</span><span class="n">region_number</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>
+                        <span class="n">PAS</span><span class="p">[:,:,</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="n">PAS_</span>
+                    <span class="n">subdir</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/</span><span class="si">{}</span><span class="s1">/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">save_dir</span><span class="p">,</span><span class="n">basename</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">make_folder</span><span class="p">(</span><span class="n">subdir</span><span class="p">)</span>
+                    <span class="c1">#imsave(subdir + basename + &#39;_anno_&#39; + str(annotationID) +&quot;_reg_&quot;+str(region_number+1)+lblmber+1)+lbl+ &quot;_coord_&quot; + str(coord[0]) + &quot;_&quot; + str(coord[1]) + &#39;.jpg&#39;, PAS) </span>
+                    <span class="n">imsave</span><span class="p">(</span><span class="n">subdir</span> <span class="o">+</span> <span class="n">basename</span> <span class="o">+</span> <span class="s1">&#39;_anno_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">annotationID</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;_reg_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">region_number</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">lbl</span><span class="o">+</span> <span class="s2">&quot;_coord_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="n">PAS</span><span class="p">)</span> 
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;saved &lt;region&gt; of annotationID : &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">annotationID</span><span class="p">))</span>
+                    <span class="n">region_number</span> <span class="o">=</span> <span class="n">region_number</span> <span class="o">+</span> <span class="mi">1</span>
+                    
+                    <span class="k">if</span> <span class="n">vis</span><span class="o">==</span><span class="kc">True</span> <span class="ow">and</span> <span class="n">save_mask</span><span class="o">==</span><span class="kc">True</span> <span class="p">:</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">PAS</span><span class="p">)</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+                        <span class="c1">#axes[num,0].imshow(PAS)</span>
+                        <span class="c1">#axes[num,0].set_title(&#39;Region number : {}&#39;.format(num))</span>
+                        
+                    <span class="k">if</span> <span class="n">vis</span><span class="o">==</span><span class="kc">True</span> <span class="ow">and</span> <span class="n">save_mask</span> <span class="o">==</span><span class="kc">False</span><span class="p">:</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">PAS</span><span class="p">)</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+                        <span class="c1">#axes[num].imshow(PAS)</span>
+                        <span class="c1">#axes[num].set_title(&#39;Region number : {}&#39;.format(num))</span>
+             
+                <span class="c1">#plt.show()</span>
+
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Seyed Kahaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

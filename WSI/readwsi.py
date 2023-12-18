@@ -27,7 +27,6 @@ import cv2
 from skimage.io import imsave, imread
 from PIL import Image
 import os
-#os.environ['path'] ="D:\\openslide-win64-20171122\\bin"+";"+os.environ['path']
 from glob import glob
 import openslide
 import numpy as np
@@ -44,6 +43,8 @@ from shapely.geometry import Polygon, Point
 import PIL
 
 class WSIReader:
+    def __init__(self):
+        pass  
     """
         This Class process the WSIs.
         
@@ -54,7 +55,7 @@ class WSIReader:
             extract_bounds
             wsi_xml_list
         """
-        
+  
     def extract_region(wsi_obj,location,level,size):
         """
         This method process the WSIs and extract regions.

@@ -8,6 +8,9 @@
 import os
 import sys
 sys.path.insert(0,os.path.abspath(".."))
+#sys.path.insert(0,os.path.abspath("C:\\temp\\openslide-win64-20171122\\bin"))
+#sys.path.insert(0,os.path.abspath("C:\\Users\\SeyedM.MousaviKahaki\\Documents\\slidepro\\wsitoolbox"))
+
 
 project = 'ValidPath'
 copyright = '2023, Seyed Kahaki'
@@ -27,5 +30,5 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-#default_html_theme = 'sphinx_rtd_theme'
+html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation Guide &mdash; ValidPath 2.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="WSI package" href="WSI.html" />
+    <link rel="prev" title="ValidPath" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ValidPath
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ValidPath</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#required-components">Required Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation-using-anaconda-is-recommended">Installation Using Anaconda is Recommended</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#direct-installation-of-slidepro">Direct Installation of SlidePro</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="WSI.html">WSI package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assessment.html">Annotation package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ValidPath</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">ValidPath</a></li>
+      <li class="breadcrumb-item active">Installation Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation-guide">
+<h1>Installation Guide<a class="headerlink" href="#installation-guide" title="Permalink to this heading"></a></h1>
+<p>This installation guide provides a detailed explanation and step by step guide to install packages required for SlidePro toolbox.</p>
+<section id="required-components">
+<h2>Required Components<a class="headerlink" href="#required-components" title="Permalink to this heading"></a></h2>
+<p>Please follow the instructions below to install required dependencies for ValidPath.</p>
+<section id="installation-using-anaconda-is-recommended">
+<h3>Installation Using Anaconda is Recommended<a class="headerlink" href="#installation-using-anaconda-is-recommended" title="Permalink to this heading"></a></h3>
+<section id="anaconda">
+<h4>Anaconda<a class="headerlink" href="#anaconda" title="Permalink to this heading"></a></h4>
+<p>Anaconda is a distribution of the Python and R programming languages for scientific computing, that aims to simplify package management and deployment. The distribution includes data-science packages suitable for Windows, Linux, and macOS. Wikipedia</p>
+<p>There are few steps to complete the installation. Firstly, you need to install Anaconda Navigator. This allows you to access to different Python IDEs and Python packages. When you install Anaconda Navigator, you may install your favorite IDEs such as Spider, PyCharm, and etc. You also will be able to create environment to have specific IDEs and Python packages for each project separately. Let’s start with Anaconda Navigator.</p>
+<p>Anaconda Navigator</p>
+<p>In order to install Anaconda Navigator, download the Anaconda distribution from the following URL:</p>
+<p><a class="reference external" href="https://www.anaconda.com/products/distribution">https://www.anaconda.com/products/distribution</a></p>
+</section>
+<section id="installing-slidepro-using-anaconda">
+<h4>Installing SlidePro using Anaconda<a class="headerlink" href="#installing-slidepro-using-anaconda" title="Permalink to this heading"></a></h4>
+<p>After installing Anaconda, you can install the SlidePro toolbox using this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>conda install -c conda-forge ValidPath
+</pre></div>
+</div>
+</section>
+</section>
+<section id="direct-installation-of-slidepro">
+<h3>Direct Installation of SlidePro<a class="headerlink" href="#direct-installation-of-slidepro" title="Permalink to this heading"></a></h3>
+<p>You can install required packages and then use pip to install the ValidPath.</p>
+<section id="windows">
+<h4>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h4>
+<p>1. Download OpenSlide binaries from <a class="reference external" href="https://openslide.org/download/">this page</a>. Extract the folder and add <code class="docutils literal notranslate"><span class="pre">bin</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> subdirectories to
+Windows <a class="reference external" href="https://docs.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)">system path</a>.</p>
+<p>2. Install OpenJPEG. The easiest way is to install OpenJpeg is through conda
+using</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\&gt; conda install -c conda-forge openjpeg</span>
+</pre></div>
+</div>
+<p>3. Install
+slideprotoolbox.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">C:\&gt; pip install slideprotoolbox</span>
+</pre></div>
+</div>
+</section>
+<section id="linux-ubuntu">
+<h4>Linux (Ubuntu)<a class="headerlink" href="#linux-ubuntu" title="Permalink to this heading"></a></h4>
+<p>On Linux the prerequisite software can be installed using the command</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>apt-get -y install libopenjp2-7-dev libopenjp2-tools openslide-tools
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="from-sources">
+<h2>From sources<a class="headerlink" href="#from-sources" title="Permalink to this heading"></a></h2>
+<p>The source code of the slidepro toolbox can be accessed from the GitHub.</p>
+<p>You can either clone the public repository:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/mousavikahaki/ValidPath.git
+</pre></div>
+</div>
+<p>after downloading the source code of the slidepro toolbox, you can install it using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python setup.py install
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="ValidPath" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="WSI.html" class="btn btn-neutral float-right" title="WSI package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Seyed Kahaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
