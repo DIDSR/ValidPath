@@ -1,9 +1,6 @@
 WSI package
 ===========
 
-Submodules
-----------
-
 WSI.readwsi module
 ------------------------
 
@@ -28,10 +25,4 @@ WSI.patch module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
 
-.. automodule:: WSI
-   :members:
-   :undoc-members:
-   :show-inheritance:

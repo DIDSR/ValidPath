@@ -67,29 +67,29 @@
              
   <h1>Source code for WSI.annotation</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">#</span>
-<span class="sd"># ---------------------------------------------------------------------------</span>
-<span class="sd"># Created on Fri Feb  4 11:42:52 2023</span>
-<span class="sd">#</span>
-<span class="sd"># @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
-<span class="sd">#----------------------------------------------------------------------------</span>
-<span class="sd"># Title:        Whole Slide Image Processing Toolbox - Annotation  module</span>
-<span class="sd">#</span>
-<span class="sd"># Description:  This is the AnnotationExtractor module for the whole slide  </span>
-<span class="sd">#               image processing toolbox. It is includes AnnotationExtractor </span>
-<span class="sd">#               class and several methods.</span>
-<span class="sd">#</span>
-<span class="sd"># Classes:      AnnotationExtractor</span>
-<span class="sd">#</span>
-<span class="sd"># Methods:      make_folder</span>
-<span class="sd">#               extract_ann</span>
-<span class="sd">#</span>
-<span class="sd"># version =&#39;1.0&#39;</span>
-<span class="sd"># ---------------------------------------------------------------------------</span>
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Created on Fri Feb  4 11:42:52 2023</span>
+
+<span class="sd">----------------------------------------------------------------------------</span>
+
+<span class="sd">Title:        ValidPath Toolbox - Annotation Module</span>
+
+<span class="sd">Description:  This is the AnnotationExtractor module for the whole slide image processing toolbox. It is includes AnnotationExtractor class and several methods.</span>
+<span class="sd">              </span>
+<span class="sd">Classes:      AnnotationExtractor</span>
+<span class="sd">              </span>
+
+<span class="sd">Methods:      extract_ann, make_folder</span>
+
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
+<span class="sd">Version =&#39;3.0&#39;</span>
+<span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="c1">#import openslide</span>
 <span class="kn">import</span> <span class="nn">lxml.etree</span> <span class="k">as</span> <span class="nn">ET</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>

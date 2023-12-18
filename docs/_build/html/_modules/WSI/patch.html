@@ -67,39 +67,33 @@
              
   <h1>Source code for WSI.patch</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">#</span>
-<span class="sd"># ---------------------------------------------------------------------------</span>
-<span class="sd"># Created on Fri Feb  4 11:42:52 2023</span>
-<span class="sd">#</span>
-<span class="sd"># @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
-<span class="sd">#----------------------------------------------------------------------------</span>
-<span class="sd"># Title:        Whole Slide Image Processing Toolbox - patch module</span>
-<span class="sd">#</span>
-<span class="sd"># Description:  This is the patch module for the whole slide image processing </span>
-<span class="sd">#               toolbox. It is includes two classes and several methods</span>
-<span class="sd">#               </span>
-<span class="sd"># Classes:</span>
-<span class="sd">#               WSIpatch_extractor</span>
-<span class="sd">#               PatchExtractor</span>
-<span class="sd">#       </span>
-<span class="sd"># Methods:      patch_extraction</span>
-<span class="sd">#               patch_extraction_of_tissue</span>
-<span class="sd">#               patch_extraction_with_normalized_tiles</span>
-<span class="sd">#               find_between</span>
-<span class="sd">#               gen_patch</span>
-<span class="sd">#</span>
-<span class="sd"># version =&#39;1.0&#39;</span>
-<span class="sd"># ---------------------------------------------------------------------------</span>
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Created on Fri Feb  4 11:42:52 2023</span>
+
+<span class="sd">----------------------------------------------------------------------------</span>
+
+<span class="sd">Title:        ValidPath Toolbox - patch module</span>
+
+<span class="sd">Description:  This is the patch module for the whole slide image processing toolbox. It is includes two classes and several methods</span>
+<span class="sd">              </span>
+<span class="sd">Classes:      WSIpatch_extractor, PatchExtractor</span>
+<span class="sd">              </span>
+
+<span class="sd">Methods:      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch</span>
+
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
+<span class="sd">Version =&#39;3.0&#39;</span>
+<span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imsave</span><span class="p">,</span> <span class="n">imread</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 <span class="c1">#import openslide</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="c1">#from openslide.deepzoom import DeepZoomGenerator</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>

@@ -67,38 +67,33 @@
              
   <h1>Source code for WSI.readwsi</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">#</span>
-<span class="sd"># ---------------------------------------------------------------------------</span>
-<span class="sd"># Created on Fri Feb  4 11:42:52 2023</span>
-<span class="sd">#</span>
-<span class="sd"># @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
-<span class="sd">#----------------------------------------------------------------------------</span>
-<span class="sd"># Title:        Whole Slide Image Processing Toolbox - reader module</span>
-<span class="sd">#</span>
-<span class="sd"># Description:  This is the reader module for the whole slide image processing </span>
-<span class="sd">#               toolbox. It is includes ReadWsi class and several methods</span>
-<span class="sd">#               </span>
-<span class="sd"># Classes:      WSIReader</span>
-<span class="sd">#               </span>
-<span class="sd">#</span>
-<span class="sd"># Methods:      wsi_reader</span>
-<span class="sd">#               extract_region</span>
-<span class="sd">#               extract_bounds</span>
-<span class="sd">#               wsi_xml_list</span>
-<span class="sd">#</span>
-<span class="sd"># version =&#39;3.0&#39;</span>
-<span class="sd"># ---------------------------------------------------------------------------</span>
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Created on Fri Feb  4 11:42:52 2023</span>
+
+<span class="sd">----------------------------------------------------------------------------</span>
+
+<span class="sd">Title:        Whole Slide Image Processing Toolbox - reader module</span>
+
+<span class="sd">Description:  This is the reader module for the ValidPath toolbox. It is includes ReadWsi class and several methods</span>
+<span class="sd">              </span>
+<span class="sd">Classes:      WSIReader</span>
+<span class="sd">              </span>
+
+<span class="sd">Methods:      wsi_reader, extract_region, extract_bounds, wsi_xml_list</span>
+
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
+<span class="sd">Version =&#39;3.0&#39;</span>
+<span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">cv2</span>
 <span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imsave</span><span class="p">,</span> <span class="n">imread</span>
 <span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="c1">#os.environ[&#39;path&#39;] =&quot;D:\\openslide-win64-20171122\\bin&quot;+&quot;;&quot;+os.environ[&#39;path&#39;]</span>
 <span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 <span class="c1">#import openslide</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="c1">#from openslide.deepzoom import DeepZoomGenerator</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>

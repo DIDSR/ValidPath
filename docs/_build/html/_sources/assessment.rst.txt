@@ -1,9 +1,6 @@
 Annotation package
 ==================
 
-Submodules
-----------
-
 assessment.annotation module
 --------------------------------
 
@@ -20,10 +17,4 @@ assessment.uncertainty module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
 
-.. automodule:: assessment
-   :members:
-   :undoc-members:
-   :show-inheritance:

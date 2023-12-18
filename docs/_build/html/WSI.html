@@ -44,7 +44,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">ValidPath</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Installation Guide</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">WSI package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-WSI.readwsi">WSI.readwsi module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#WSI.readwsi.WSIReader"><code class="docutils literal notranslate"><span class="pre">WSIReader</span></code></a></li>
 </ul>
@@ -58,7 +57,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#WSI.patch.WSIpatch_extractor"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-WSI">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="assessment.html">Annotation package</a></li>
@@ -93,32 +91,14 @@
              
   <section id="wsi-package">
 <h1>WSI package<a class="headerlink" href="#wsi-package" title="Permalink to this heading"></a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
-</section>
 <section id="module-WSI.readwsi">
 <span id="wsi-readwsi-module"></span><h2>WSI.readwsi module<a class="headerlink" href="#module-WSI.readwsi" title="Permalink to this heading"></a></h2>
-<p>#
-# —————————————————————————
-# Created on Fri Feb  4 11:42:52 2023
-#
-# &#64;author: SeyedM.MousaviKahaki (<a class="reference external" href="mailto:seyed&#46;kahaki&#37;&#52;&#48;fda&#46;hhs&#46;gov">seyed<span>&#46;</span>kahaki<span>&#64;</span>fda<span>&#46;</span>hhs<span>&#46;</span>gov</a>)
-#—————————————————————————-
-# Title:        Whole Slide Image Processing Toolbox - reader module
-#
-# Description:  This is the reader module for the whole slide image processing 
-#               toolbox. It is includes ReadWsi class and several methods
-#               
-# Classes:      WSIReader
-#               
-#
-# Methods:      wsi_reader
-#               extract_region
-#               extract_bounds
-#               wsi_xml_list
-#
-# version =’3.0’
-# —————————————————————————</p>
+<hr class="docutils" />
+<p>Title:        Whole Slide Image Processing Toolbox - reader module</p>
+<p>Description:  This is the reader module for the ValidPath toolbox. It is includes ReadWsi class and several methods</p>
+<p>Classes:      WSIReader</p>
+<p>Methods:      wsi_reader, extract_region, extract_bounds, wsi_xml_list</p>
+<hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="WSI.readwsi.WSIReader">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">WSI.readwsi.</span></span><span class="sig-name descname"><span class="pre">WSIReader</span></span><a class="reference internal" href="_modules/WSI/readwsi.html#WSIReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.readwsi.WSIReader" title="Permalink to this definition"></a></dt>
@@ -231,25 +211,12 @@ Only WSI are included if there is an XML file with the same name.</p>
 </section>
 <section id="wsi-annotation-module">
 <h2>WSI.annotation module<a class="headerlink" href="#wsi-annotation-module" title="Permalink to this heading"></a></h2>
-<span class="target" id="module-WSI.annotation"></span><p>#
-# —————————————————————————
-# Created on Fri Feb  4 11:42:52 2023
-#
-# &#64;author: SeyedM.MousaviKahaki (<a class="reference external" href="mailto:seyed&#46;kahaki&#37;&#52;&#48;fda&#46;hhs&#46;gov">seyed<span>&#46;</span>kahaki<span>&#64;</span>fda<span>&#46;</span>hhs<span>&#46;</span>gov</a>)
-#—————————————————————————-
-# Title:        Whole Slide Image Processing Toolbox - Annotation  module
-#
-# Description:  This is the AnnotationExtractor module for the whole slide  
-#               image processing toolbox. It is includes AnnotationExtractor 
-#               class and several methods.
-#
-# Classes:      AnnotationExtractor
-#
-# Methods:      make_folder
-#               extract_ann
-#
-# version =’1.0’
-# —————————————————————————</p>
+<span class="target" id="module-WSI.annotation"></span><hr class="docutils" />
+<p>Title:        ValidPath Toolbox - Annotation Module</p>
+<p>Description:  This is the AnnotationExtractor module for the whole slide image processing toolbox. It is includes AnnotationExtractor class and several methods.</p>
+<p>Classes:      AnnotationExtractor</p>
+<p>Methods:      extract_ann, make_folder</p>
+<hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="WSI.annotation.AnnotationExtractor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">WSI.annotation.</span></span><span class="sig-name descname"><span class="pre">AnnotationExtractor</span></span><a class="reference internal" href="_modules/WSI/annotation.html#AnnotationExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.annotation.AnnotationExtractor" title="Permalink to this definition"></a></dt>
@@ -306,29 +273,12 @@ The output directory will be generated based on the strucutr of the input direct
 </section>
 <section id="module-WSI.patch">
 <span id="wsi-patch-module"></span><h2>WSI.patch module<a class="headerlink" href="#module-WSI.patch" title="Permalink to this heading"></a></h2>
-<p>#
-# —————————————————————————
-# Created on Fri Feb  4 11:42:52 2023
-#
-# &#64;author: SeyedM.MousaviKahaki (<a class="reference external" href="mailto:seyed&#46;kahaki&#37;&#52;&#48;fda&#46;hhs&#46;gov">seyed<span>&#46;</span>kahaki<span>&#64;</span>fda<span>&#46;</span>hhs<span>&#46;</span>gov</a>)
-#—————————————————————————-
-# Title:        Whole Slide Image Processing Toolbox - patch module
-#
-# Description:  This is the patch module for the whole slide image processing 
-#               toolbox. It is includes two classes and several methods
-#               
-# Classes:
-#               WSIpatch_extractor
-#               PatchExtractor
-#       
-# Methods:      patch_extraction
-#               patch_extraction_of_tissue
-#               patch_extraction_with_normalized_tiles
-#               find_between
-#               gen_patch
-#
-# version =’1.0’
-# —————————————————————————</p>
+<hr class="docutils" />
+<p>Title:        ValidPath Toolbox - patch module</p>
+<p>Description:  This is the patch module for the whole slide image processing toolbox. It is includes two classes and several methods</p>
+<p>Classes:      WSIpatch_extractor, PatchExtractor</p>
+<p>Methods:      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch</p>
+<hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="WSI.patch.PatchExtractor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">WSI.patch.</span></span><span class="sig-name descname"><span class="pre">PatchExtractor</span></span><a class="reference internal" href="_modules/WSI/patch.html#PatchExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.patch.PatchExtractor" title="Permalink to this definition"></a></dt>
@@ -423,9 +373,6 @@ random_state : bool</p>
 
 </dd></dl>
 
-</section>
-<section id="module-WSI">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-WSI" title="Permalink to this heading"></a></h2>
 </section>
 </section>
 

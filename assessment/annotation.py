@@ -1,24 +1,22 @@
 """
-#
-# ---------------------------------------------------------------------------
-# Created on Fri Oct  5 12:52:32 2023
-#
-# @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
-#----------------------------------------------------------------------------
-# Title:        Whole Slide Image Processing Toolbox - Annotation File Generation Module
-#
-# Description:  This is the Annotation File Generator module for the whole slide  
-#               image processing toolbox. It is includes Annotation_Generator 
-#               class and several methods.
-#
-# Classes:      Annotation_Generator
-#
-# Methods:      make_region
-#               create_xml
-#               generate_map_file
-#
-# version ='1.0'
-# ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+Created on Fri Feb  4 11:42:52 2023
+
+----------------------------------------------------------------------------
+
+Title:        ValidPath Toolbox - Annotation File Generation Module
+
+Description:  This is the Annotation File Generator module for the whole slide image processing toolbox. It is includes Annotation_Generato
+              
+Classes:      Annotation_Generator
+              
+
+Methods:      make_region, create_xml, generate_map_file
+
+---------------------------------------------------------------------------
+Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
+Version ='3.0'
+---------------------------------------------------------------------------
 """
 
 

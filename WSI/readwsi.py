@@ -1,35 +1,31 @@
 """
-#
-# ---------------------------------------------------------------------------
-# Created on Fri Feb  4 11:42:52 2023
-#
-# @author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
-#----------------------------------------------------------------------------
-# Title:        Whole Slide Image Processing Toolbox - reader module
-#
-# Description:  This is the reader module for the whole slide image processing 
-#               toolbox. It is includes ReadWsi class and several methods
-#               
-# Classes:      WSIReader
-#               
-#
-# Methods:      wsi_reader
-#               extract_region
-#               extract_bounds
-#               wsi_xml_list
-#
-# version ='3.0'
-# ---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+Created on Fri Feb  4 11:42:52 2023
+
+----------------------------------------------------------------------------
+
+Title:        Whole Slide Image Processing Toolbox - reader module
+
+Description:  This is the reader module for the ValidPath toolbox. It is includes ReadWsi class and several methods
+              
+Classes:      WSIReader
+              
+
+Methods:      wsi_reader, extract_region, extract_bounds, wsi_xml_list
+
+---------------------------------------------------------------------------
+Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
+Version ='3.0'
+---------------------------------------------------------------------------
 """
 
-
+import numpy as np
 import cv2
 from skimage.io import imsave, imread
 from PIL import Image
 import os
 from glob import glob
 import openslide
-import numpy as np
 from openslide.deepzoom import DeepZoomGenerator
 import numpy as np
 from pathlib import Path
