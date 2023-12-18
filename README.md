@@ -36,7 +36,7 @@ There are several modules in this package including
 ### Information for Developers
 Code Documentation:
 https://htmlpreview.github.io/?https://github.com/DIDSR/wsi_processing_toolbox/blob/main/docs/_build/html/index.html
-Please refer to the code documentation and email  **[seyed.kahaki@fda.hhs.gov](mailto:seyed.kahaki@fda.hhs.gov)** if you would like to collaborate on this project.
+Please refer to the code documentation and email  **[seyed.kahaki@fda.hhs.gov](mailto:seyed.kahaki@fda.hhs.gov)** if you have any questions.
 
 
 ### Testing Examples
@@ -155,7 +155,7 @@ If you find that WSIToolbox is useful or if you use it in your project, please c
 
 ### Auxiliary Files
 
-Pre-trained models and their weights can be accessed from https://github.com/DIDSR/wsi_processing_toolbox/tree/main/models.
+Pre-trained models and their weights can be accessed from https://github.com/DIDSR/wsi_processing_toolbox/data/.
 
 
 ### Acknowledgment 
