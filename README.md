@@ -162,4 +162,4 @@ Pre-trained models and their weights can be accessed from https://github.com/DID
 This project was supported in part by an appointment to the ORISE Research Participation Program at the Center for Devices and Radiological Health, U.S. Food and Drug Administration, administered by the Oak Ridge Institute for Science and Education through an interagency agreement between the U.S. Department of Energy and FDA/CDRH.
 
 ### License
-The SlideProToolbox code is released under the XXX licence. The full text for the licence can be accessed from [LICENSE](LINK to Licence).
+The ValidPath code is released under the XXX licence. The full text for the licence can be accessed from [LICENSE](LINK to Licence).
