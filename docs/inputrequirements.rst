@@ -1,16 +1,16 @@
-Installation Guide
-****************************************
+Input Requirements
+******************************
 This installation guide provides a detailed explanation and step by step guide to install packages required for SlidePro toolbox.
 
-Required Components
---------------------------------------------------------
-Please follow the instructions below to install required dependencies for ValidPath.
+WSI Processing
+--------------
+The input data include WSI image and its annotation file:
 
 Installation Using Anaconda is Recommended
 ========================================================
 
 Anaconda
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 Anaconda is a distribution of the Python and R programming languages for scientific computing, that aims to simplify package management and deployment. The distribution includes data-science packages suitable for Windows, Linux, and macOS. Wikipedia 
 
 There are few steps to complete the installation. Firstly, you need to install Anaconda Navigator. This allows you to access to different Python IDEs and Python packages. When you install Anaconda Navigator, you may install your favorite IDEs such as Spider, PyCharm, and etc. You also will be able to create environment to have specific IDEs and Python packages for each project separately. Let’s start with Anaconda Navigator.    
@@ -22,7 +22,7 @@ In order to install Anaconda Navigator, download the Anaconda distribution from 
 https://www.anaconda.com/products/distribution
 
 Installing SlidePro using Anaconda
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 After installing Anaconda, you can install the SlidePro toolbox using this command:
 
@@ -32,12 +32,12 @@ After installing Anaconda, you can install the SlidePro toolbox using this comma
 
 
 Direct Installation of SlidePro
-======================================================
+====================================
 
 You can install required packages and then use pip to install the ValidPath.
 
 Windows
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 1. Download OpenSlide binaries from `this page <https://openslide.org/download/>`_. Extract the folder and add ``bin`` and ``lib`` subdirectories to
 Windows `system path <https://docs.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14)>`_.
 
@@ -56,7 +56,7 @@ slideprotoolbox.
     C:\> pip install slideprotoolbox
 
 Linux (Ubuntu)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 On Linux the prerequisite software can be installed using the command
 
 .. code-block:: console
@@ -65,7 +65,7 @@ On Linux the prerequisite software can be installed using the command
 
 
 From sources
-------------------------------------------------------------
+------------------------
 
 The source code of the slidepro toolbox can be accessed from the GitHub.
 

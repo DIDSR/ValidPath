@@ -145,7 +145,26 @@
         <span class="n">Vertex</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>  </div>
 
 <div class="viewcode-block" id="Annotation_Generator.create_xml"><a class="viewcode-back" href="../../assessment.html#assessment.annotation.Annotation_Generator.create_xml">[docs]</a>    <span class="k">def</span> <span class="nf">create_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">input_DIR</span><span class="p">,</span> <span class="n">file_path</span>  <span class="p">,</span><span class="n">path_size</span> <span class="p">,</span> <span class="n">save_xml_path</span><span class="p">):</span>
-        
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method extracts different types for annotations from Whole Slide Images.</span>
+<span class="sd">        It can save the extracted annottions to the output directory as defined in inputs.</span>
+<span class="sd">        This code also handles several annotations per slide. </span>
+<span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
+
+<span class="sd">        :Parameters:</span>
+<span class="sd">            input_DIR : str</span>
+<span class="sd">                Input Directory</span>
+
+<span class="sd">            file_path : str</span>
+<span class="sd">                WSIs</span>
+
+<span class="sd">            path_size : int</span>
+<span class="sd">                Size of image patch</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            None : None</span>
+<span class="sd">                None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">csv_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_DIR</span><span class="o">+</span><span class="n">file_path</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;WSI&#39;</span><span class="p">)</span>
 
@@ -194,7 +213,26 @@
                 
                 
 <div class="viewcode-block" id="Annotation_Generator.generate_map_file"><a class="viewcode-back" href="../../assessment.html#assessment.annotation.Annotation_Generator.generate_map_file">[docs]</a>    <span class="k">def</span> <span class="nf">generate_map_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_DIR</span><span class="p">,</span><span class="n">output_DIR</span><span class="p">,</span> <span class="n">file_Name</span><span class="p">,</span><span class="n">tag_name</span><span class="p">):</span>            
-        <span class="c1">#Generate Excel file</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method extracts different types for annotations from Whole Slide Images.</span>
+<span class="sd">        It can save the extracted annottions to the output directory as defined in inputs.</span>
+<span class="sd">        This code also handles several annotations per slide. </span>
+<span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
+
+<span class="sd">        :Parameters:</span>
+<span class="sd">            input_DIR : str</span>
+<span class="sd">                Input Directory</span>
+
+<span class="sd">            file_path : str</span>
+<span class="sd">                WSIs</span>
+
+<span class="sd">            path_size : int</span>
+<span class="sd">                Size of image patch</span>
+
+<span class="sd">        :Returns:</span>
+<span class="sd">            None : None</span>
+<span class="sd">                None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         
         <span class="nb">print</span><span class="p">(</span><span class="n">input_DIR</span><span class="p">)</span>

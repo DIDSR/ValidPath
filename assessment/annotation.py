@@ -77,7 +77,26 @@ class Annotation_Generator:
         Vertex.set('Z', str(0))  
 
     def create_xml(self,input_DIR, file_path  ,path_size , save_xml_path):
-        
+        """
+        This method extracts different types for annotations from Whole Slide Images.
+        It can save the extracted annottions to the output directory as defined in inputs.
+        This code also handles several annotations per slide. 
+        The output directory will be generated based on the strucutr of the input directories.
+
+        :Parameters:
+            input_DIR : str
+                Input Directory
+
+            file_path : str
+                WSIs
+
+            path_size : int
+                Size of image patch
+
+        :Returns:
+            None : None
+                None.
+        """
 
         csv_file = pd.read_csv(input_DIR+file_path,index_col='WSI')
 
@@ -126,7 +145,26 @@ class Annotation_Generator:
                 
                 
     def generate_map_file(self, input_DIR,output_DIR, file_Name,tag_name):            
-        #Generate Excel file
+        """
+        This method extracts different types for annotations from Whole Slide Images.
+        It can save the extracted annottions to the output directory as defined in inputs.
+        This code also handles several annotations per slide. 
+        The output directory will be generated based on the strucutr of the input directories.
+
+        :Parameters:
+            input_DIR : str
+                Input Directory
+
+            file_path : str
+                WSIs
+
+            path_size : int
+                Size of image patch
+
+        :Returns:
+            None : None
+                None.
+        """
 
         
         print(input_DIR)

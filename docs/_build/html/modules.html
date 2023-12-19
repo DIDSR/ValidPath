@@ -43,6 +43,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ValidPath</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputrequirements.html">Input Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="WSI.html">WSI package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="assessment.html">Annotation package</a></li>
 </ul>
@@ -75,6 +76,14 @@
              
   <section id="validpath">
 <h1>ValidPath<a class="headerlink" href="#validpath" title="Permalink to this heading"></a></h1>
+<p>The Whole Slide Image Processing and Machine Learning Performance Assessment Tool is a software program written in Python for analyzing whole slide images (WSIs), assisting pathologists in the assessment of machine learning (ML) results, and assessment of ML performance. The tool currently contains three modules that accept WSIs to generate image patches for AI/ML models, accept image patches (e.g., ML detected ROIs) to generate an Aperio ImageScope annotation file for validation of ML model results by pathologists, and accept outputs of ML models to generate performance results and their confidence intervals.</p>
+<p>The tool provides the following components:</p>
+<ul class="simple">
+<li><p>WSI handler for whole slide image processing and analysis</p></li>
+<li><p>Extraction of pathologist annotations and extraction of image patches from the annotated areas of the whole slide images</p></li>
+<li><p>Mapping ROIs onto WSI viewable by the Aperio ImageScope for the pathologist validation</p></li>
+<li><p>Performance assessment of the ML results and statistical analysis</p></li>
+</ul>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a><ul>
@@ -92,6 +101,23 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="inputrequirements.html">Input Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="inputrequirements.html#wsi-processing">WSI Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="inputrequirements.html#installation-using-anaconda-is-recommended">Installation Using Anaconda is Recommended</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="inputrequirements.html#anaconda">Anaconda</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inputrequirements.html#installing-slidepro-using-anaconda">Installing SlidePro using Anaconda</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="inputrequirements.html#direct-installation-of-slidepro">Direct Installation of SlidePro</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="inputrequirements.html#windows">Windows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inputrequirements.html#linux-ubuntu">Linux (Ubuntu)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="inputrequirements.html#from-sources">From sources</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="WSI.html">WSI package</a><ul>

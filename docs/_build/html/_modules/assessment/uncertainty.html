@@ -92,7 +92,16 @@
 
 
 <div class="viewcode-block" id="Uncertainty_Analysis.get_report"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.get_report">[docs]</a>    <span class="k">def</span> <span class="nf">get_report</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span> <span class="p">,</span><span class="n">y_truth</span><span class="p">)</span> <span class="p">:</span>
-
+        <span class="sd">&quot;&quot;&quot; Estimates confidence interval for Bernoulli p</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">          tp: number of positive outcomes, TP in this case</span>
+<span class="sd">          n: number of attemps, TP+FP for Precision, TP+FN for Recall</span>
+<span class="sd">          alpha: confidence level</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">          Tuple[float, float]: lower and upper bounds of the confidence interval</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">cmtx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
             <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_truth</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> 
@@ -166,17 +175,31 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">precision</span><span class="p">,</span><span class="n">Precision_CI</span><span class="p">,</span><span class="n">recall</span><span class="p">,</span><span class="n">Recall_CI</span><span class="p">,</span> <span class="n">auc_delong</span> <span class="p">,</span><span class="n">auc_delong_cov</span> <span class="p">,</span><span class="n">ci_delong</span> <span class="p">,</span> <span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span> <span class="p">,</span><span class="n">auc_keras</span> <span class="p">,</span><span class="n">cmtx</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Uncertainty_Analysis.auc_keras_"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.auc_keras_">[docs]</a>    <span class="k">def</span> <span class="nf">auc_keras_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span><span class="p">):</span>
-        <span class="n">auc_keras</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">auc_keras</span></div>
-    
-<div class="viewcode-block" id="Uncertainty_Analysis.ci_"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.ci_">[docs]</a>    <span class="k">def</span> <span class="nf">ci_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+        
         <span class="sd">&quot;&quot;&quot; Estimates confidence interval for Bernoulli p</span>
-<span class="sd">        Args:</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
 <span class="sd">          tp: number of positive outcomes, TP in this case</span>
 <span class="sd">          n: number of attemps, TP+FP for Precision, TP+FN for Recall</span>
 <span class="sd">          alpha: confidence level</span>
-<span class="sd">        Returns:</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">          Tuple[float, float]: lower and upper bounds of the confidence interval</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">auc_keras</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span><span class="p">)</span></div>
+
+        <span class="c1">#return auc_keras</span>
+    
+<div class="viewcode-block" id="Uncertainty_Analysis.ci_"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.ci_">[docs]</a>    <span class="k">def</span> <span class="nf">ci_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Estimates confidence interval for Bernoulli p</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">          tp: number of positive outcomes, TP in this case</span>
+<span class="sd">          n: number of attemps, TP+FP for Precision, TP+FN for Recall</span>
+<span class="sd">          alpha: confidence level</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
 <span class="sd">          Tuple[float, float]: lower and upper bounds of the confidence interval</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">p_hat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
@@ -186,10 +209,11 @@
         <span class="k">return</span> <span class="n">p_hat</span> <span class="o">-</span> <span class="n">z_score</span> <span class="o">*</span> <span class="n">std</span><span class="p">,</span> <span class="n">p_hat</span> <span class="o">+</span> <span class="n">z_score</span> <span class="o">*</span> <span class="n">std</span></div>
     
 <div class="viewcode-block" id="Uncertainty_Analysis.Delong_CI"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.Delong_CI">[docs]</a>    <span class="k">def</span> <span class="nf">Delong_CI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span> <span class="p">,</span><span class="n">y_truth</span><span class="p">):</span>
-        <span class="c1"># A Python implementation of an algorithm for computing the statistical significance of comparing two sets of predictions by ROC AUC. </span>
-        <span class="c1">#Also can compute variance of a single ROC AUC estimate. X. Sun and W. Xu, &quot;Fast Implementation of DeLong’s Algorithm for Comparing the </span>
-        <span class="c1">#Areas Under Correlated Receiver Operating Characteristic Curves,&quot; in IEEE Signal Processing Letters, vol. 21, no. 11, pp. 1389-1393, Nov. 2014, </span>
-        <span class="c1">#doi: 10.1109/LSP.2014.2337313.</span>
+        <span class="sd">&quot;&quot;&quot; A Python implementation of an algorithm for computing the statistical significance of comparing two sets of predictions by ROC AUC. </span>
+<span class="sd">        Also can compute variance of a single ROC AUC estimate. X. Sun and W. Xu, &quot;Fast Implementation of DeLong’s Algorithm for Comparing the </span>
+<span class="sd">        Areas Under Correlated Receiver Operating Characteristic Curves,&quot; in IEEE Signal Processing Letters, vol. 21, no. 11, pp. 1389-1393, Nov. 2014, </span>
+<span class="sd">        doi: 10.1109/LSP.2014.2337313.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.95</span>
         
         <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_truth</span><span class="p">)</span>
@@ -212,9 +236,11 @@
     <span class="c1"># stackoverflow.com/questions/19124239/scikit-learn-roc-curve-with-confidence-intervals</span>
 <div class="viewcode-block" id="Uncertainty_Analysis.compute_midrank"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.compute_midrank">[docs]</a>    <span class="k">def</span> <span class="nf">compute_midrank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Computes midranks.</span>
-<span class="sd">        Args:</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
 <span class="sd">           x - a 1D numpy array</span>
-<span class="sd">        Returns:</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
 <span class="sd">           array of midranks</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -236,9 +262,11 @@
         
 <div class="viewcode-block" id="Uncertainty_Analysis.compute_midrank_weight"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.compute_midrank_weight">[docs]</a>    <span class="k">def</span> <span class="nf">compute_midrank_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Computes midranks.</span>
-<span class="sd">        Args:</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
 <span class="sd">           x - a 1D numpy array</span>
-<span class="sd">        Returns:</span>
+<span class="sd">           </span>
+<span class="sd">        :Returns:</span>
 <span class="sd">           array of midranks</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -268,15 +296,16 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The fast version of DeLong&#39;s method for computing the covariance of</span>
 <span class="sd">        unadjusted AUC.</span>
-<span class="sd">        Args:</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
 <span class="sd">           predictions_sorted_transposed: a 2D numpy.array[n_classifiers, n_examples]</span>
 <span class="sd">              sorted such as the examples with label &quot;1&quot; are first</span>
-<span class="sd">        Returns:</span>
+<span class="sd">        :Returns:</span>
 <span class="sd">           (AUC value, DeLong covariance)</span>
-<span class="sd">        Reference:</span>
+<span class="sd">           </span>
+<span class="sd">        :Reference:</span>
 <span class="sd">         @article{sun2014fast,</span>
-<span class="sd">           title={Fast Implementation of DeLong&#39;s Algorithm for</span>
-<span class="sd">                  Comparing the Areas Under Correlated Receiver Oerating Characteristic Curves},</span>
+<span class="sd">           title={Fast Implementation of DeLong&#39;s Algorithm for Comparing the Areas Under Correlated Receiver Oerating Characteristic Curves},</span>
 <span class="sd">           author={Xu Sun and Weichao Xu},</span>
 <span class="sd">           journal={IEEE Signal Processing Letters},</span>
 <span class="sd">           volume={21},</span>
@@ -317,16 +346,17 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The fast version of DeLong&#39;s method for computing the covariance of</span>
 <span class="sd">        unadjusted AUC.</span>
-<span class="sd">        Args:</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
 <span class="sd">           predictions_sorted_transposed: a 2D numpy.array[n_classifiers, n_examples]</span>
 <span class="sd">              sorted such as the examples with label &quot;1&quot; are first</span>
-<span class="sd">        Returns:</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
 <span class="sd">           (AUC value, DeLong covariance)</span>
+<span class="sd">        </span>
 <span class="sd">        Reference:</span>
 <span class="sd">         @article{sun2014fast,</span>
-<span class="sd">           title={Fast Implementation of DeLong&#39;s Algorithm for</span>
-<span class="sd">                  Comparing the Areas Under Correlated Receiver Oerating</span>
-<span class="sd">                  Characteristic Curves},</span>
+<span class="sd">           title={Fast Implementation of DeLong&#39;s Algorithm for Comparing the Areas Under Correlated Receiver Oerating Characteristic Curves},</span>
 <span class="sd">           author={Xu Sun and Weichao Xu},</span>
 <span class="sd">           journal={IEEE Signal Processing Letters},</span>
 <span class="sd">           volume={21},</span>
@@ -361,10 +391,12 @@
     
 <div class="viewcode-block" id="Uncertainty_Analysis.calc_pvalue"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.calc_pvalue">[docs]</a>    <span class="k">def</span> <span class="nf">calc_pvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aucs</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Computes log(10) of p-values.</span>
-<span class="sd">        Args:</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
 <span class="sd">           aucs: 1D array of AUCs</span>
 <span class="sd">           sigma: AUC DeLong covariances</span>
-<span class="sd">        Returns:</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
 <span class="sd">           log10(pvalue)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
@@ -387,7 +419,8 @@
 <div class="viewcode-block" id="Uncertainty_Analysis.delong_roc_variance"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.delong_roc_variance">[docs]</a>    <span class="k">def</span> <span class="nf">delong_roc_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ground_truth</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes ROC AUC variance for a single set of predictions</span>
-<span class="sd">        Args:</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
 <span class="sd">           ground_truth: np.array of 0 and 1</span>
 <span class="sd">           predictions: np.array of floats of the probability of being class 1</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -400,7 +433,13 @@
         
         
 <div class="viewcode-block" id="Uncertainty_Analysis.bootstrapping"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.bootstrapping">[docs]</a>    <span class="k">def</span> <span class="nf">bootstrapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
-    
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes ROC AUC variance for a single set of predictions</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">           ground_truth: np.array of 0 and 1</span>
+<span class="sd">           predictions: np.array of floats of the probability of being class 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original ROC area: </span><span class="si">{:0.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)))</span>
         
         <span class="n">rng_seed</span> <span class="o">=</span> <span class="mi">42</span>  <span class="c1"># control reproducibility</span>

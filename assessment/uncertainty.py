@@ -24,7 +24,16 @@ class Uncertainty_Analysis:
 
 
     def get_report (self, y_pred ,y_truth) :
-
+        """ Estimates confidence interval for Bernoulli p
+        
+        :Parameters:
+          tp: number of positive outcomes, TP in this case
+          n: number of attemps, TP+FP for Precision, TP+FN for Recall
+          alpha: confidence level
+        
+        :Returns:
+          Tuple[float, float]: lower and upper bounds of the confidence interval
+        """
 
         cmtx = pd.DataFrame(
             confusion_matrix(y_truth.round(), y_pred.round(), labels=[1, 0]), 
@@ -98,17 +107,31 @@ class Uncertainty_Analysis:
         return (precision,Precision_CI,recall,Recall_CI, auc_delong ,auc_delong_cov ,ci_delong , fpr_keras, tpr_keras ,auc_keras ,cmtx)
 
     def auc_keras_(self, fpr_keras, tpr_keras):
-        auc_keras = auc(fpr_keras, tpr_keras)
-
-        return auc_keras
-    
-    def ci_(self, tp, n, alpha=0.05):
+        
         """ Estimates confidence interval for Bernoulli p
-        Args:
+        
+        :Parameters:
           tp: number of positive outcomes, TP in this case
           n: number of attemps, TP+FP for Precision, TP+FN for Recall
           alpha: confidence level
-        Returns:
+        
+        :Returns:
+          Tuple[float, float]: lower and upper bounds of the confidence interval
+        """
+        
+        auc_keras = auc(fpr_keras, tpr_keras)
+
+        #return auc_keras
+    
+    def ci_(self, tp, n, alpha=0.05):
+        """ Estimates confidence interval for Bernoulli p
+        
+        :Parameters:
+          tp: number of positive outcomes, TP in this case
+          n: number of attemps, TP+FP for Precision, TP+FN for Recall
+          alpha: confidence level
+        
+        :Returns:
           Tuple[float, float]: lower and upper bounds of the confidence interval
         """
         p_hat = float(tp) / n
@@ -118,10 +141,11 @@ class Uncertainty_Analysis:
         return p_hat - z_score * std, p_hat + z_score * std
     
     def Delong_CI(self, y_pred ,y_truth):
-        # A Python implementation of an algorithm for computing the statistical significance of comparing two sets of predictions by ROC AUC. 
-        #Also can compute variance of a single ROC AUC estimate. X. Sun and W. Xu, "Fast Implementation of DeLong’s Algorithm for Comparing the 
-        #Areas Under Correlated Receiver Operating Characteristic Curves," in IEEE Signal Processing Letters, vol. 21, no. 11, pp. 1389-1393, Nov. 2014, 
-        #doi: 10.1109/LSP.2014.2337313.
+        """ A Python implementation of an algorithm for computing the statistical significance of comparing two sets of predictions by ROC AUC. 
+        Also can compute variance of a single ROC AUC estimate. X. Sun and W. Xu, "Fast Implementation of DeLong’s Algorithm for Comparing the 
+        Areas Under Correlated Receiver Operating Characteristic Curves," in IEEE Signal Processing Letters, vol. 21, no. 11, pp. 1389-1393, Nov. 2014, 
+        doi: 10.1109/LSP.2014.2337313.
+        """
         alpha = .95
         
         y_true = np.array(y_truth)
@@ -144,9 +168,11 @@ class Uncertainty_Analysis:
     # stackoverflow.com/questions/19124239/scikit-learn-roc-curve-with-confidence-intervals
     def compute_midrank(self,x):
         """Computes midranks.
-        Args:
+        
+        :Parameters:
            x - a 1D numpy array
-        Returns:
+        
+        :Returns:
            array of midranks
         """
         J = np.argsort(x)
@@ -168,9 +194,11 @@ class Uncertainty_Analysis:
         
     def compute_midrank_weight(self, x, sample_weight):
         """Computes midranks.
-        Args:
+        
+        :Parameters:
            x - a 1D numpy array
-        Returns:
+           
+        :Returns:
            array of midranks
         """
         J = np.argsort(x)
@@ -200,15 +228,16 @@ class Uncertainty_Analysis:
         """
         The fast version of DeLong's method for computing the covariance of
         unadjusted AUC.
-        Args:
+        
+        :Parameters:
            predictions_sorted_transposed: a 2D numpy.array[n_classifiers, n_examples]
               sorted such as the examples with label "1" are first
-        Returns:
+        :Returns:
            (AUC value, DeLong covariance)
-        Reference:
+           
+        :Reference:
          @article{sun2014fast,
-           title={Fast Implementation of DeLong's Algorithm for
-                  Comparing the Areas Under Correlated Receiver Oerating Characteristic Curves},
+           title={Fast Implementation of DeLong's Algorithm for Comparing the Areas Under Correlated Receiver Oerating Characteristic Curves},
            author={Xu Sun and Weichao Xu},
            journal={IEEE Signal Processing Letters},
            volume={21},
@@ -249,16 +278,17 @@ class Uncertainty_Analysis:
         """
         The fast version of DeLong's method for computing the covariance of
         unadjusted AUC.
-        Args:
+        
+        :Parameters:
            predictions_sorted_transposed: a 2D numpy.array[n_classifiers, n_examples]
               sorted such as the examples with label "1" are first
-        Returns:
+        
+        :Returns:
            (AUC value, DeLong covariance)
+        
         Reference:
          @article{sun2014fast,
-           title={Fast Implementation of DeLong's Algorithm for
-                  Comparing the Areas Under Correlated Receiver Oerating
-                  Characteristic Curves},
+           title={Fast Implementation of DeLong's Algorithm for Comparing the Areas Under Correlated Receiver Oerating Characteristic Curves},
            author={Xu Sun and Weichao Xu},
            journal={IEEE Signal Processing Letters},
            volume={21},
@@ -293,10 +323,12 @@ class Uncertainty_Analysis:
     
     def calc_pvalue(self, aucs, sigma):
         """Computes log(10) of p-values.
-        Args:
+        
+        :Parameters:
            aucs: 1D array of AUCs
            sigma: AUC DeLong covariances
-        Returns:
+        
+        :Returns:
            log10(pvalue)
         """
         l = np.array([[1, -1]])
@@ -319,7 +351,8 @@ class Uncertainty_Analysis:
     def delong_roc_variance(self, ground_truth, predictions, sample_weight=None):
         """
         Computes ROC AUC variance for a single set of predictions
-        Args:
+        
+        :Parameters:
            ground_truth: np.array of 0 and 1
            predictions: np.array of floats of the probability of being class 1
         """
@@ -332,7 +365,13 @@ class Uncertainty_Analysis:
         
         
     def bootstrapping(self, y_true, y_pred):
-    
+        """
+        Computes ROC AUC variance for a single set of predictions
+        
+        :Parameters:
+           ground_truth: np.array of 0 and 1
+           predictions: np.array of floats of the probability of being class 1
+        """
         print("Original ROC area: {:0.3f}".format(roc_auc_score(y_true, y_pred)))
         
         rng_seed = 42  # control reproducibility
