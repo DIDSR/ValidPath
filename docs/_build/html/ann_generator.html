@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Annotation File Generator &mdash; ValidPath 2.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> ValidPath
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputrequirements.html">Data (Input/Output) Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSI.html">WSI Handler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annotation.html">Annotation Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assessment.html">ML Assessment</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ValidPath</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Annotation File Generator</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ann_generator.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="annotation-file-generator">
+<h1>Annotation File Generator<a class="headerlink" href="#annotation-file-generator" title="Permalink to this heading"></a></h1>
+<section id="module-assessment.annotation">
+<span id="assessment-annotation-module"></span><h2>assessment.annotation module<a class="headerlink" href="#module-assessment.annotation" title="Permalink to this heading"></a></h2>
+<hr class="docutils" />
+<p>Title:        ValidPath Toolbox - Annotation File Generation Module</p>
+<p>Description:  This is the Annotation File Generator module for the whole slide image processing toolbox. It is includes Annotation_Generato</p>
+<p>Classes:      Annotation_Generator</p>
+<p>Methods:      make_region, create_xml, generate_map_file</p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="assessment.annotation.Annotation_Generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">assessment.annotation.</span></span><span class="sig-name descname"><span class="pre">Annotation_Generator</span></span><a class="reference internal" href="_modules/assessment/annotation.html#Annotation_Generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#assessment.annotation.Annotation_Generator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="assessment.annotation.Annotation_Generator.create_xml">
+<span class="sig-name descname"><span class="pre">create_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_DIR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_xml_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/assessment/annotation.html#Annotation_Generator.create_xml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#assessment.annotation.Annotation_Generator.create_xml" title="Permalink to this definition"></a></dt>
+<dd><p>This method extracts different types for annotations from Whole Slide Images.
+It can save the extracted annottions to the output directory as defined in inputs.
+This code also handles several annotations per slide. 
+The output directory will be generated based on the strucutr of the input directories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>input_DIR<span class="classifier">str</span></dt><dd><p>Input Directory</p>
+</dd>
+<dt>file_path<span class="classifier">str</span></dt><dd><p>WSIs</p>
+</dd>
+<dt>path_size<span class="classifier">int</span></dt><dd><p>Size of image patch</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="assessment.annotation.Annotation_Generator.generate_map_file">
+<span class="sig-name descname"><span class="pre">generate_map_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_DIR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_DIR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_Name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/assessment/annotation.html#Annotation_Generator.generate_map_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#assessment.annotation.Annotation_Generator.generate_map_file" title="Permalink to this definition"></a></dt>
+<dd><p>This method extracts different types for annotations from Whole Slide Images.
+It can save the extracted annottions to the output directory as defined in inputs.
+This code also handles several annotations per slide. 
+The output directory will be generated based on the strucutr of the input directories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>input_DIR<span class="classifier">str</span></dt><dd><p>Input Directory</p>
+</dd>
+<dt>file_path<span class="classifier">str</span></dt><dd><p>WSIs</p>
+</dd>
+<dt>path_size<span class="classifier">int</span></dt><dd><p>Size of image patch</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="assessment.annotation.Annotation_Generator.make_region">
+<span class="sig-name descname"><span class="pre">make_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">txt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Regions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/assessment/annotation.html#Annotation_Generator.make_region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#assessment.annotation.Annotation_Generator.make_region" title="Permalink to this definition"></a></dt>
+<dd><p>This method extracts different types for annotations from Whole Slide Images.
+It can save the extracted annottions to the output directory as defined in inputs.
+This code also handles several annotations per slide. 
+The output directory will be generated based on the strucutr of the input directories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt>save_dir<span class="classifier">str</span></dt><dd><p>Output Directory to save the extracted annotations</p>
+</dd>
+<dt>WSIs<span class="classifier">list</span></dt><dd><p>List of included WSIs</p>
+</dd>
+<dt>XMLs<span class="classifier">list</span></dt><dd><p>List of XML files associated with included WSIs</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Seyed Kahaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

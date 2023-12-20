@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input Requirements &mdash; ValidPath 2.0.0 documentation</title>
+  <title>Data (Input/Output) Examples &mdash; ValidPath 2.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,9 @@
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="WSI Handler" href="WSI.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,10 +42,20 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
 </ul>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="WSI.html">WSI package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="assessment.html">Assessment package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data (Input/Output) Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#wsi-handler">WSI Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#annotation-extraction">Annotation Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#patch-extraction">Patch Extraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#annotation-file-generator">Annotation File Generator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-assessment">Performance Assessment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WSI.html">WSI Handler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annotation.html">Annotation Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assessment.html">ML Assessment</a></li>
 </ul>
 
         </div>
@@ -60,7 +72,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">Input Requirements</li>
+      <li class="breadcrumb-item active">Data (Input/Output) Examples</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/inputrequirements.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -70,19 +82,86 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="input-requirements">
-<h1>Input Requirements<a class="headerlink" href="#input-requirements" title="Permalink to this heading"></a></h1>
-<p>This installation guide provides a detailed explanation and step by step guide to install packages required for SlidePro toolbox.</p>
-<section id="wsi-processing">
-<h2>WSI Processing<a class="headerlink" href="#wsi-processing" title="Permalink to this heading"></a></h2>
-<p>The input data include WSI image and its annotation file:</p>
+  <section id="data-input-output-examples">
+<h1>Data (Input/Output) Examples<a class="headerlink" href="#data-input-output-examples" title="Permalink to this heading"></a></h1>
+<p>Example of these files can be found in the /data/_ directory.</p>
+<p>Here are the input and output examples for each module:</p>
+<section id="wsi-handler">
+<h2>WSI Handler<a class="headerlink" href="#wsi-handler" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p><strong>Input:</strong> Whole Slide Image file (.SVS,DICOM,TIFF)</p>
+<p>Link to the Data File Example: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/data/CMU-1-Small-Region.svs">SVSFile</a></p>
+</div></blockquote>
+<blockquote>
+<div><p>Link to the Jupyter Notebook Example Script: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/01_read_wsi.ipynb">WSI_Handler</a></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Output:</strong> Processed file such as sub image region</p>
+</div></blockquote>
+</section>
+<section id="annotation-extraction">
+<h2>Annotation Extraction<a class="headerlink" href="#annotation-extraction" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p><strong>Input:</strong> Whole Slide Image file (.SVS,DICOM,TIFF) and annotation file (.xml)</p>
+<p>Link to the WSI File Example: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/data/CMU-1-Small-Region.svs">SVSFile</a></p>
+<p>Link to the XML File Example: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/data/CMU-1-Small-Region.xml">XMLFile</a></p>
+</div></blockquote>
+<blockquote>
+<div><p>Link to the Jupyter Notebook Example Script: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/02_annotation_extraction.ipynb">AnnotationExtraction</a></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Output:</strong> Extracted annotation file</p>
+<p>Link to the Output Data File Example: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/tree/main/data/images/CMU-1-Small-Region">Annotation</a></p>
+</div></blockquote>
+</section>
+<section id="patch-extraction">
+<h2>Patch Extraction<a class="headerlink" href="#patch-extraction" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p><strong>Input:</strong> Extracted annotation file generated from Annotation Extraction Step</p>
+<p>Link to the Input Data File Example: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/tree/main/data/images/CMU-1-Small-Region">Annotation</a></p>
+<p>Link to the Jupyter Notebook Example Script: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/03_patch_extraction.ipynb">PatchExtraction</a></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Output:</strong> Extracted Patches</p>
+<p>Link to the Output Data File Example: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/tree/main/data/ROIs">Patches</a></p>
+</div></blockquote>
+</section>
+<section id="annotation-file-generator">
+<h2>Annotation File Generator<a class="headerlink" href="#annotation-file-generator" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p><strong>Input:</strong> Extracted Patches generated from Patch Extraction Step</p>
+<p>Link to the Output Data File Example: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/tree/main/data/ROIs">Patches</a></p>
+<p>Link to the Jupyter Notebook Example Script: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/4_annotation_generator.ipynb">AnnotationGenerator</a></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Output:</strong> Generated Annotation File (.xml)</p>
+<p>Link to the Output Data File Example: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/tree/main/data/AnnGeneration">xml_file</a></p>
+</div></blockquote>
+</section>
+<section id="performance-assessment">
+<h2>Performance Assessment<a class="headerlink" href="#performance-assessment" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p><strong>Input:</strong> Continuous classification scores generated by ML model and the binary truth</p>
+<p>Link to the Output Data File Example: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/data/ResultsExample.xlsx">MLResultExample</a></p>
+</div></blockquote>
+<blockquote>
+<div><p>Link to the Jupyter Notebook Example Script: <a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/05_performance_assessment.ipynb">PerformanceAssessment</a></p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Output:</strong> Performance Assessment Results</p>
+<p>Example of the results output</p>
+</div></blockquote>
+<img alt="https://github.com/mousavikahaki/ValidPath/tree/main/img/assessment_output_example.png" src="https://github.com/mousavikahaki/ValidPath/tree/main/img/assessment_output_example.png" />
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="WSI.html" class="btn btn-neutral float-right" title="WSI Handler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

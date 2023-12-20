@@ -1,13 +1,5 @@
-Assessment package
+ML Assessment
 ==================
-
-assessment.annotation module
---------------------------------
-
-.. automodule:: assessment.annotation
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 assessment.uncertainty module
 -----------------------------------
