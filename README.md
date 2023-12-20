@@ -35,7 +35,7 @@ There are several modules in this package including
 
 ### Information for Developers
 Code Documentation:
-https://htmlpreview.github.io/?https://github.com/DIDSR/wsi_processing_toolbox/blob/main/docs/_build/html/index.html
+[https://htmlpreview.github.io/?https://github.com/DIDSR/wsi_processing_toolbox/blob/main/docs/_build/html/index.html](https://htmlpreview.github.io/?https://github.com/mousavikahaki/ValidPath/blob/main/docs/_build/html/index.html)
 Please refer to the code documentation and email  **[seyed.kahaki@fda.hhs.gov](mailto:seyed.kahaki@fda.hhs.gov)** if you have any questions.
 
 
