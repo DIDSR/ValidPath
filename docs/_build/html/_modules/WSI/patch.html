@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WSI.patch &mdash; ValidPath 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ValidPath
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Packages and Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ValidPath</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">WSI.patch</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for WSI.patch</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Created on Fri Feb  4 11:42:52 2023</span>
+
+<span class="sd">----------------------------------------------------------------------------</span>
+
+<span class="sd">Title:        ValidPath Toolbox - patch module</span>
+
+<span class="sd">Description:  This is the patch module for the whole slide image processing toolbox. It is includes two classes and several methods</span>
+<span class="sd">              </span>
+<span class="sd">Classes:      WSIpatch_extractor, PatchExtractor</span>
+<span class="sd">              </span>
+
+<span class="sd">Methods:      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch</span>
+
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
+<span class="sd">Version =&#39;3.0&#39;</span>
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imsave</span><span class="p">,</span> <span class="n">imread</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="c1">#import openslide</span>
+<span class="c1">#from openslide.deepzoom import DeepZoomGenerator</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">tifffile</span> <span class="k">as</span> <span class="nn">tiff</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="c1">#from readwsi.TissueSegmentation import TissueSegmentation</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span><span class="p">,</span> <span class="n">Point</span>
+<span class="c1">#from readwsi.normalization import Normalization</span>
+<span class="c1">#from readwsi import normalization</span>
+<span class="kn">import</span> <span class="nn">PIL</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+<span class="c1">#import sys</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="c1">#from scipy import misc</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>     
+            
+            
+<div class="viewcode-block" id="WSIpatch_extractor"><a class="viewcode-back" href="../../WSI.html#WSI.patch.WSIpatch_extractor">[docs]</a><span class="k">class</span> <span class="nc">WSIpatch_extractor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+<div class="viewcode-block" id="WSIpatch_extractor.patch_extraction"><a class="viewcode-back" href="../../WSI.html#WSI.patch.WSIpatch_extractor.patch_extraction">[docs]</a>    <span class="k">def</span> <span class="nf">patch_extraction</span><span class="p">(</span><span class="n">wsi_obj</span><span class="p">,</span><span class="n">patch_size</span><span class="p">,</span><span class="n">output_folder</span><span class="p">,</span><span class="n">random_state</span><span class="p">,</span><span class="n">visualize</span><span class="p">,</span><span class="n">intensity_check</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">std_threshold</span><span class="p">,</span><span class="n">patch_number</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        this function  Generate object for tiles using the DeepZoomGenerator and divided </span>
+<span class="sd">        the svs file into tiles of size 256 with no overlap.</span>
+<span class="sd">        then  processing and saving each tile to local directory.</span>
+<span class="sd">        </span>
+<span class="sd">          </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">        wsi_obj : obj</span>
+<span class="sd">            WSI object.</span>
+<span class="sd">        patch_size: int</span>
+<span class="sd">            size tiles</span>
+<span class="sd">        output_folder : str</span>
+<span class="sd">            path root folder to save tiles</span>
+<span class="sd">        perform_segmentation_state: bool</span>
+<span class="sd">        random_state : bool</span>
+<span class="sd">            </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Generate object for tiles using the DeepZoomGenerator</span>
+        <span class="n">tiles</span> <span class="o">=</span> <span class="n">DeepZoomGenerator</span><span class="p">(</span><span class="n">wsi_obj</span><span class="p">,</span> <span class="n">tile_size</span><span class="o">=</span> <span class="n">patch_size</span><span class="p">,</span> <span class="n">overlap</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">limit_bounds</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Here, we have divided our svs into tiles of size 256 with no overlap.</span>
+     
+        <span class="c1"># The tiles object also contains data at many levels.</span>
+        <span class="c1"># To check the number of levels</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of levels in the tiles object are: &quot;</span><span class="p">,</span> <span class="n">tiles</span><span class="o">.</span><span class="n">level_count</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The dimensions of data in each level are: &quot;</span><span class="p">,</span> <span class="n">tiles</span><span class="o">.</span><span class="n">level_dimensions</span><span class="p">)</span>
+        <span class="c1"># Total number of tiles in the tiles object</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of tiles = : &quot;</span><span class="p">,</span> <span class="n">tiles</span><span class="o">.</span><span class="n">tile_count</span><span class="p">)</span>
+
+        <span class="c1">###### processing and saving each tile to local directory</span>
+        <span class="c1">#print(&quot;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&quot;)</span>
+        <span class="n">MaxTileLevel</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tiles</span><span class="o">.</span><span class="n">level_tiles</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        
+        <span class="n">cols</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">tiles</span><span class="o">.</span><span class="n">level_tiles</span><span class="p">[</span><span class="n">MaxTileLevel</span><span class="p">]</span>
+       
+        <span class="c1">#print(tiles)</span>
+        <span class="c1">#import pdb; pdb.set_trace()</span>
+        <span class="n">tile_path</span> <span class="o">=</span> <span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/&quot;</span>
+        <span class="n">orig_tile_dir_name</span> <span class="o">=</span> <span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/&quot;</span>
+        <span class="c1">#norm_tile_dir_name = output_folder+&quot;Imagepatches/normalized_tiles/&quot;</span>
+        <span class="c1">#H_tile_dir_name = output_folder+&quot;Imagepatches/H_tiles/&quot;</span>
+        <span class="c1">#E_tile_dir_name = output_folder+&quot;Imagepatches/E_tiles/&quot;</span>
+
+        <span class="c1"># MYDIRs = [output_folder+&quot;Imagepatches/&quot;, output_folder+&quot;Imagepatches/original_tiles/&quot;,</span>
+                  <span class="c1"># output_folder+&quot;Imagepatches/normalized_tiles/&quot;,output_folder+&quot;Imagepatches/H_tiles/&quot;,</span>
+                  <span class="c1"># output_folder+&quot;Imagepatches/E_tiles/&quot;]</span>
+        <span class="n">MYDIRs</span> <span class="o">=</span> <span class="p">[</span><span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/&quot;</span><span class="p">]</span>
+            
+        <span class="k">for</span> <span class="n">dr</span> <span class="ow">in</span> <span class="n">MYDIRs</span><span class="p">:</span>
+            <span class="n">CHECK_FOLDER</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">dr</span><span class="p">)</span>
+            <span class="c1"># If folder doesn&#39;t exist, then create it.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">CHECK_FOLDER</span><span class="p">:</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dr</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;created folder : &quot;</span><span class="p">,</span> <span class="n">dr</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;folder already exists.&quot;</span><span class="p">)</span>
+        
+       
+        <span class="n">ro</span> <span class="o">=</span> <span class="n">patch_number</span>
+        <span class="n">co</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">axes</span><span class="o">=</span><span class="p">[]</span>
+        
+        <span class="c1">#fig = plt.figure(figsize=(18, 10))</span>
+        
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span> 
+        <span class="n">flag_counter</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">flag_counter</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+                   
+                <span class="k">if</span> <span class="n">random_state</span><span class="o">==</span><span class="kc">True</span> <span class="p">:</span>
+                        
+                    <span class="n">row</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">col</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>   
+       <span class="c1"># sw = False</span>
+       <span class="c1"># for row in range(rows):</span>
+         <span class="c1">#   if sw == True:</span>
+        <span class="c1">#        break</span>
+        <span class="c1">#    for col in range(cols):</span>
+                
+                
+                <span class="c1">#tile_name = str(col) + &quot;_&quot; + str(row)</span>
+                <span class="c1"># tile_name = os.path.join(tile_dir, &#39;%d_%d&#39; % (col, row))</span>
+                <span class="c1"># print(&quot;Now processing tile with title: &quot;, tile_name)</span>
+                <span class="n">temp_tile</span> <span class="o">=</span> <span class="n">tiles</span><span class="o">.</span><span class="n">get_tile</span><span class="p">(</span><span class="n">MaxTileLevel</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+                <span class="c1">#getting the coordinates</span>
+                <span class="n">temp_tile_coor</span> <span class="o">=</span> <span class="n">tiles</span><span class="o">.</span><span class="n">get_tile_coordinates</span><span class="p">(</span><span class="n">MaxTileLevel</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+                <span class="n">xx</span> <span class="o">=</span> <span class="n">temp_tile_coor</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">yy</span> <span class="o">=</span> <span class="n">temp_tile_coor</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                
+                
+                <span class="n">tile_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_x_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_y_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_a_&quot;</span> <span class="o">+</span> <span class="s2">&quot;100.00&quot;</span>
+                
+                
+                <span class="n">temp_tile_RGB</span> <span class="o">=</span> <span class="n">temp_tile</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">)</span>
+                <span class="n">temp_tile_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temp_tile_RGB</span><span class="p">)</span>
+                <span class="c1"># Save original tile</span>
+                
+                <span class="c1"># to check intensity mean and intensity standard deviation of the tiles (To exclude non-informative tiles)</span>
+                <span class="k">if</span> <span class="n">intensity_check</span><span class="p">:</span>
+                    <span class="n">intensity_cond</span> <span class="o">=</span> <span class="n">temp_tile_np</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">intensity_threshold</span> <span class="ow">and</span> <span class="n">temp_tile_np</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">std_threshold</span>
+                <span class="k">else</span><span class="p">:</span> 
+                    <span class="n">intensity_cond</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="n">intensity_cond</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saving&quot;</span> <span class="o">+</span> <span class="n">orig_tile_dir_name</span> <span class="o">+</span> <span class="n">tile_name</span> <span class="o">+</span> <span class="s2">&quot;.tif&quot;</span><span class="p">)</span>
+                    <span class="n">tiff</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">orig_tile_dir_name</span> <span class="o">+</span> <span class="n">tile_name</span> <span class="o">+</span> <span class="s2">&quot;.tif&quot;</span><span class="p">,</span> <span class="n">temp_tile_np</span><span class="p">)</span>
+                   <span class="c1"># fig = plt.figure(figsize=(7, 7))</span>
+                    <span class="c1">#fig.add_subplot(ro, co, 1)</span>
+                    <span class="c1">#plt.imshow(temp_tile_np)</span>
+                    <span class="c1">#plt.axis(&#39;off&#39;)</span>
+                    
+                    <span class="c1">#plt.title(&quot;patch number :&quot; + str(counter+1))</span>
+                   <span class="c1"># fig = plt.figure(figsize=(7, 7))</span>
+                    <span class="c1">#plt.plot(temp_tile_np)</span>
+                    <span class="c1">#plt.figure(i+1)</span>
+                    <span class="c1"># plt.rcParams.update({&#39;font.size&#39;: 8})</span>
+                    <span class="c1"># axes.append( fig.add_subplot(ro, co, counter+1) )</span>
+                    <span class="c1"># subplot_title=(&quot;patch number :&quot; + str(counter+1))</span>
+                    <span class="c1"># axes[-1].set_title(subplot_title)  </span>
+                    <span class="k">if</span> <span class="n">visualize</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">temp_tile_np</span><span class="p">)</span>
+                        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+                    
+                    <span class="k">if</span> <span class="n">patch_number</span> <span class="o">&gt;</span><span class="mi">0</span> <span class="p">:</span>
+                        <span class="n">counter</span>  <span class="o">+=</span> <span class="mi">1</span>
+                    
+                        <span class="k">if</span> <span class="n">patch_number</span> <span class="o">==</span> <span class="n">counter</span> <span class="p">:</span>
+                           
+                            <span class="n">flag_counter</span> <span class="o">=</span> <span class="kc">False</span>
+                            <span class="k">break</span></div>
+                       <span class="c1"># sw =True</span>
+                       <span class="c1"># break</span>
+       <span class="c1"># return (temp_tile_np)</span>
+        <span class="c1">#fig.tight_layout(pad=1)</span>
+        <span class="c1">#plt.show()</span>
+        
+        
+<div class="viewcode-block" id="WSIpatch_extractor.patch_extraction_of_tissue"><a class="viewcode-back" href="../../WSI.html#WSI.patch.WSIpatch_extractor.patch_extraction_of_tissue">[docs]</a>    <span class="k">def</span> <span class="nf">patch_extraction_of_tissue</span><span class="p">(</span><span class="n">slidepath</span><span class="p">,</span><span class="n">patch_size</span> <span class="p">,</span><span class="n">output_folder</span><span class="p">,</span> <span class="n">number_of_patches</span><span class="o">=</span><span class="mi">1</span> <span class="p">,</span> <span class="n">vis</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        
+        <span class="c1"># vis   =   visualize state , if it is True == output will be displayed</span>
+        <span class="n">std_threshold</span> <span class="o">=</span> <span class="mi">15</span>
+        <span class="n">intensity_threshold</span> <span class="o">=</span> <span class="mi">250</span>
+        <span class="n">img_array</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1">#Minimum tissue area</span>
+        <span class="n">min_tissue_size</span> <span class="o">=</span><span class="mi">10000</span>
+        <span class="c1">#Max height and width for the size of slide with selected level</span>
+        <span class="n">max_img_size</span> <span class="o">=</span><span class="mi">10000</span>
+        <span class="c1">#Gaussian smoothing sigma</span>
+        <span class="n">smooth_sigma</span> <span class="o">=</span> <span class="mi">13</span>
+        <span class="c1">#Thresholding value</span>
+        <span class="n">thresh_val</span> <span class="o">=</span><span class="mf">0.8</span>
+        
+        <span class="n">s_level</span><span class="p">,</span> <span class="n">d_factor</span> <span class="p">,</span><span class="n">slide_shape</span>  <span class="o">=</span> <span class="n">TissueSegmentation</span><span class="o">.</span><span class="n">test_locate_tissue_seperately</span><span class="p">(</span><span class="n">slidepath</span><span class="p">,</span><span class="n">output_folder</span><span class="p">,</span>
+                                                                                   <span class="n">min_tissue_size</span><span class="p">,</span><span class="n">max_img_size</span><span class="p">,</span><span class="n">smooth_sigma</span><span class="p">,</span><span class="n">thresh_val</span><span class="p">)</span>
+        <span class="n">cnts</span> <span class="o">=</span> <span class="n">TissueSegmentation</span><span class="o">.</span><span class="n">test_locate_tissue</span><span class="p">(</span><span class="n">slidepath</span><span class="p">,</span><span class="n">min_tissue_size</span><span class="p">,</span><span class="n">max_img_size</span><span class="p">,</span><span class="n">smooth_sigma</span><span class="p">,</span><span class="n">thresh_val</span><span class="p">)</span>
+        
+        
+        <span class="n">Slide</span> <span class="o">=</span> <span class="n">openslide</span><span class="o">.</span><span class="n">OpenSlide</span><span class="p">(</span><span class="n">slidepath</span><span class="p">)</span>
+        <span class="n">region</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">s_level</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="n">d_factor</span>
+        <span class="n">w_</span> <span class="o">=</span> <span class="n">slide_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">h_</span> <span class="o">=</span> <span class="n">slide_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">slide_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">slide_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+
+        <span class="n">list_of_polygons</span><span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">cnt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cnts</span><span class="p">)</span> <span class="p">:</span>
+            <span class="n">lst_of_tuples</span> <span class="o">=</span> <span class="p">[]</span> 
+            <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+            <span class="n">y</span><span class="o">=</span><span class="p">[]</span> 
+
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">cn</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cnt</span><span class="p">):</span>
+
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cn</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cn</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">lst_of_tuples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+            <span class="n">list_of_polygons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst_of_tuples</span><span class="p">)</span>
+
+        <span class="c1">#for num_p in range(number_of_patches) : </span>
+        <span class="n">num_p</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">num_p</span> <span class="o">!=</span>  <span class="n">number_of_patches</span><span class="p">:</span>    
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">rand_x</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">w_</span><span class="p">)</span>
+                <span class="n">rand_y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">h_</span><span class="p">)</span>
+                <span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="n">rand_x</span><span class="p">,</span><span class="n">rand_y</span><span class="p">)</span>
+                <span class="n">polygon</span> <span class="o">=</span>  <span class="n">Polygon</span><span class="p">(</span><span class="n">lst_of_tuples</span><span class="p">)</span>                                <span class="c1"># Polygon([(0, 0), (0, 1), (1, 1), (1, 0)])</span>
+                <span class="n">is_correct</span> <span class="o">=</span> <span class="n">polygon</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> 
+                <span class="k">if</span> <span class="n">is_correct</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="n">n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                    <span class="k">break</span>
+
+
+            <span class="n">spointx</span><span class="p">,</span> <span class="n">spointy</span> <span class="o">=</span> <span class="n">rand_x</span><span class="o">*</span><span class="n">factor</span><span class="p">,</span> <span class="n">rand_y</span><span class="o">*</span><span class="n">factor</span> <span class="c1">#multipled by factor to get the original co-ordinates as in WSI and not the as per the level </span>
+
+
+            <span class="n">patchimg</span> <span class="o">=</span> <span class="n">Slide</span><span class="o">.</span><span class="n">read_region</span><span class="p">((</span><span class="n">spointx</span><span class="p">,</span> <span class="n">spointy</span><span class="p">),</span> <span class="n">level</span><span class="p">,</span> <span class="p">(</span><span class="n">patch_size</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">))</span>                        
+            <span class="c1">#patchimg.convert(&#39;RGB&#39;)</span>
+
+           <span class="c1"># cv2.imwrite(f&quot;C:/Users/masoud/data/patch_{str(num_p)}.tif&quot;, np.array(patchimg))</span>
+            <span class="n">temp_tile_RGB</span> <span class="o">=</span> <span class="n">patchimg</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">)</span>
+            <span class="n">temp_tile_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temp_tile_RGB</span><span class="p">)</span>
+            
+            <span class="c1"># to check intensity mean and intensity standard deviation of the tiles (To exclude non-informative tiles)</span>
+            <span class="k">if</span> <span class="n">temp_tile_np</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">intensity_threshold</span> <span class="ow">and</span> <span class="n">temp_tile_np</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">std_threshold</span><span class="p">:</span>
+                <span class="n">tiff</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">output_folder</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;/patch_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">num_p</span><span class="p">)</span><span class="si">}</span><span class="s2">.tif&quot;</span><span class="p">,</span> <span class="n">temp_tile_np</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">output_folder</span><span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;/patch_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">num_p</span><span class="p">)</span><span class="si">}</span><span class="s2">.tif&quot;</span><span class="p">)</span>
+                <span class="c1">#print(&quot;-------------&quot;, type(patchimg))</span>
+                <span class="n">num_p</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+                
+                <span class="n">img_array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_tile_np</span><span class="p">)</span>
+       
+        <span class="n">l</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">4</span><span class="p">,</span><span class="n">number_of_patches</span><span class="p">]</span>
+        <span class="n">min_</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">vis</span> <span class="o">==</span><span class="kc">True</span> <span class="p">:</span>
+            <span class="n">fig</span><span class="p">,</span><span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="n">min_</span><span class="p">)</span>
+      
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">img_array</span><span class="p">)</span> <span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">4</span> <span class="p">:</span>
+                    <span class="k">break</span>
+                
+           
+                <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                
+                
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+            
+            
+<div class="viewcode-block" id="WSIpatch_extractor.patch_extraction_with_normalized_tiles"><a class="viewcode-back" href="../../WSI.html#WSI.patch.WSIpatch_extractor.patch_extraction_with_normalized_tiles">[docs]</a>    <span class="k">def</span> <span class="nf">patch_extraction_with_normalized_tiles</span><span class="p">(</span><span class="n">wsi_obj</span><span class="p">,</span><span class="n">patch_size</span><span class="p">,</span><span class="n">output_folder</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="kc">True</span> <span class="p">,</span><span class="n">patch_number</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            this function  Generate object for tiles using the DeepZoomGenerator and divided </span>
+<span class="sd">            the svs file into tiles of size 256 with no overlap.</span>
+<span class="sd">            then  processing and saving each tile to local directory.</span>
+
+
+<span class="sd">            :Parameters:</span>
+<span class="sd">            wsi_obj : obj</span>
+<span class="sd">                WSI object.</span>
+<span class="sd">            patch_size: int</span>
+<span class="sd">                size tiles</span>
+<span class="sd">            output_folder : str</span>
+<span class="sd">                path root folder to save tiles</span>
+<span class="sd">            perform_segmentation_state: bool</span>
+<span class="sd">            random_state : bool</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="c1"># Generate object for tiles using the DeepZoomGenerator</span>
+            <span class="n">tiles</span> <span class="o">=</span> <span class="n">DeepZoomGenerator</span><span class="p">(</span><span class="n">wsi_obj</span><span class="p">,</span> <span class="n">tile_size</span><span class="o">=</span> <span class="n">patch_size</span><span class="p">,</span> <span class="n">overlap</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">limit_bounds</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="c1"># Here, we have divided our svs into tiles of size 256 with no overlap.</span>
+
+            <span class="c1"># The tiles object also contains data at many levels.</span>
+            <span class="c1"># To check the number of levels</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of levels in the tiles object are: &quot;</span><span class="p">,</span> <span class="n">tiles</span><span class="o">.</span><span class="n">level_count</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The dimensions of data in each level are: &quot;</span><span class="p">,</span> <span class="n">tiles</span><span class="o">.</span><span class="n">level_dimensions</span><span class="p">)</span>
+            <span class="c1"># Total number of tiles in the tiles object</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total number of tiles = : &quot;</span><span class="p">,</span> <span class="n">tiles</span><span class="o">.</span><span class="n">tile_count</span><span class="p">)</span>
+            <span class="c1">#print(&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;)</span>
+            <span class="n">std_threshold</span> <span class="o">=</span> <span class="mi">15</span>
+            <span class="n">intensity_threshold</span> <span class="o">=</span> <span class="mi">250</span>
+            <span class="n">MaxTileLevel</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tiles</span><span class="o">.</span><span class="n">level_tiles</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="c1">###### processing and saving each tile to local directory</span>
+            <span class="n">cols</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="n">tiles</span><span class="o">.</span><span class="n">level_tiles</span><span class="p">[</span><span class="n">MaxTileLevel</span><span class="p">]</span>
+            
+            
+            <span class="n">orig_tile_dir_name</span> <span class="o">=</span> <span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/original_tiles/&quot;</span>
+            <span class="n">norm_tile_dir_name</span> <span class="o">=</span> <span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/normalized_tiles/&quot;</span>
+            <span class="n">H_tile_dir_name</span> <span class="o">=</span> <span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/H_tiles/&quot;</span>
+            <span class="n">E_tile_dir_name</span> <span class="o">=</span> <span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/E_tiles/&quot;</span>
+            
+            <span class="n">MYDIRs</span> <span class="o">=</span> <span class="p">[</span><span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/original_tiles/&quot;</span><span class="p">,</span><span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/normalized_tiles/&quot;</span><span class="p">,</span>
+                <span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/H_tiles/&quot;</span><span class="p">,</span><span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/E_tiles/&quot;</span><span class="p">]</span>
+            
+            <span class="k">for</span> <span class="n">dr</span> <span class="ow">in</span> <span class="n">MYDIRs</span><span class="p">:</span>
+                <span class="n">CHECK_FOLDER</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">dr</span><span class="p">)</span>
+                <span class="c1"># If folder doesn&#39;t exist, then create it.</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">CHECK_FOLDER</span><span class="p">:</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dr</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;created folder : &quot;</span><span class="p">,</span> <span class="n">dr</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">dr</span><span class="p">,</span> <span class="s2">&quot;folder already exists.&quot;</span><span class="p">)</span>
+                    
+            <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span> 
+            <span class="n">flag_counter</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">ro</span> <span class="o">=</span> <span class="n">patch_number</span><span class="o">*</span><span class="mi">4</span>
+            <span class="n">co</span> <span class="o">=</span> <span class="mi">4</span>
+            <span class="n">axes</span><span class="o">=</span><span class="p">[]</span>
+            <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>  
+            <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">})</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">flag_counter</span><span class="o">==</span><span class="kc">False</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cols</span><span class="p">):</span>
+                   
+                    <span class="k">if</span> <span class="n">random_state</span><span class="o">==</span><span class="kc">True</span> <span class="p">:</span>
+                        
+                        <span class="n">row</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                        <span class="n">col</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>                        
+                        
+                    <span class="n">tile_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">col</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+                    <span class="c1"># tile_name = os.path.join(tile_dir, &#39;%d_%d&#39; % (col, row))</span>
+                    <span class="c1"># print(&quot;Now processing tile with title: &quot;, tile_name)</span>
+                    
+                    <span class="c1">#print(MaxTileLevel, col, row)</span>
+                    <span class="n">temp_tile</span> <span class="o">=</span> <span class="n">tiles</span><span class="o">.</span><span class="n">get_tile</span><span class="p">(</span><span class="n">MaxTileLevel</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
+                    
+                    <span class="n">temp_tile_RGB</span> <span class="o">=</span> <span class="n">temp_tile</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">)</span>
+                    <span class="n">temp_tile_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temp_tile_RGB</span><span class="p">)</span>
+                    
+                    
+                    <span class="c1"># to check intensity mean and intensity standard deviation of the tiles (To exclude non-informative tiles)</span>
+                    <span class="k">if</span> <span class="n">temp_tile_np</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">intensity_threshold</span> <span class="ow">and</span> <span class="n">temp_tile_np</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">std_threshold</span><span class="p">:</span>
+                       <span class="c1"># print(&quot;Processing tile number:&quot;, tile_name)</span>
+                        <span class="n">norm_img</span><span class="p">,</span> <span class="n">H_img</span><span class="p">,</span> <span class="n">E_img</span> <span class="o">=</span> <span class="n">normalization</span><span class="o">.</span><span class="n">norm_HnE</span><span class="p">(</span><span class="n">temp_tile_np</span><span class="p">,</span> <span class="n">Io</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+                        <span class="c1"># Save original tile</span>
+                        <span class="n">tiff</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">orig_tile_dir_name</span> <span class="o">+</span> <span class="n">tile_name</span> <span class="o">+</span> <span class="s2">&quot;_original.tif&quot;</span><span class="p">,</span> <span class="n">temp_tile_np</span><span class="p">)</span>
+                        <span class="c1"># Save the norm tile, H and E tiles</span>
+                        <span class="n">tiff</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">norm_tile_dir_name</span> <span class="o">+</span> <span class="n">tile_name</span> <span class="o">+</span> <span class="s2">&quot;_norm.tif&quot;</span><span class="p">,</span> <span class="n">norm_img</span><span class="p">)</span>
+                        <span class="n">tiff</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">H_tile_dir_name</span> <span class="o">+</span> <span class="n">tile_name</span> <span class="o">+</span> <span class="s2">&quot;_H.tif&quot;</span><span class="p">,</span> <span class="n">H_img</span><span class="p">)</span>
+                        <span class="n">tiff</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">E_tile_dir_name</span> <span class="o">+</span> <span class="n">tile_name</span> <span class="o">+</span> <span class="s2">&quot;_E.tif&quot;</span><span class="p">,</span> <span class="n">E_img</span><span class="p">)</span>
+                       
+                        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+                        <span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">ro</span><span class="p">,</span> <span class="n">co</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+                        <span class="n">subplot_title</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;patch number (original_img) :&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                        <span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">subplot_title</span><span class="p">)</span>  
+                        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">temp_tile_np</span><span class="p">)</span>
+                        <span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">ro</span><span class="p">,</span> <span class="n">co</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+                        <span class="n">subplot_title</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;patch number (norm_img) :&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                        <span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">subplot_title</span><span class="p">)</span>  
+                        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">norm_img</span><span class="p">)</span>
+                        <span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">ro</span><span class="p">,</span> <span class="n">co</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span> <span class="p">)</span>
+                        <span class="n">subplot_title</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;patch number (H_img) :&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                        <span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">subplot_title</span><span class="p">)</span>  
+                        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">H_img</span><span class="p">)</span>
+                        <span class="n">axes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">ro</span><span class="p">,</span> <span class="n">co</span><span class="p">,</span> <span class="n">c</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span> <span class="p">)</span>
+                        <span class="n">subplot_title</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;patch number (E_img) :&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                        <span class="n">axes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">subplot_title</span><span class="p">)</span>  
+                        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">E_img</span><span class="p">)</span>
+                        <span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="o">+</span><span class="mi">4</span>
+                        <span class="k">if</span> <span class="n">patch_number</span> <span class="o">&gt;</span><span class="mi">0</span> <span class="p">:</span>
+                            <span class="n">counter</span>  <span class="o">+=</span> <span class="mi">1</span>
+                        
+                            <span class="k">if</span> <span class="n">patch_number</span> <span class="o">==</span> <span class="n">counter</span> <span class="p">:</span>
+                         
+                                <span class="n">flag_counter</span> <span class="o">=</span> <span class="kc">False</span>
+                                <span class="k">break</span>
+
+                    <span class="c1">#else:</span>
+                        <span class="c1">#print(&quot;NOT PROCESSING TILE:&quot;, tile_name)</span>
+            <span class="c1">#fig.tight_layout()</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+            
+
+<div class="viewcode-block" id="PatchExtractor"><a class="viewcode-back" href="../../WSI.html#WSI.patch.PatchExtractor">[docs]</a><span class="k">class</span> <span class="nc">PatchExtractor</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="c1">#for on all folders</span>
+    
+<div class="viewcode-block" id="PatchExtractor.find_between"><a class="viewcode-back" href="../../WSI.html#WSI.patch.PatchExtractor.find_between">[docs]</a>    <span class="k">def</span> <span class="nf">find_between</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span> <span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span> <span class="n">first</span> <span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span> <span class="n">first</span> <span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">(</span> <span class="n">last</span><span class="p">,</span> <span class="n">start</span> <span class="p">)</span>
+            <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="PatchExtractor.gen_patch"><a class="viewcode-back" href="../../WSI.html#WSI.patch.PatchExtractor.gen_patch">[docs]</a>    <span class="k">def</span> <span class="nf">gen_patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">INPUTDIR</span><span class="p">,</span><span class="n">PatchSize</span><span class="p">,</span><span class="n">Number_of_Patches</span><span class="p">,</span><span class="n">intensity_check</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">OUTPUTDIR</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function a number of pactches from extracted annotations.</span>
+<span class="sd">        It can save the extracted annottions to the output directory as defined in inputs.</span>
+<span class="sd">        Before running this function, please call annotation.ann_extractor.extract_ann(save_dir, XMLs, WSIs) to generate annotations. </span>
+<span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
+<span class="sd">        IF the WSI Magnification is 13X or 20X, this code will automaticall convert to 20X.</span>
+<span class="sd">              </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">            root_directory : str</span>
+<span class="sd">                Output Directory to save the extracted annotations</span>
+<span class="sd">                </span>
+<span class="sd">            WSIs : list</span>
+<span class="sd">                List of included WSIs</span>
+<span class="sd">                </span>
+<span class="sd">            XMLs : list</span>
+<span class="sd">                List of XML files associated with included WSIs</span>
+<span class="sd">                </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">            None : None</span>
+<span class="sd">                None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        
+        <span class="n">std_threshold</span> <span class="o">=</span> <span class="mi">15</span>
+        <span class="n">chck_group_name</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">open_dataset</span> <span class="o">=</span> <span class="kc">True</span> 
+        <span class="n">save_hdf5</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">save_png</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">input_x</span> <span class="o">=</span> <span class="n">PatchSize</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">input_y</span> <span class="o">=</span> <span class="n">PatchSize</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">hdf5_file</span><span class="o">=</span> <span class="n">OUTPUTDIR</span><span class="o">+</span><span class="s2">&quot;dataset.hdf5&quot;</span>
+        <span class="n">root_directory</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&#39;</span><span class="o">+</span><span class="n">INPUTDIR</span><span class="o">+</span><span class="s1">&#39;*&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">root_directory</span><span class="p">)</span>
+        <span class="n">png_dir</span> <span class="o">=</span> <span class="n">OUTPUTDIR</span><span class="o">+</span><span class="s2">&quot;Imagepatches/&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">png_dir</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">png_dir</span><span class="p">)</span>
+                
+        <span class="nb">print</span><span class="p">(</span><span class="n">png_dir</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">root_directory</span><span class="p">:</span>
+        
+            <span class="n">groupname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="c1">#FName = groupname.upper()</span>
+
+            <span class="c1">#files = glob( filename + r&quot;\*.jpg&quot;)</span>
+            <span class="c1"># adjustment for compatibility with linux (because &quot;\&quot; is the wrong type of slash for unix):</span>
+            <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;*.jpg&quot;</span><span class="p">))</span>
+            <span class="c1">#import pdb; pdb.set_trace()</span>
+            <span class="c1">#files = [f.upper() for f in files]</span>
+        
+            <span class="n">files_clean</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># exclude mask images</span>
+            <span class="c1"># i=0</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                <span class="n">subr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_between</span><span class="p">(</span> <span class="n">r</span><span class="p">,</span> <span class="s2">&quot;_coord_&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span> <span class="p">)</span>
+                
+                <span class="n">xx</span> <span class="o">=</span> <span class="n">subr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">yy</span> <span class="o">=</span> <span class="n">subr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="n">a</span><span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">b</span><span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">c</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;mask&quot;</span><span class="p">)</span>
+                <span class="c1"># if(c&gt;-1):</span>
+                <span class="c1">#     rt=files.pop()[i]\</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">c</span><span class="o">==-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">files_clean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+            <span class="c1"># for on  all images in a folder</span>
+            <span class="k">for</span> <span class="n">fl</span> <span class="ow">in</span> <span class="n">files_clean</span><span class="p">:</span>
+              
+            
+                <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">fl</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+                <span class="c1"># to check intensity mean and intensity standard deviation of the tiles (To exclude non-informative tiles)</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">intensity_threshold</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># Don&#39;t use regions that are too small</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+                <span class="n">min_acceptable_height</span><span class="p">,</span> <span class="n">min_acceptable_width</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">input_y</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">input_x</span>
+                <span class="k">if</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_acceptable_height</span> <span class="ow">or</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_acceptable_width</span><span class="p">:</span>
+                    <span class="k">continue</span>
+              
+                <span class="n">rows</span><span class="p">,</span><span class="n">cols</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                
+                <span class="n">b</span><span class="o">=</span><span class="n">fl</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+          
+                <span class="n">name</span><span class="o">=</span><span class="n">b</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="c1">#extract patches</span>
+                <span class="k">for</span> <span class="n">rng</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Number_of_Patches</span><span class="p">):</span>
+             
+                    <span class="c1">#end_name =name+&quot;_patchnumber_&quot;+str(rng) </span>
+
+                    <span class="n">done</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">breakLimit</span> <span class="o">=</span> <span class="mi">500</span>
+                    <span class="n">breakCount</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="k">while</span> <span class="n">done</span> <span class="p">:</span> 
+                        
+                        <span class="n">breakCount</span> <span class="o">=</span> <span class="n">breakCount</span> <span class="o">+</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="n">breakCount</span> <span class="o">&gt;</span> <span class="n">breakLimit</span><span class="p">:</span>
+                            <span class="k">break</span>
+                        <span class="n">coords</span> <span class="o">=</span> <span class="p">[(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="n">rows</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="n">cols</span><span class="p">)]</span>
+                        <span class="n">x</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="p">(</span><span class="n">rows</span><span class="o">-</span><span class="n">input_x</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+                            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">-</span><span class="n">input_x</span><span class="o">+</span><span class="mi">1</span>
+                   
+                        <span class="n">y</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cols</span><span class="o">-</span><span class="n">input_x</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+                            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="n">input_y</span><span class="o">+</span><span class="mi">1</span>
+                    
+                        <span class="n">x_end</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="n">input_x</span>
+                        <span class="n">y_end</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="n">input_y</span>
+                        
+                        
+                        <span class="c1"># to include patches with high intensity in corner of the patches</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">color_chk1</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">]</span>
+                            <span class="n">color_chk2</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y_end</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">]</span>
+                            <span class="n">color_chk3</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">x_end</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">]</span>
+                            <span class="n">color_chk4</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">x_end</span><span class="p">,</span> <span class="n">y_end</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">]</span>
+                            <span class="n">color_chk5</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="nb">round</span><span class="p">((</span><span class="n">x</span><span class="o">+</span><span class="n">x_end</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">((</span><span class="n">y</span><span class="o">+</span><span class="n">y_end</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">]</span>
+                            
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                        
+                        <span class="k">if</span> <span class="n">intensity_check</span><span class="p">:</span>
+                            <span class="n">intensity_cond</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">color_chk1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">any</span><span class="p">(</span><span class="n">color_chk2</span><span class="p">)</span> <span class="o">==</span> <span class="nb">any</span><span class="p">(</span><span class="n">color_chk3</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">intensity_cond</span> <span class="o">=</span> <span class="kc">True</span>
+                        
+                        <span class="c1"># Check three corner have high intensity</span>
+                        <span class="k">if</span> <span class="n">intensity_cond</span> <span class="p">:</span> 
+                            <span class="n">cropped_image</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">x</span><span class="p">:</span><span class="n">x_end</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span><span class="n">y_end</span><span class="p">]</span>
+                            
+                            <span class="c1"># add location of annotation (xx,yy) to patch location (x,y)</span>
+                            <span class="n">yFinal</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span>
+                            <span class="n">xFinal</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">yy</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span>
+                            <span class="c1"># plt.imshow(cropped_image)</span>
+                            <span class="c1"># plt.show()</span>
+                            <span class="c1">#create png files of patches</span>
+                            <span class="k">if</span> <span class="n">save_png</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+                                <span class="n">png_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">OUTPUTDIR</span><span class="o">+</span><span class="s2">&quot;Imagepatches/&quot;</span><span class="o">+</span><span class="n">groupname</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+                                <span class="n">png_file</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="n">png_dir</span><span class="p">)</span>
+                                <span class="c1">#end_name = str(rng)+&quot;_&quot;+groupname + &quot;_x_&quot; + str(x) + &quot;_y_&quot; + str(y) + &quot;_a_&quot; + &quot;100.00&quot;</span>
+                                <span class="n">end_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_&quot;</span><span class="o">+</span><span class="n">groupname</span> <span class="o">+</span> <span class="s2">&quot;_x_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">xFinal</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_y_&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">yFinal</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;_a_&quot;</span> <span class="o">+</span> <span class="s2">&quot;100.00&quot;</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creating &quot;</span><span class="o">+</span><span class="n">png_dir</span> <span class="o">+</span><span class="n">groupname</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="n">end_name</span><span class="o">+</span><span class="s2">&quot;.png&quot;</span><span class="p">)</span>
+                                <span class="k">try</span><span class="p">:</span>
+                                    <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">png_dir</span> <span class="o">+</span> <span class="n">groupname</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span><span class="n">end_name</span><span class="o">+</span><span class="s2">&quot;.png&quot;</span><span class="p">,</span> <span class="n">cropped_image</span><span class="p">)</span>
+                                <span class="k">except</span><span class="p">:</span>
+                                    <span class="k">continue</span>
+  
+                            <span class="c1">#create a hdf5 file of all patches</span>
+                            <span class="k">if</span><span class="p">(</span><span class="n">save_hdf5</span><span class="o">==</span><span class="kc">True</span><span class="p">):</span>
+                                <span class="k">if</span> <span class="n">open_dataset</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>    
+                                    <span class="n">dataset</span> <span class="o">=</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">hdf5_file</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+                                    <span class="n">open_dataset</span><span class="o">=</span><span class="kc">False</span>
+              
+                                <span class="k">if</span> <span class="n">chck_group_name</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+                                    
+                                    <span class="nb">print</span><span class="p">(</span><span class="n">groupname</span><span class="o">+</span><span class="s2">&quot;_is--&gt;&gt;&gt;&gt;&gt; new group name.&quot;</span><span class="p">)</span>
+                                    <span class="n">grp</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">groupname</span><span class="p">);</span>
+                                    <span class="n">chck_group_name</span><span class="o">=</span><span class="kc">False</span>
+
+                                <span class="n">dset</span> <span class="o">=</span> <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">end_name</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">cropped_image</span><span class="p">)</span>
+                                <span class="nb">print</span><span class="p">(</span><span class="n">end_name</span><span class="o">+</span><span class="s2">&quot;_is new dataset on  &quot;</span><span class="o">+</span><span class="n">groupname</span><span class="o">+</span><span class="s2">&quot; group&quot;</span><span class="p">)</span>
+                               
+                            <span class="n">done</span><span class="o">=</span><span class="kc">False</span> 
+
+        <span class="k">if</span><span class="p">(</span><span class="n">save_hdf5</span><span class="o">==</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+	
+	
+	
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Seyed Kahaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

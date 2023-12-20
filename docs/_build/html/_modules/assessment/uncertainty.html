@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>assessment.uncertainty &mdash; ValidPath 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> ValidPath
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">Home</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Packages and Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ValidPath</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">assessment.uncertainty</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for assessment.uncertainty</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_curve</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">precision_recall_curve</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">cohen_kappa_score</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+
+
+<div class="viewcode-block" id="Uncertainty_Analysis"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis">[docs]</a><span class="k">class</span> <span class="nc">Uncertainty_Analysis</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perform_Delong</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perform_Bootstrap</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_roc</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tag</span> <span class="o">=</span> <span class="s1">&#39;My Results&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_bootstraps</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="k">pass</span>
+
+
+<div class="viewcode-block" id="Uncertainty_Analysis.get_report"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.get_report">[docs]</a>    <span class="k">def</span> <span class="nf">get_report</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span> <span class="p">,</span><span class="n">y_truth</span><span class="p">)</span> <span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Estimates confidence interval for Bernoulli p</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">          tp: number of positive outcomes, TP in this case</span>
+<span class="sd">          n: number of attemps, TP+FP for Precision, TP+FN for Recall</span>
+<span class="sd">          alpha: confidence level</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">          Tuple[float, float]: lower and upper bounds of the confidence interval</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">cmtx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_truth</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span> 
+            <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;true:yes&#39;</span><span class="p">,</span> <span class="s1">&#39;true:no&#39;</span><span class="p">],</span> 
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pred:yes&#39;</span><span class="p">,</span> <span class="s1">&#39;pred:no&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+
+        <span class="c1">###############  Precision</span>
+        <span class="n">precision</span> <span class="o">=</span> <span class="n">precision_score</span><span class="p">(</span><span class="n">y_truth</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">round</span><span class="p">())</span>
+        <span class="c1">############### Recall</span>
+        <span class="n">recall</span> <span class="o">=</span> <span class="n">recall_score</span><span class="p">(</span><span class="n">y_truth</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">round</span><span class="p">())</span>
+        <span class="c1"># ############### F1 score</span>
+        <span class="n">f1_score1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_truth</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">round</span><span class="p">())</span>
+        <span class="c1"># ############### Cohen&#39;s kappa</span>
+        <span class="n">cohen_kappa_score1</span> <span class="o">=</span> <span class="n">cohen_kappa_score</span><span class="p">(</span><span class="n">y_truth</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">round</span><span class="p">())</span>
+
+        <span class="n">confusion_m</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_truth</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">round</span><span class="p">())</span>
+
+        <span class="n">TP</span> <span class="o">=</span> <span class="n">confusion_m</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">FP</span> <span class="o">=</span> <span class="n">confusion_m</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">TN</span> <span class="o">=</span> <span class="n">confusion_m</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">FN</span> <span class="o">=</span> <span class="n">confusion_m</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">n</span> <span class="o">=</span> <span class="n">TP</span><span class="o">+</span><span class="n">FP</span>
+        <span class="n">Precision_CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ci_</span><span class="p">(</span><span class="n">TP</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+        <span class="n">n</span> <span class="o">=</span> <span class="n">TP</span><span class="o">+</span><span class="n">FN</span>
+        <span class="n">Recall_CI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ci_</span><span class="p">(</span><span class="n">TP</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+        <span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span><span class="p">,</span> <span class="n">thresholds_keras</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_truth</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+        <span class="n">auc_keras</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auc_keras_</span><span class="p">(</span><span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">perform_Delong</span><span class="p">:</span>
+            <span class="n">auc_delong</span><span class="p">,</span> <span class="n">ci_delong</span><span class="p">,</span> <span class="n">lower_upper_q</span><span class="p">,</span> <span class="n">auc_delong_cov</span><span class="p">,</span> <span class="n">auc_std</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Delong_CI</span><span class="p">(</span><span class="n">y_pred</span> <span class="p">,</span><span class="n">y_truth</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">auc_delong</span> <span class="o">=</span> <span class="n">ci_delong</span> <span class="o">=</span> <span class="n">lower_upper_q</span> <span class="o">=</span> <span class="n">auc_delong_cov</span> <span class="o">=</span> <span class="n">auc_std</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1">########## Print All Together</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;####################&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Results for &quot;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cmtx</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Precision: &quot;</span><span class="p">,</span><span class="n">precision</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Precision_CI: &quot;</span><span class="p">,</span><span class="n">Precision_CI</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recall: &quot;</span><span class="p">,</span><span class="n">recall</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recall_CI: &quot;</span><span class="p">,</span><span class="n">Recall_CI</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">perform_Delong</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Delong Method&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AUC:&#39;</span><span class="p">,</span> <span class="n">auc_delong</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;AUC COV:&#39;</span><span class="p">,</span> <span class="n">auc_delong_cov</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;95% AUC CI:&#39;</span><span class="p">,</span> <span class="n">ci_delong</span><span class="p">)</span>
+        <span class="c1"># ### Bootstrap</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">perform_Bootstrap</span><span class="p">:</span>
+            <span class="n">bootstrapped_scores</span><span class="p">,</span> <span class="n">confidence_lower</span><span class="p">,</span> <span class="n">confidence_upper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootstrapping</span><span class="p">(</span><span class="n">y_truth</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">bootstrapped_scores</span> <span class="o">=</span>  <span class="n">confidence_lower</span> <span class="o">=</span>  <span class="n">confidence_upper</span> <span class="o">=</span> <span class="p">{}</span>
+                
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_roc</span> <span class="o">==</span><span class="kc">True</span> <span class="p">:</span>
+            <span class="c1"># ### AUC Plot</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;keras (AUC = </span><span class="si">{:.3f}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">auc_keras</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False positive rate&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True positive rate&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ROC curve&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+            
+        
+        <span class="k">return</span> <span class="p">(</span><span class="n">precision</span><span class="p">,</span><span class="n">Precision_CI</span><span class="p">,</span><span class="n">recall</span><span class="p">,</span><span class="n">Recall_CI</span><span class="p">,</span> <span class="n">auc_delong</span> <span class="p">,</span><span class="n">auc_delong_cov</span> <span class="p">,</span><span class="n">ci_delong</span> <span class="p">,</span> <span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span> <span class="p">,</span><span class="n">auc_keras</span> <span class="p">,</span><span class="n">cmtx</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Uncertainty_Analysis.auc_keras_"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.auc_keras_">[docs]</a>    <span class="k">def</span> <span class="nf">auc_keras_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span><span class="p">):</span>
+        
+        <span class="sd">&quot;&quot;&quot; Estimates confidence interval for Bernoulli p</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">          tp: number of positive outcomes, TP in this case</span>
+<span class="sd">          n: number of attemps, TP+FP for Precision, TP+FN for Recall</span>
+<span class="sd">          alpha: confidence level</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">          Tuple[float, float]: lower and upper bounds of the confidence interval</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">auc_keras</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span><span class="p">)</span></div>
+
+        <span class="c1">#return auc_keras</span>
+    
+<div class="viewcode-block" id="Uncertainty_Analysis.ci_"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.ci_">[docs]</a>    <span class="k">def</span> <span class="nf">ci_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Estimates confidence interval for Bernoulli p</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">          tp: number of positive outcomes, TP in this case</span>
+<span class="sd">          n: number of attemps, TP+FP for Precision, TP+FN for Recall</span>
+<span class="sd">          alpha: confidence level</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">          Tuple[float, float]: lower and upper bounds of the confidence interval</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">p_hat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">z_score</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># two sides, so alpha/2 on each side</span>
+        <span class="n">variance_of_sum</span> <span class="o">=</span> <span class="n">p_hat</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p_hat</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">variance_of_sum</span> <span class="o">**</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="n">p_hat</span> <span class="o">-</span> <span class="n">z_score</span> <span class="o">*</span> <span class="n">std</span><span class="p">,</span> <span class="n">p_hat</span> <span class="o">+</span> <span class="n">z_score</span> <span class="o">*</span> <span class="n">std</span></div>
+    
+<div class="viewcode-block" id="Uncertainty_Analysis.Delong_CI"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.Delong_CI">[docs]</a>    <span class="k">def</span> <span class="nf">Delong_CI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span> <span class="p">,</span><span class="n">y_truth</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; A Python implementation of an algorithm for computing the statistical significance of comparing two sets of predictions by ROC AUC. </span>
+<span class="sd">        Also can compute variance of a single ROC AUC estimate. X. Sun and W. Xu, &quot;Fast Implementation of DeLong’s Algorithm for Comparing the </span>
+<span class="sd">        Areas Under Correlated Receiver Operating Characteristic Curves,&quot; in IEEE Signal Processing Letters, vol. 21, no. 11, pp. 1389-1393, Nov. 2014, </span>
+<span class="sd">        doi: 10.1109/LSP.2014.2337313.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.95</span>
+        
+        <span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_truth</span><span class="p">)</span>
+
+        <span class="n">auc</span><span class="p">,</span> <span class="n">auc_cov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delong_roc_variance</span><span class="p">(</span>
+            <span class="n">y_true</span><span class="p">,</span>
+            <span class="n">y_pred</span><span class="p">)</span>
+
+        <span class="n">auc_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">auc_cov</span><span class="p">)</span>
+        <span class="n">lower_upper_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="n">ci</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span>
+            <span class="n">lower_upper_q</span><span class="p">,</span>
+            <span class="n">loc</span><span class="o">=</span><span class="n">auc</span><span class="p">,</span>
+            <span class="n">scale</span><span class="o">=</span><span class="n">auc_std</span><span class="p">)</span>
+
+        <span class="n">ci</span><span class="p">[</span><span class="n">ci</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">auc</span><span class="p">,</span> <span class="n">ci</span><span class="p">,</span> <span class="n">lower_upper_q</span><span class="p">,</span> <span class="n">auc_cov</span><span class="p">,</span> <span class="n">auc_std</span></div>
+    
+    <span class="c1"># stackoverflow.com/questions/19124239/scikit-learn-roc-curve-with-confidence-intervals</span>
+<div class="viewcode-block" id="Uncertainty_Analysis.compute_midrank"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.compute_midrank">[docs]</a>    <span class="k">def</span> <span class="nf">compute_midrank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes midranks.</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">           x - a 1D numpy array</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">           array of midranks</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">J</span><span class="p">]</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="ow">and</span> <span class="n">Z</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">T2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="c1"># Note(kazeevn) +1 is due to Python using 0-based indexing</span>
+        <span class="c1"># instead of 1-based in the AUC formula in the paper</span>
+        <span class="n">T2</span><span class="p">[</span><span class="n">J</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">T2</span></div>
+        
+<div class="viewcode-block" id="Uncertainty_Analysis.compute_midrank_weight"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.compute_midrank_weight">[docs]</a>    <span class="k">def</span> <span class="nf">compute_midrank_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes midranks.</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">           x - a 1D numpy array</span>
+<span class="sd">           </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">           array of midranks</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">J</span><span class="p">]</span>
+        <span class="n">cumulative_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">[</span><span class="n">J</span><span class="p">])</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+            <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span> <span class="ow">and</span> <span class="n">Z</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">cumulative_weight</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">T2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">T2</span><span class="p">[</span><span class="n">J</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span>
+        <span class="k">return</span> <span class="n">T2</span></div>
+    
+    
+<div class="viewcode-block" id="Uncertainty_Analysis.fastDeLong"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.fastDeLong">[docs]</a>    <span class="k">def</span> <span class="nf">fastDeLong</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions_sorted_transposed</span><span class="p">,</span> <span class="n">label_1_count</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fastDeLong_no_weights</span><span class="p">(</span><span class="n">predictions_sorted_transposed</span><span class="p">,</span> <span class="n">label_1_count</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fastDeLong_weights</span><span class="p">(</span><span class="n">predictions_sorted_transposed</span><span class="p">,</span> <span class="n">label_1_count</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="Uncertainty_Analysis.fastDeLong_weights"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.fastDeLong_weights">[docs]</a>    <span class="k">def</span> <span class="nf">fastDeLong_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions_sorted_transposed</span><span class="p">,</span> <span class="n">label_1_count</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The fast version of DeLong&#39;s method for computing the covariance of</span>
+<span class="sd">        unadjusted AUC.</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">           predictions_sorted_transposed: a 2D numpy.array[n_classifiers, n_examples]</span>
+<span class="sd">              sorted such as the examples with label &quot;1&quot; are first</span>
+<span class="sd">        :Returns:</span>
+<span class="sd">           (AUC value, DeLong covariance)</span>
+<span class="sd">           </span>
+<span class="sd">        :Reference:</span>
+<span class="sd">         @article{sun2014fast,</span>
+<span class="sd">           title={Fast Implementation of DeLong&#39;s Algorithm for Comparing the Areas Under Correlated Receiver Oerating Characteristic Curves},</span>
+<span class="sd">           author={Xu Sun and Weichao Xu},</span>
+<span class="sd">           journal={IEEE Signal Processing Letters},</span>
+<span class="sd">           volume={21},</span>
+<span class="sd">           number={11},</span>
+<span class="sd">           pages={1389--1393},</span>
+<span class="sd">           year={2014},</span>
+<span class="sd">           publisher={IEEE}</span>
+<span class="sd">         }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Short variables are named as they are in the paper</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">label_1_count</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">predictions_sorted_transposed</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span>
+        <span class="n">positive_examples</span> <span class="o">=</span> <span class="n">predictions_sorted_transposed</span><span class="p">[:,</span> <span class="p">:</span><span class="n">m</span><span class="p">]</span>
+        <span class="n">negative_examples</span> <span class="o">=</span> <span class="n">predictions_sorted_transposed</span><span class="p">[:,</span> <span class="n">m</span><span class="p">:]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">predictions_sorted_transposed</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">tx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">ty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">tz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">tx</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_midrank_weight</span><span class="p">(</span><span class="n">positive_examples</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:],</span> <span class="n">sample_weight</span><span class="p">[:</span><span class="n">m</span><span class="p">])</span>
+            <span class="n">ty</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_midrank_weight</span><span class="p">(</span><span class="n">negative_examples</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:],</span> <span class="n">sample_weight</span><span class="p">[</span><span class="n">m</span><span class="p">:])</span>
+            <span class="n">tz</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_midrank_weight</span><span class="p">(</span><span class="n">predictions_sorted_transposed</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:],</span> <span class="n">sample_weight</span><span class="p">)</span>
+        <span class="n">total_positive_weights</span> <span class="o">=</span> <span class="n">sample_weight</span><span class="p">[:</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">total_negative_weights</span> <span class="o">=</span> <span class="n">sample_weight</span><span class="p">[</span><span class="n">m</span><span class="p">:]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">pair_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">sample_weight</span><span class="p">[:</span><span class="n">m</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">sample_weight</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">m</span><span class="p">:])</span>
+        <span class="n">total_pair_weights</span> <span class="o">=</span> <span class="n">pair_weights</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">aucs</span> <span class="o">=</span> <span class="p">(</span><span class="n">sample_weight</span><span class="p">[:</span><span class="n">m</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">tz</span><span class="p">[:,</span> <span class="p">:</span><span class="n">m</span><span class="p">]</span> <span class="o">-</span> <span class="n">tx</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">total_pair_weights</span>
+        <span class="n">v01</span> <span class="o">=</span> <span class="p">(</span><span class="n">tz</span><span class="p">[:,</span> <span class="p">:</span><span class="n">m</span><span class="p">]</span> <span class="o">-</span> <span class="n">tx</span><span class="p">[:,</span> <span class="p">:])</span> <span class="o">/</span> <span class="n">total_negative_weights</span>
+        <span class="n">v10</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="p">(</span><span class="n">tz</span><span class="p">[:,</span> <span class="n">m</span><span class="p">:]</span> <span class="o">-</span> <span class="n">ty</span><span class="p">[:,</span> <span class="p">:])</span> <span class="o">/</span> <span class="n">total_positive_weights</span>
+        <span class="n">sx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">v01</span><span class="p">)</span>
+        <span class="n">sy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">v10</span><span class="p">)</span>
+        <span class="n">delongcov</span> <span class="o">=</span> <span class="n">sx</span> <span class="o">/</span> <span class="n">m</span> <span class="o">+</span> <span class="n">sy</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="n">aucs</span><span class="p">,</span> <span class="n">delongcov</span></div>
+    
+    
+<div class="viewcode-block" id="Uncertainty_Analysis.fastDeLong_no_weights"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.fastDeLong_no_weights">[docs]</a>    <span class="k">def</span> <span class="nf">fastDeLong_no_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictions_sorted_transposed</span><span class="p">,</span> <span class="n">label_1_count</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The fast version of DeLong&#39;s method for computing the covariance of</span>
+<span class="sd">        unadjusted AUC.</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">           predictions_sorted_transposed: a 2D numpy.array[n_classifiers, n_examples]</span>
+<span class="sd">              sorted such as the examples with label &quot;1&quot; are first</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">           (AUC value, DeLong covariance)</span>
+<span class="sd">        </span>
+<span class="sd">        Reference:</span>
+<span class="sd">         @article{sun2014fast,</span>
+<span class="sd">           title={Fast Implementation of DeLong&#39;s Algorithm for Comparing the Areas Under Correlated Receiver Oerating Characteristic Curves},</span>
+<span class="sd">           author={Xu Sun and Weichao Xu},</span>
+<span class="sd">           journal={IEEE Signal Processing Letters},</span>
+<span class="sd">           volume={21},</span>
+<span class="sd">           number={11},</span>
+<span class="sd">           pages={1389--1393},</span>
+<span class="sd">           year={2014},</span>
+<span class="sd">           publisher={IEEE}</span>
+<span class="sd">         }</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Short variables are named as they are in the paper</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">label_1_count</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">predictions_sorted_transposed</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span>
+        <span class="n">positive_examples</span> <span class="o">=</span> <span class="n">predictions_sorted_transposed</span><span class="p">[:,</span> <span class="p">:</span><span class="n">m</span><span class="p">]</span>
+        <span class="n">negative_examples</span> <span class="o">=</span> <span class="n">predictions_sorted_transposed</span><span class="p">[:,</span> <span class="n">m</span><span class="p">:]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">predictions_sorted_transposed</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">tx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">ty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">tz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">k</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">tx</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_midrank</span><span class="p">(</span><span class="n">positive_examples</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:])</span>
+            <span class="n">ty</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_midrank</span><span class="p">(</span><span class="n">negative_examples</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:])</span>
+            <span class="n">tz</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_midrank</span><span class="p">(</span><span class="n">predictions_sorted_transposed</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">aucs</span> <span class="o">=</span> <span class="n">tz</span><span class="p">[:,</span> <span class="p">:</span><span class="n">m</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">m</span> <span class="o">/</span> <span class="n">n</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">v01</span> <span class="o">=</span> <span class="p">(</span><span class="n">tz</span><span class="p">[:,</span> <span class="p">:</span><span class="n">m</span><span class="p">]</span> <span class="o">-</span> <span class="n">tx</span><span class="p">[:,</span> <span class="p">:])</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="n">v10</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">tz</span><span class="p">[:,</span> <span class="n">m</span><span class="p">:]</span> <span class="o">-</span> <span class="n">ty</span><span class="p">[:,</span> <span class="p">:])</span> <span class="o">/</span> <span class="n">m</span>
+        <span class="n">sx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">v01</span><span class="p">)</span>
+        <span class="n">sy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">v10</span><span class="p">)</span>
+        <span class="n">delongcov</span> <span class="o">=</span> <span class="n">sx</span> <span class="o">/</span> <span class="n">m</span> <span class="o">+</span> <span class="n">sy</span> <span class="o">/</span> <span class="n">n</span>
+        <span class="k">return</span> <span class="n">aucs</span><span class="p">,</span> <span class="n">delongcov</span></div>
+    
+    
+<div class="viewcode-block" id="Uncertainty_Analysis.calc_pvalue"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.calc_pvalue">[docs]</a>    <span class="k">def</span> <span class="nf">calc_pvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aucs</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes log(10) of p-values.</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">           aucs: 1D array of AUCs</span>
+<span class="sd">           sigma: AUC DeLong covariances</span>
+<span class="sd">        </span>
+<span class="sd">        :Returns:</span>
+<span class="sd">           log10(pvalue)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">aucs</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">sigma</span><span class="p">),</span> <span class="n">l</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logsf</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span></div>
+        
+        
+<div class="viewcode-block" id="Uncertainty_Analysis.compute_ground_truth_statistics"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.compute_ground_truth_statistics">[docs]</a>    <span class="k">def</span> <span class="nf">compute_ground_truth_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ground_truth</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">ground_truth</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">ground_truth</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">()</span>
+        <span class="n">label_1_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ground_truth</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">sample_weight</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ordered_sample_weight</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ordered_sample_weight</span> <span class="o">=</span> <span class="n">sample_weight</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">order</span><span class="p">,</span> <span class="n">label_1_count</span><span class="p">,</span> <span class="n">ordered_sample_weight</span></div>
+        
+        
+<div class="viewcode-block" id="Uncertainty_Analysis.delong_roc_variance"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.delong_roc_variance">[docs]</a>    <span class="k">def</span> <span class="nf">delong_roc_variance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ground_truth</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes ROC AUC variance for a single set of predictions</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">           ground_truth: np.array of 0 and 1</span>
+<span class="sd">           predictions: np.array of floats of the probability of being class 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">order</span><span class="p">,</span> <span class="n">label_1_count</span><span class="p">,</span> <span class="n">ordered_sample_weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_ground_truth_statistics</span><span class="p">(</span>
+            <span class="n">ground_truth</span><span class="p">,</span> <span class="n">sample_weight</span><span class="p">)</span>
+        <span class="n">predictions_sorted_transposed</span> <span class="o">=</span> <span class="n">predictions</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">order</span><span class="p">]</span>
+        <span class="n">aucs</span><span class="p">,</span> <span class="n">delongcov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fastDeLong</span><span class="p">(</span><span class="n">predictions_sorted_transposed</span><span class="p">,</span> <span class="n">label_1_count</span><span class="p">,</span> <span class="n">ordered_sample_weight</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">aucs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">aucs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">delongcov</span></div>
+        
+        
+<div class="viewcode-block" id="Uncertainty_Analysis.bootstrapping"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.bootstrapping">[docs]</a>    <span class="k">def</span> <span class="nf">bootstrapping</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Computes ROC AUC variance for a single set of predictions</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">           ground_truth: np.array of 0 and 1</span>
+<span class="sd">           predictions: np.array of floats of the probability of being class 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original ROC area: </span><span class="si">{:0.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)))</span>
+        
+        <span class="n">rng_seed</span> <span class="o">=</span> <span class="mi">42</span>  <span class="c1"># control reproducibility</span>
+        <span class="n">bootstrapped_scores</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">rng_seed</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_bootstraps</span><span class="p">):</span>
+            <span class="c1"># bootstrap by sampling with replacement on the prediction indices</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_true</span><span class="p">[</span><span class="n">indices</span><span class="p">]))</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="c1"># We need at least one positive and one negative sample for ROC AUC</span>
+                <span class="c1"># to be defined: reject the sample</span>
+                <span class="k">continue</span>
+
+            <span class="n">score</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">indices</span><span class="p">])</span>
+            <span class="n">bootstrapped_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bootstrap #</span><span class="si">{}</span><span class="s2"> ROC area: </span><span class="si">{:0.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span>
+
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bootstrapped_scores</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram of the bootstrapped ROC AUC scores&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="n">sorted_scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bootstrapped_scores</span><span class="p">)</span>
+        <span class="n">sorted_scores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="c1"># Computing the lower and upper bound of the 90% confidence interval</span>
+        <span class="c1"># You can change the bounds percentiles to 0.025 and 0.975 to get</span>
+        <span class="c1"># a 95% confidence interval instead.</span>
+        <span class="n">confidence_lower</span> <span class="o">=</span> <span class="n">sorted_scores</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.05</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_scores</span><span class="p">))]</span>
+        <span class="n">confidence_upper</span> <span class="o">=</span> <span class="n">sorted_scores</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="mf">0.95</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_scores</span><span class="p">))]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bootstrap&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confidence interval for the score: [</span><span class="si">{:0.3f}</span><span class="s2"> - </span><span class="si">{:0.3}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">confidence_lower</span><span class="p">,</span> <span class="n">confidence_upper</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">bootstrapped_scores</span><span class="p">,</span> <span class="n">confidence_lower</span><span class="p">,</span> <span class="n">confidence_upper</span></div></div>
+        
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Seyed Kahaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

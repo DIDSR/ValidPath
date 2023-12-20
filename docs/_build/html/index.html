@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home &mdash; ValidPath 2.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> ValidPath
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Home</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Packages and Modules</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ValidPath</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Home</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="home">
+<h1>Home<a class="headerlink" href="#home" title="Permalink to this heading"></a></h1>
+<section id="about-validpath">
+<h2>About ValidPath<a class="headerlink" href="#about-validpath" title="Permalink to this heading"></a></h2>
+<p>The Whole Slide Image Processing and Machine Learning Performance Assessment Tool is a software program written in Python for analyzing whole slide images (WSIs), assisting pathologists in the assessment of machine learning (ML) results, and assessment of ML performance. The tool currently contains three modules that accept WSIs to generate image patches for AI/ML models, accept image patches (e.g., ML detected ROIs) to generate an Aperio ImageScope annotation file for validation of ML model results by pathologists, and accept outputs of ML models to generate performance results and their confidence intervals.</p>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this heading"></a></h2>
+<p>There are several modules in this package including:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>WSI handler: includes functions and classes for general WSI analysis such as read whole slide images, tissue segmentation, and normalization.</p></li>
+<li><p>Annotation Extraction: this module includes several functions for processing annotations such as annotation extraction.</p></li>
+<li><p>Patch Extraction: which assist pathologist and developers in extracting image patches from whole slide images region of interest.</p></li>
+<li><p>Aperio ImageScope Annotation File Generator: to enable pathologist validation of the AI/ML results.</p></li>
+<li><p>Performance Assessment: to assess the performance of ML models in classification tasks.</p></li>
+</ol>
+</div></blockquote>
+<p>To see a demo of the functions in this toolbox, please refer to the Jupyter Notebooks files in the root folder of this package.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/01_read_wsi.ipynb">01_read_wsi.ipynb</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/02_annotation_extraction.ipynb">02_annotation_extraction.ipynb</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/03_patch_extraction.ipynb">03_patch_extraction.ipynb</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/4_annotation_generator.ipynb">4_annotation_generator.ipynb</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mousavikahaki/ValidPath/blob/main/05_performance_assessment.ipynb">05_performance_assessment.ipynb</a></p></li>
+</ul>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#required-packages">Required Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-using-anaconda">Installation Using Anaconda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installing-validpath-using-anaconda">Installing ValidPath using Anaconda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#direct-installation-of-validpath">Direct Installation of ValidPath</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#from-source">From Source</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Packages and Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="WSI.html">WSI package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="WSI.html#module-WSI.readwsi">WSI.readwsi module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="WSI.html#WSI.readwsi.WSIReader"><code class="docutils literal notranslate"><span class="pre">WSIReader</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.readwsi.WSIReader.extract_bounds"><code class="docutils literal notranslate"><span class="pre">WSIReader.extract_bounds()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.readwsi.WSIReader.extract_region"><code class="docutils literal notranslate"><span class="pre">WSIReader.extract_region()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.readwsi.WSIReader.wsi_reader"><code class="docutils literal notranslate"><span class="pre">WSIReader.wsi_reader()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.readwsi.WSIReader.wsi_xml_list"><code class="docutils literal notranslate"><span class="pre">WSIReader.wsi_xml_list()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="WSI.html#wsi-annotation-module">WSI.annotation module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="WSI.html#WSI.annotation.AnnotationExtractor"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.annotation.AnnotationExtractor.extract_ann"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor.extract_ann()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.annotation.AnnotationExtractor.make_folder"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor.make_folder()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="WSI.html#module-WSI.patch">WSI.patch module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="WSI.html#WSI.patch.PatchExtractor"><code class="docutils literal notranslate"><span class="pre">PatchExtractor</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.patch.PatchExtractor.find_between"><code class="docutils literal notranslate"><span class="pre">PatchExtractor.find_between()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.patch.PatchExtractor.gen_patch"><code class="docutils literal notranslate"><span class="pre">PatchExtractor.gen_patch()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="WSI.html#WSI.patch.WSIpatch_extractor"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.patch.WSIpatch_extractor.patch_extraction"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor.patch_extraction()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.patch.WSIpatch_extractor.patch_extraction_of_tissue"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor.patch_extraction_of_tissue()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="WSI.html#WSI.patch.WSIpatch_extractor.patch_extraction_with_normalized_tiles"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor.patch_extraction_with_normalized_tiles()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="assessment.html">Annotation package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="assessment.html#module-assessment.annotation">assessment.annotation module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="assessment.html#assessment.annotation.Annotation_Generator"><code class="docutils literal notranslate"><span class="pre">Annotation_Generator</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.annotation.Annotation_Generator.create_xml"><code class="docutils literal notranslate"><span class="pre">Annotation_Generator.create_xml()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.annotation.Annotation_Generator.generate_map_file"><code class="docutils literal notranslate"><span class="pre">Annotation_Generator.generate_map_file()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.annotation.Annotation_Generator.make_region"><code class="docutils literal notranslate"><span class="pre">Annotation_Generator.make_region()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="assessment.html#module-assessment.uncertainty">assessment.uncertainty module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis</span></code></a><ul>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.Delong_CI"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.Delong_CI()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.auc_keras_"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.auc_keras_()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.bootstrapping"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.bootstrapping()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.calc_pvalue"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.calc_pvalue()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.ci_"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.ci_()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.compute_ground_truth_statistics"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.compute_ground_truth_statistics()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.compute_midrank"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.compute_midrank()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.compute_midrank_weight"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.compute_midrank_weight()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.delong_roc_variance"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.delong_roc_variance()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.fastDeLong"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.fastDeLong()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.fastDeLong_no_weights"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.fastDeLong_no_weights()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.fastDeLong_weights"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.fastDeLong_weights()</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="assessment.html#assessment.uncertainty.Uncertainty_Analysis.get_report"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.get_report()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Seyed Kahaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
