@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../WSI.html">WSI Handler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../annotation.html">Annotation Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ann_generator.html">Annotation File Generator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../assessment.html">ML Assessment</a></li>
 </ul>
 
@@ -79,18 +80,18 @@
 
 <span class="sd">----------------------------------------------------------------------------</span>
 
-<span class="sd">Title:        ValidPath Toolbox - Annotation File Generation Module</span>
+<span class="sd">**Title:**       ValidPath Toolbox - Annotation File Generation Module</span>
 
-<span class="sd">Description:  This is the Annotation File Generator module for the whole slide image processing toolbox. It is includes Annotation_Generato</span>
+<span class="sd">**Description:**  This is the Annotation File Generator module for the ValidPath toolbox. It is includes Annotation_Generator class and several methods</span>
 <span class="sd">              </span>
-<span class="sd">Classes:      Annotation_Generator</span>
+<span class="sd">**Classes:**      Annotation_Generator</span>
 <span class="sd">              </span>
 
-<span class="sd">Methods:      make_region, create_xml, generate_map_file</span>
+<span class="sd">**Methods:**      make_region, create_xml, generate_map_file</span>
 
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
-<span class="sd">Version =&#39;3.0&#39;</span>
+<span class="sd">Version =&#39;1.0&#39;</span>
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -112,7 +113,7 @@
 <span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
 
 <span class="sd">        :Parameters:</span>
-<span class="sd">            save_dir : str</span>
+<span class="sd">            save_dir : string</span>
 <span class="sd">                Output Directory to save the extracted annotations</span>
 
 <span class="sd">            WSIs : list</span>
@@ -159,13 +160,13 @@
 <span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
 
 <span class="sd">        :Parameters:</span>
-<span class="sd">            input_DIR : str</span>
+<span class="sd">            input_DIR : string</span>
 <span class="sd">                Input Directory</span>
 
-<span class="sd">            file_path : str</span>
+<span class="sd">            file_path : string</span>
 <span class="sd">                WSIs</span>
 
-<span class="sd">            path_size : int</span>
+<span class="sd">            path_size : integer</span>
 <span class="sd">                Size of image patch</span>
 
 <span class="sd">        :Returns:</span>
@@ -227,13 +228,13 @@
 <span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
 
 <span class="sd">        :Parameters:</span>
-<span class="sd">            input_DIR : str</span>
+<span class="sd">            input_DIR : string</span>
 <span class="sd">                Input Directory</span>
 
 <span class="sd">            file_path : str</span>
 <span class="sd">                WSIs</span>
 
-<span class="sd">            path_size : int</span>
+<span class="sd">            path_size : integer</span>
 <span class="sd">                Size of image patch</span>
 
 <span class="sd">        :Returns:</span>

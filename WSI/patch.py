@@ -4,18 +4,18 @@ Created on Fri Feb  4 11:42:52 2023
 
 ----------------------------------------------------------------------------
 
-Title:        ValidPath Toolbox - patch module
+**Title:**        ValidPath Toolbox - patch extraction module
 
-Description:  This is the patch module for the whole slide image processing toolbox. It is includes two classes and several methods
+**Description:**  This is the patch extraction module for the ValidPath toolbox. It is includes two classes and several methods
               
-Classes:      WSIpatch_extractor, PatchExtractor
+**Classes:**      WSIpatch_extractor, PatchExtractor
               
 
-Methods:      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch
+**Methods:**      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch
 
 ---------------------------------------------------------------------------
 Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
-Version ='3.0'
+Version ='1.0'
 ---------------------------------------------------------------------------
 """
 
@@ -55,14 +55,14 @@ class WSIpatch_extractor:
         
           
         :Parameters:
-        wsi_obj : obj
+        wsi_obj : object
             WSI object.
-        patch_size: int
+        patch_size: integer
             size tiles
-        output_folder : str
+        output_folder : string
             path root folder to save tiles
-        perform_segmentation_state: bool
-        random_state : bool
+        perform_segmentation_state: boolean
+        random_state : boolean
             
         """
         # Generate object for tiles using the DeepZoomGenerator
@@ -86,13 +86,7 @@ class WSIpatch_extractor:
         #import pdb; pdb.set_trace()
         tile_path = output_folder+"Imagepatches/"
         orig_tile_dir_name = output_folder+"Imagepatches/"
-        #norm_tile_dir_name = output_folder+"Imagepatches/normalized_tiles/"
-        #H_tile_dir_name = output_folder+"Imagepatches/H_tiles/"
-        #E_tile_dir_name = output_folder+"Imagepatches/E_tiles/"
 
-        # MYDIRs = [output_folder+"Imagepatches/", output_folder+"Imagepatches/original_tiles/",
-                  # output_folder+"Imagepatches/normalized_tiles/",output_folder+"Imagepatches/H_tiles/",
-                  # output_folder+"Imagepatches/E_tiles/"]
         MYDIRs = [output_folder+"Imagepatches/"]
             
         for dr in MYDIRs:
@@ -109,8 +103,6 @@ class WSIpatch_extractor:
         co = 2
         axes=[]
         
-        #fig = plt.figure(figsize=(18, 10))
-        
         counter = 0 
         flag_counter = True
         for row in range(rows):
@@ -122,16 +114,7 @@ class WSIpatch_extractor:
                         
                     row = random.randint(0,rows-1)
                     col = random.randint(0,cols-1)   
-       # sw = False
-       # for row in range(rows):
-         #   if sw == True:
-        #        break
-        #    for col in range(cols):
                 
-                
-                #tile_name = str(col) + "_" + str(row)
-                # tile_name = os.path.join(tile_dir, '%d_%d' % (col, row))
-                # print("Now processing tile with title: ", tile_name)
                 temp_tile = tiles.get_tile(MaxTileLevel, (col, row))
                 #getting the coordinates
                 temp_tile_coor = tiles.get_tile_coordinates(MaxTileLevel, (col, row))
@@ -154,19 +137,7 @@ class WSIpatch_extractor:
                 if intensity_cond:
                     print("Saving" + orig_tile_dir_name + tile_name + ".tif")
                     tiff.imsave(orig_tile_dir_name + tile_name + ".tif", temp_tile_np)
-                   # fig = plt.figure(figsize=(7, 7))
-                    #fig.add_subplot(ro, co, 1)
-                    #plt.imshow(temp_tile_np)
-                    #plt.axis('off')
-                    
-                    #plt.title("patch number :" + str(counter+1))
-                   # fig = plt.figure(figsize=(7, 7))
-                    #plt.plot(temp_tile_np)
-                    #plt.figure(i+1)
-                    # plt.rcParams.update({'font.size': 8})
-                    # axes.append( fig.add_subplot(ro, co, counter+1) )
-                    # subplot_title=("patch number :" + str(counter+1))
-                    # axes[-1].set_title(subplot_title)  
+  
                     if visualize ==1:
                         plt.imshow(temp_tile_np)
                         plt.show()
@@ -178,11 +149,6 @@ class WSIpatch_extractor:
                            
                             flag_counter = False
                             break
-                       # sw =True
-                       # break
-       # return (temp_tile_np)
-        #fig.tight_layout(pad=1)
-        #plt.show()
         
         
     def patch_extraction_of_tissue(slidepath,patch_size ,output_folder, number_of_patches=1 , vis = False):
@@ -288,14 +254,14 @@ class WSIpatch_extractor:
 
 
             :Parameters:
-            wsi_obj : obj
+            wsi_obj : object
                 WSI object.
-            patch_size: int
+            patch_size: integer
                 size tiles
-            output_folder : str
+            output_folder : string
                 path root folder to save tiles
-            perform_segmentation_state: bool
-            random_state : bool
+            perform_segmentation_state: boolean
+            random_state : boolean
 
             """
             # Generate object for tiles using the DeepZoomGenerator
@@ -399,16 +365,13 @@ class WSIpatch_extractor:
                                 flag_counter = False
                                 break
 
-                    #else:
-                        #print("NOT PROCESSING TILE:", tile_name)
-            #fig.tight_layout()
+
             plt.show()
             
 
 class PatchExtractor :
     def __init__(self):
         pass
-    #for on all folders
     
     def find_between(self, s, first, last ):
         try:
@@ -420,14 +383,14 @@ class PatchExtractor :
     
     def gen_patch(self, INPUTDIR,PatchSize,Number_of_Patches,intensity_check,intensity_threshold,OUTPUTDIR):
         """
-        This function a number of pactches from extracted annotations.
+        This function extracts a number of pactches from extracted annotations.
         It can save the extracted annottions to the output directory as defined in inputs.
         Before running this function, please call annotation.ann_extractor.extract_ann(save_dir, XMLs, WSIs) to generate annotations. 
         The output directory will be generated based on the strucutr of the input directories.
         IF the WSI Magnification is 13X or 20X, this code will automaticall convert to 20X.
               
         :Parameters:
-            root_directory : str
+            root_directory : string
                 Output Directory to save the extracted annotations
                 
             WSIs : list
@@ -440,8 +403,7 @@ class PatchExtractor :
             None : None
                 None.
         """
-        
-        
+              
         std_threshold = 15
         chck_group_name=True
         open_dataset = True 

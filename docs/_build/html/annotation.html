@@ -58,6 +58,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ann_generator.html">Annotation File Generator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="assessment.html">ML Assessment</a></li>
 </ul>
 
@@ -90,10 +91,10 @@
 <section id="wsi-annotation-module">
 <h2>WSI.annotation module<a class="headerlink" href="#wsi-annotation-module" title="Permalink to this heading"></a></h2>
 <span class="target" id="module-WSI.annotation"></span><hr class="docutils" />
-<p>Title:        ValidPath Toolbox - Annotation Module</p>
-<p>Description:  This is the AnnotationExtractor module for the whole slide image processing toolbox. It is includes AnnotationExtractor class and several methods.</p>
-<p>Classes:      AnnotationExtractor</p>
-<p>Methods:      extract_ann, make_folder</p>
+<p><strong>Title:</strong>       ValidPath Toolbox - Annotation Extraction Module</p>
+<p><strong>Description:</strong>  This is the Annotation Extraction module for the ValidPath toolbox. It is includes AnnotationExtractor class and several methods.</p>
+<p><strong>Classes:</strong>      AnnotationExtractor</p>
+<p><strong>Methods:</strong>      extract_ann, make_folder</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="WSI.annotation.AnnotationExtractor">
@@ -109,7 +110,7 @@ The output directory will be generated based on the strucutr of the input direct
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>save_dir<span class="classifier">str</span></dt><dd><p>Output Directory to save the extracted annotations</p>
+<dt>save_dir<span class="classifier">string</span></dt><dd><p>Output Directory to save the extracted annotations</p>
 </dd>
 <dt>WSIs<span class="classifier">list</span></dt><dd><p>List of included WSIs</p>
 </dd>
@@ -133,7 +134,7 @@ The output directory will be generated based on the strucutr of the input direct
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>directory<span class="classifier">str</span></dt><dd><p>Directory to be created.</p>
+<dt>directory<span class="classifier">string</span></dt><dd><p>Directory to be created.</p>
 </dd>
 </dl>
 </dd>

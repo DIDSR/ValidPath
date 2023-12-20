@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../WSI.html">WSI Handler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../annotation.html">Annotation Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ann_generator.html">Annotation File Generator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../assessment.html">ML Assessment</a></li>
 </ul>
 
@@ -79,18 +80,18 @@
 
 <span class="sd">----------------------------------------------------------------------------</span>
 
-<span class="sd">Title:        Whole Slide Image Processing Toolbox - reader module</span>
+<span class="sd">**Title:**        ValidPath Toolbox - WSI Handler module</span>
 
-<span class="sd">Description:  This is the reader module for the ValidPath toolbox. It is includes ReadWsi class and several methods</span>
+<span class="sd">**Description:**  This is the WSI Handler module for the ValidPath toolbox. It is includes ReadWsi class and several methods</span>
 <span class="sd">              </span>
-<span class="sd">Classes:      WSIReader</span>
+<span class="sd">**Classes:**      WSIReader</span>
 <span class="sd">              </span>
 
-<span class="sd">Methods:      wsi_reader, extract_region, extract_bounds, wsi_xml_list</span>
+<span class="sd">**Methods:**      wsi_reader, extract_region, extract_bounds, wsi_xml_list</span>
 
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
-<span class="sd">Version =&#39;3.0&#39;</span>
+<span class="sd">Version =&#39;1.0&#39;</span>
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -116,16 +117,6 @@
 <div class="viewcode-block" id="WSIReader"><a class="viewcode-back" href="../../WSI.html#WSI.readwsi.WSIReader">[docs]</a><span class="k">class</span> <span class="nc">WSIReader</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>  
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This Class process the WSIs.</span>
-<span class="sd">        </span>
-<span class="sd">      </span>
-<span class="sd">        :Methods:</span>
-<span class="sd">            wsi_reader</span>
-<span class="sd">            extract_region</span>
-<span class="sd">            extract_bounds</span>
-<span class="sd">            wsi_xml_list</span>
-<span class="sd">        &quot;&quot;&quot;</span>
   
 <div class="viewcode-block" id="WSIReader.extract_region"><a class="viewcode-back" href="../../WSI.html#WSI.readwsi.WSIReader.extract_region">[docs]</a>    <span class="k">def</span> <span class="nf">extract_region</span><span class="p">(</span><span class="n">wsi_obj</span><span class="p">,</span><span class="n">location</span><span class="p">,</span><span class="n">level</span><span class="p">,</span><span class="n">size</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -133,7 +124,7 @@
 <span class="sd">        </span>
 <span class="sd">      </span>
 <span class="sd">        :Parameters:</span>
-<span class="sd">        wsi_obj : obj</span>
+<span class="sd">        wsi_obj : object</span>
 <span class="sd">            recieve the WSI object</span>
 <span class="sd">            </span>
 <span class="sd">        :Returns:</span>
@@ -149,9 +140,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method process the WSIs and extract image.</span>
 <span class="sd">        </span>
-<span class="sd">      </span>
 <span class="sd">        :Parameters:</span>
-<span class="sd">        wsi_obj : obj</span>
+<span class="sd">        wsi_obj : object</span>
 <span class="sd">            recieve the WSI object</span>
 <span class="sd">        bounds : tuple</span>
 <span class="sd">            recieve the locations for extracting image from WSI</span>
@@ -172,7 +162,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error in bounds , try again&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="mi">0</span>
         
-        <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">size_h</span><span class="p">,</span><span class="n">size_w</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="n">size_w</span><span class="p">,</span><span class="n">size_h</span><span class="p">)</span>
         
         <span class="n">location</span> <span class="o">=</span> <span class="p">(</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">bounds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
         
@@ -185,7 +175,7 @@
 <span class="sd">        Only WSI are included if there is an XML file with the same name.</span>
 <span class="sd">      </span>
 <span class="sd">        :Parameters:</span>
-<span class="sd">        wsis_dir : str</span>
+<span class="sd">        wsis_dir : string</span>
 <span class="sd">            Input Directory which has the original WSIs and XML files</span>
 <span class="sd">            </span>
 <span class="sd">        :Returns:</span>
@@ -229,11 +219,11 @@
 <span class="sd">        Generic tiled TIFF (.tif)</span>
 <span class="sd">          </span>
 <span class="sd">        :Parameters:</span>
-<span class="sd">            WSI_path : str</span>
+<span class="sd">            WSI_path : string</span>
 <span class="sd">                The address to the WSI file.</span>
 <span class="sd">                </span>
 <span class="sd">        :Returns:</span>
-<span class="sd">            wsi_obj : obj</span>
+<span class="sd">            wsi_obj : object</span>
 <span class="sd">                WSI object</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>

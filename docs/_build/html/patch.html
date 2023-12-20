@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ML Assessment" href="assessment.html" />
+    <link rel="next" title="Annotation File Generator" href="ann_generator.html" />
     <link rel="prev" title="Annotation Extraction" href="annotation.html" /> 
 </head>
 
@@ -64,6 +64,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="ann_generator.html">Annotation File Generator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="assessment.html">ML Assessment</a></li>
 </ul>
 
@@ -96,10 +97,10 @@
 <section id="module-WSI.patch">
 <span id="wsi-patch-module"></span><h2>WSI.patch module<a class="headerlink" href="#module-WSI.patch" title="Permalink to this heading"></a></h2>
 <hr class="docutils" />
-<p>Title:        ValidPath Toolbox - patch module</p>
-<p>Description:  This is the patch module for the whole slide image processing toolbox. It is includes two classes and several methods</p>
-<p>Classes:      WSIpatch_extractor, PatchExtractor</p>
-<p>Methods:      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch</p>
+<p><strong>Title:</strong>        ValidPath Toolbox - patch extraction module</p>
+<p><strong>Description:</strong>  This is the patch extraction module for the ValidPath toolbox. It is includes two classes and several methods</p>
+<p><strong>Classes:</strong>      WSIpatch_extractor, PatchExtractor</p>
+<p><strong>Methods:</strong>      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="WSI.patch.PatchExtractor">
@@ -113,7 +114,7 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="WSI.patch.PatchExtractor.gen_patch">
 <span class="sig-name descname"><span class="pre">gen_patch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">INPUTDIR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PatchSize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Number_of_Patches</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity_check</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity_threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">OUTPUTDIR</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/WSI/patch.html#PatchExtractor.gen_patch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.patch.PatchExtractor.gen_patch" title="Permalink to this definition"></a></dt>
-<dd><p>This function a number of pactches from extracted annotations.
+<dd><p>This function extracts a number of pactches from extracted annotations.
 It can save the extracted annottions to the output directory as defined in inputs.
 Before running this function, please call annotation.ann_extractor.extract_ann(save_dir, XMLs, WSIs) to generate annotations. 
 The output directory will be generated based on the strucutr of the input directories.
@@ -121,7 +122,7 @@ IF the WSI Magnification is 13X or 20X, this code will automaticall convert to 2
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>root_directory<span class="classifier">str</span></dt><dd><p>Output Directory to save the extracted annotations</p>
+<dt>root_directory<span class="classifier">string</span></dt><dd><p>Output Directory to save the extracted annotations</p>
 </dd>
 <dt>WSIs<span class="classifier">list</span></dt><dd><p>List of included WSIs</p>
 </dd>
@@ -155,15 +156,15 @@ then  processing and saving each tile to local directory.</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
-<dt>wsi_obj<span class="classifier">obj</span></dt><dd><p>WSI object.</p>
+<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>WSI object.</p>
 </dd>
-<dt>patch_size: int</dt><dd><p>size tiles</p>
+<dt>patch_size: integer</dt><dd><p>size tiles</p>
 </dd>
-<dt>output_folder<span class="classifier">str</span></dt><dd><p>path root folder to save tiles</p>
+<dt>output_folder<span class="classifier">string</span></dt><dd><p>path root folder to save tiles</p>
 </dd>
 </dl>
-<p>perform_segmentation_state: bool
-random_state : bool</p>
+<p>perform_segmentation_state: boolean
+random_state : boolean</p>
 </dd></dl>
 
 <dl class="py method">
@@ -182,15 +183,15 @@ then  processing and saving each tile to local directory.</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
-<dt>wsi_obj<span class="classifier">obj</span></dt><dd><p>WSI object.</p>
+<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>WSI object.</p>
 </dd>
-<dt>patch_size: int</dt><dd><p>size tiles</p>
+<dt>patch_size: integer</dt><dd><p>size tiles</p>
 </dd>
-<dt>output_folder<span class="classifier">str</span></dt><dd><p>path root folder to save tiles</p>
+<dt>output_folder<span class="classifier">string</span></dt><dd><p>path root folder to save tiles</p>
 </dd>
 </dl>
-<p>perform_segmentation_state: bool
-random_state : bool</p>
+<p>perform_segmentation_state: boolean
+random_state : boolean</p>
 </dd></dl>
 
 </dd></dl>
@@ -203,7 +204,7 @@ random_state : bool</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="annotation.html" class="btn btn-neutral float-left" title="Annotation Extraction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="assessment.html" class="btn btn-neutral float-right" title="ML Assessment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ann_generator.html" class="btn btn-neutral float-right" title="Annotation File Generator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

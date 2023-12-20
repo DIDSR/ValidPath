@@ -93,7 +93,7 @@ Download a complete copy of the ** ValidPath **.
 
 .. code-block:: console
 
-    $ git clone https://github.com/DIDSR/wsi_processing_toolbox
+    $ git clone https://github.com/mousavikahaki/ValidPath
 	
 Change directory to ValidPath
 

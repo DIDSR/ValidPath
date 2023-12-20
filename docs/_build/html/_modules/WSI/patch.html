@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../WSI.html">WSI Handler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../annotation.html">Annotation Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ann_generator.html">Annotation File Generator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../assessment.html">ML Assessment</a></li>
 </ul>
 
@@ -79,18 +80,18 @@
 
 <span class="sd">----------------------------------------------------------------------------</span>
 
-<span class="sd">Title:        ValidPath Toolbox - patch module</span>
+<span class="sd">**Title:**        ValidPath Toolbox - patch extraction module</span>
 
-<span class="sd">Description:  This is the patch module for the whole slide image processing toolbox. It is includes two classes and several methods</span>
+<span class="sd">**Description:**  This is the patch extraction module for the ValidPath toolbox. It is includes two classes and several methods</span>
 <span class="sd">              </span>
-<span class="sd">Classes:      WSIpatch_extractor, PatchExtractor</span>
+<span class="sd">**Classes:**      WSIpatch_extractor, PatchExtractor</span>
 <span class="sd">              </span>
 
-<span class="sd">Methods:      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch</span>
+<span class="sd">**Methods:**      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch</span>
 
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
-<span class="sd">Version =&#39;3.0&#39;</span>
+<span class="sd">Version =&#39;1.0&#39;</span>
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -130,14 +131,14 @@
 <span class="sd">        </span>
 <span class="sd">          </span>
 <span class="sd">        :Parameters:</span>
-<span class="sd">        wsi_obj : obj</span>
+<span class="sd">        wsi_obj : object</span>
 <span class="sd">            WSI object.</span>
-<span class="sd">        patch_size: int</span>
+<span class="sd">        patch_size: integer</span>
 <span class="sd">            size tiles</span>
-<span class="sd">        output_folder : str</span>
+<span class="sd">        output_folder : string</span>
 <span class="sd">            path root folder to save tiles</span>
-<span class="sd">        perform_segmentation_state: bool</span>
-<span class="sd">        random_state : bool</span>
+<span class="sd">        perform_segmentation_state: boolean</span>
+<span class="sd">        random_state : boolean</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Generate object for tiles using the DeepZoomGenerator</span>
@@ -161,13 +162,7 @@
         <span class="c1">#import pdb; pdb.set_trace()</span>
         <span class="n">tile_path</span> <span class="o">=</span> <span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/&quot;</span>
         <span class="n">orig_tile_dir_name</span> <span class="o">=</span> <span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/&quot;</span>
-        <span class="c1">#norm_tile_dir_name = output_folder+&quot;Imagepatches/normalized_tiles/&quot;</span>
-        <span class="c1">#H_tile_dir_name = output_folder+&quot;Imagepatches/H_tiles/&quot;</span>
-        <span class="c1">#E_tile_dir_name = output_folder+&quot;Imagepatches/E_tiles/&quot;</span>
 
-        <span class="c1"># MYDIRs = [output_folder+&quot;Imagepatches/&quot;, output_folder+&quot;Imagepatches/original_tiles/&quot;,</span>
-                  <span class="c1"># output_folder+&quot;Imagepatches/normalized_tiles/&quot;,output_folder+&quot;Imagepatches/H_tiles/&quot;,</span>
-                  <span class="c1"># output_folder+&quot;Imagepatches/E_tiles/&quot;]</span>
         <span class="n">MYDIRs</span> <span class="o">=</span> <span class="p">[</span><span class="n">output_folder</span><span class="o">+</span><span class="s2">&quot;Imagepatches/&quot;</span><span class="p">]</span>
             
         <span class="k">for</span> <span class="n">dr</span> <span class="ow">in</span> <span class="n">MYDIRs</span><span class="p">:</span>
@@ -184,8 +179,6 @@
         <span class="n">co</span> <span class="o">=</span> <span class="mi">2</span>
         <span class="n">axes</span><span class="o">=</span><span class="p">[]</span>
         
-        <span class="c1">#fig = plt.figure(figsize=(18, 10))</span>
-        
         <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span> 
         <span class="n">flag_counter</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
@@ -197,16 +190,7 @@
                         
                     <span class="n">row</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">rows</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
                     <span class="n">col</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>   
-       <span class="c1"># sw = False</span>
-       <span class="c1"># for row in range(rows):</span>
-         <span class="c1">#   if sw == True:</span>
-        <span class="c1">#        break</span>
-        <span class="c1">#    for col in range(cols):</span>
                 
-                
-                <span class="c1">#tile_name = str(col) + &quot;_&quot; + str(row)</span>
-                <span class="c1"># tile_name = os.path.join(tile_dir, &#39;%d_%d&#39; % (col, row))</span>
-                <span class="c1"># print(&quot;Now processing tile with title: &quot;, tile_name)</span>
                 <span class="n">temp_tile</span> <span class="o">=</span> <span class="n">tiles</span><span class="o">.</span><span class="n">get_tile</span><span class="p">(</span><span class="n">MaxTileLevel</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
                 <span class="c1">#getting the coordinates</span>
                 <span class="n">temp_tile_coor</span> <span class="o">=</span> <span class="n">tiles</span><span class="o">.</span><span class="n">get_tile_coordinates</span><span class="p">(</span><span class="n">MaxTileLevel</span><span class="p">,</span> <span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
@@ -229,19 +213,7 @@
                 <span class="k">if</span> <span class="n">intensity_cond</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saving&quot;</span> <span class="o">+</span> <span class="n">orig_tile_dir_name</span> <span class="o">+</span> <span class="n">tile_name</span> <span class="o">+</span> <span class="s2">&quot;.tif&quot;</span><span class="p">)</span>
                     <span class="n">tiff</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="n">orig_tile_dir_name</span> <span class="o">+</span> <span class="n">tile_name</span> <span class="o">+</span> <span class="s2">&quot;.tif&quot;</span><span class="p">,</span> <span class="n">temp_tile_np</span><span class="p">)</span>
-                   <span class="c1"># fig = plt.figure(figsize=(7, 7))</span>
-                    <span class="c1">#fig.add_subplot(ro, co, 1)</span>
-                    <span class="c1">#plt.imshow(temp_tile_np)</span>
-                    <span class="c1">#plt.axis(&#39;off&#39;)</span>
-                    
-                    <span class="c1">#plt.title(&quot;patch number :&quot; + str(counter+1))</span>
-                   <span class="c1"># fig = plt.figure(figsize=(7, 7))</span>
-                    <span class="c1">#plt.plot(temp_tile_np)</span>
-                    <span class="c1">#plt.figure(i+1)</span>
-                    <span class="c1"># plt.rcParams.update({&#39;font.size&#39;: 8})</span>
-                    <span class="c1"># axes.append( fig.add_subplot(ro, co, counter+1) )</span>
-                    <span class="c1"># subplot_title=(&quot;patch number :&quot; + str(counter+1))</span>
-                    <span class="c1"># axes[-1].set_title(subplot_title)  </span>
+  
                     <span class="k">if</span> <span class="n">visualize</span> <span class="o">==</span><span class="mi">1</span><span class="p">:</span>
                         <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">temp_tile_np</span><span class="p">)</span>
                         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -253,11 +225,6 @@
                            
                             <span class="n">flag_counter</span> <span class="o">=</span> <span class="kc">False</span>
                             <span class="k">break</span></div>
-                       <span class="c1"># sw =True</span>
-                       <span class="c1"># break</span>
-       <span class="c1"># return (temp_tile_np)</span>
-        <span class="c1">#fig.tight_layout(pad=1)</span>
-        <span class="c1">#plt.show()</span>
         
         
 <div class="viewcode-block" id="WSIpatch_extractor.patch_extraction_of_tissue"><a class="viewcode-back" href="../../patch.html#WSI.patch.WSIpatch_extractor.patch_extraction_of_tissue">[docs]</a>    <span class="k">def</span> <span class="nf">patch_extraction_of_tissue</span><span class="p">(</span><span class="n">slidepath</span><span class="p">,</span><span class="n">patch_size</span> <span class="p">,</span><span class="n">output_folder</span><span class="p">,</span> <span class="n">number_of_patches</span><span class="o">=</span><span class="mi">1</span> <span class="p">,</span> <span class="n">vis</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -363,14 +330,14 @@
 
 
 <span class="sd">            :Parameters:</span>
-<span class="sd">            wsi_obj : obj</span>
+<span class="sd">            wsi_obj : object</span>
 <span class="sd">                WSI object.</span>
-<span class="sd">            patch_size: int</span>
+<span class="sd">            patch_size: integer</span>
 <span class="sd">                size tiles</span>
-<span class="sd">            output_folder : str</span>
+<span class="sd">            output_folder : string</span>
 <span class="sd">                path root folder to save tiles</span>
-<span class="sd">            perform_segmentation_state: bool</span>
-<span class="sd">            random_state : bool</span>
+<span class="sd">            perform_segmentation_state: boolean</span>
+<span class="sd">            random_state : boolean</span>
 
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="c1"># Generate object for tiles using the DeepZoomGenerator</span>
@@ -474,16 +441,13 @@
                                 <span class="n">flag_counter</span> <span class="o">=</span> <span class="kc">False</span>
                                 <span class="k">break</span>
 
-                    <span class="c1">#else:</span>
-                        <span class="c1">#print(&quot;NOT PROCESSING TILE:&quot;, tile_name)</span>
-            <span class="c1">#fig.tight_layout()</span>
+
             <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
             
 
 <div class="viewcode-block" id="PatchExtractor"><a class="viewcode-back" href="../../patch.html#WSI.patch.PatchExtractor">[docs]</a><span class="k">class</span> <span class="nc">PatchExtractor</span> <span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">pass</span>
-    <span class="c1">#for on all folders</span>
     
 <div class="viewcode-block" id="PatchExtractor.find_between"><a class="viewcode-back" href="../../patch.html#WSI.patch.PatchExtractor.find_between">[docs]</a>    <span class="k">def</span> <span class="nf">find_between</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span> <span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -495,14 +459,14 @@
     
 <div class="viewcode-block" id="PatchExtractor.gen_patch"><a class="viewcode-back" href="../../patch.html#WSI.patch.PatchExtractor.gen_patch">[docs]</a>    <span class="k">def</span> <span class="nf">gen_patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">INPUTDIR</span><span class="p">,</span><span class="n">PatchSize</span><span class="p">,</span><span class="n">Number_of_Patches</span><span class="p">,</span><span class="n">intensity_check</span><span class="p">,</span><span class="n">intensity_threshold</span><span class="p">,</span><span class="n">OUTPUTDIR</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This function a number of pactches from extracted annotations.</span>
+<span class="sd">        This function extracts a number of pactches from extracted annotations.</span>
 <span class="sd">        It can save the extracted annottions to the output directory as defined in inputs.</span>
 <span class="sd">        Before running this function, please call annotation.ann_extractor.extract_ann(save_dir, XMLs, WSIs) to generate annotations. </span>
 <span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
 <span class="sd">        IF the WSI Magnification is 13X or 20X, this code will automaticall convert to 20X.</span>
 <span class="sd">              </span>
 <span class="sd">        :Parameters:</span>
-<span class="sd">            root_directory : str</span>
+<span class="sd">            root_directory : string</span>
 <span class="sd">                Output Directory to save the extracted annotations</span>
 <span class="sd">                </span>
 <span class="sd">            WSIs : list</span>
@@ -515,8 +479,7 @@
 <span class="sd">            None : None</span>
 <span class="sd">                None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        
-        
+              
         <span class="n">std_threshold</span> <span class="o">=</span> <span class="mi">15</span>
         <span class="n">chck_group_name</span><span class="o">=</span><span class="kc">True</span>
         <span class="n">open_dataset</span> <span class="o">=</span> <span class="kc">True</span> 

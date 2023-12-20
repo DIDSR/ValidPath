@@ -4,18 +4,18 @@ Created on Fri Feb  4 11:42:52 2023
 
 ----------------------------------------------------------------------------
 
-Title:        ValidPath Toolbox - Annotation File Generation Module
+**Title:**       ValidPath Toolbox - Annotation File Generation Module
 
-Description:  This is the Annotation File Generator module for the whole slide image processing toolbox. It is includes Annotation_Generato
+**Description:**  This is the Annotation File Generator module for the ValidPath toolbox. It is includes Annotation_Generator class and several methods
               
-Classes:      Annotation_Generator
+**Classes:**      Annotation_Generator
               
 
-Methods:      make_region, create_xml, generate_map_file
+**Methods:**      make_region, create_xml, generate_map_file
 
 ---------------------------------------------------------------------------
 Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
-Version ='3.0'
+Version ='1.0'
 ---------------------------------------------------------------------------
 """
 
@@ -37,7 +37,7 @@ class Annotation_Generator:
         The output directory will be generated based on the strucutr of the input directories.
 
         :Parameters:
-            save_dir : str
+            save_dir : string
                 Output Directory to save the extracted annotations
 
             WSIs : list
@@ -84,13 +84,13 @@ class Annotation_Generator:
         The output directory will be generated based on the strucutr of the input directories.
 
         :Parameters:
-            input_DIR : str
+            input_DIR : string
                 Input Directory
 
-            file_path : str
+            file_path : string
                 WSIs
 
-            path_size : int
+            path_size : integer
                 Size of image patch
 
         :Returns:
@@ -152,13 +152,13 @@ class Annotation_Generator:
         The output directory will be generated based on the strucutr of the input directories.
 
         :Parameters:
-            input_DIR : str
+            input_DIR : string
                 Input Directory
 
             file_path : str
                 WSIs
 
-            path_size : int
+            path_size : integer
                 Size of image patch
 
         :Returns:

@@ -1,3 +1,23 @@
+"""
+---------------------------------------------------------------------------
+Created on Fri April  10 10:32:32 2023
+
+----------------------------------------------------------------------------
+
+**Title:**        ValidPath Toolbox - Uncertainty Analysis module
+
+**Description:**  This is the Uncertainty Analysis module of the ValidPath toolbox. It is includes Uncertainty_Analysis class and several methods
+              
+**Classes:**      Uncertainty_Analysis
+              
+
+**Methods:**      get_report, auc_keras_, ci_, Delong_CI, compute_midrank, compute_midrank_weight, calc_pvalue, compute_ground_truth_statistics, delong_roc_variance, bootstrapping
+
+---------------------------------------------------------------------------
+Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
+Version ='1.0'
+---------------------------------------------------------------------------
+"""
 import numpy as np
 from sklearn.metrics import roc_auc_score
 import scipy.stats

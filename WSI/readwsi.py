@@ -4,18 +4,18 @@ Created on Fri Feb  4 11:42:52 2023
 
 ----------------------------------------------------------------------------
 
-Title:        Whole Slide Image Processing Toolbox - reader module
+**Title:**        ValidPath Toolbox - WSI Handler module
 
-Description:  This is the reader module for the ValidPath toolbox. It is includes ReadWsi class and several methods
+**Description:**  This is the WSI Handler module for the ValidPath toolbox. It is includes ReadWsi class and several methods
               
-Classes:      WSIReader
+**Classes:**      WSIReader
               
 
-Methods:      wsi_reader, extract_region, extract_bounds, wsi_xml_list
+**Methods:**      wsi_reader, extract_region, extract_bounds, wsi_xml_list
 
 ---------------------------------------------------------------------------
 Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
-Version ='3.0'
+Version ='1.0'
 ---------------------------------------------------------------------------
 """
 
@@ -41,16 +41,6 @@ import PIL
 class WSIReader:
     def __init__(self):
         pass  
-    """
-        This Class process the WSIs.
-        
-      
-        :Methods:
-            wsi_reader
-            extract_region
-            extract_bounds
-            wsi_xml_list
-        """
   
     def extract_region(wsi_obj,location,level,size):
         """
@@ -58,7 +48,7 @@ class WSIReader:
         
       
         :Parameters:
-        wsi_obj : obj
+        wsi_obj : object
             recieve the WSI object
             
         :Returns:
@@ -74,9 +64,8 @@ class WSIReader:
         """
         This method process the WSIs and extract image.
         
-      
         :Parameters:
-        wsi_obj : obj
+        wsi_obj : object
             recieve the WSI object
         bounds : tuple
             recieve the locations for extracting image from WSI
@@ -110,7 +99,7 @@ class WSIReader:
         Only WSI are included if there is an XML file with the same name.
       
         :Parameters:
-        wsis_dir : str
+        wsis_dir : string
             Input Directory which has the original WSIs and XML files
             
         :Returns:
@@ -154,11 +143,11 @@ class WSIReader:
         Generic tiled TIFF (.tif)
           
         :Parameters:
-            WSI_path : str
+            WSI_path : string
                 The address to the WSI file.
                 
         :Returns:
-            wsi_obj : obj
+            wsi_obj : object
                 WSI object
 
         """

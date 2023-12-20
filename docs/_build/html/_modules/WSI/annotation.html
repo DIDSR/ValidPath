@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../WSI.html">WSI Handler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../annotation.html">Annotation Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ann_generator.html">Annotation File Generator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../assessment.html">ML Assessment</a></li>
 </ul>
 
@@ -79,18 +80,18 @@
 
 <span class="sd">----------------------------------------------------------------------------</span>
 
-<span class="sd">Title:        ValidPath Toolbox - Annotation Module</span>
+<span class="sd">**Title:**       ValidPath Toolbox - Annotation Extraction Module</span>
 
-<span class="sd">Description:  This is the AnnotationExtractor module for the whole slide image processing toolbox. It is includes AnnotationExtractor class and several methods.</span>
+<span class="sd">**Description:**  This is the Annotation Extraction module for the ValidPath toolbox. It is includes AnnotationExtractor class and several methods.</span>
 <span class="sd">              </span>
-<span class="sd">Classes:      AnnotationExtractor</span>
+<span class="sd">**Classes:**      AnnotationExtractor</span>
 <span class="sd">              </span>
 
-<span class="sd">Methods:      extract_ann, make_folder</span>
+<span class="sd">**Methods:**      extract_ann, make_folder</span>
 
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
-<span class="sd">Version =&#39;3.0&#39;</span>
+<span class="sd">Version =&#39;1.0&#39;</span>
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -117,7 +118,7 @@
 <span class="sd">        This method creates a directory if not exist.</span>
 
 <span class="sd">        :Parameters:</span>
-<span class="sd">            directory : str</span>
+<span class="sd">            directory : string</span>
 <span class="sd">                Directory to be created.</span>
 
 <span class="sd">        :Returns:</span>
@@ -135,7 +136,7 @@
 <span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
 
 <span class="sd">        :Parameters:</span>
-<span class="sd">            save_dir : str</span>
+<span class="sd">            save_dir : string</span>
 <span class="sd">                Output Directory to save the extracted annotations</span>
 
 <span class="sd">            WSIs : list</span>

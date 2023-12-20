@@ -45,6 +45,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../WSI.html">WSI Handler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../annotation.html">Annotation Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ann_generator.html">Annotation File Generator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../assessment.html">ML Assessment</a></li>
 </ul>
 
@@ -73,7 +74,27 @@
            <div itemprop="articleBody">
              
   <h1>Source code for assessment.uncertainty</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Created on Fri April  10 10:32:32 2023</span>
+
+<span class="sd">----------------------------------------------------------------------------</span>
+
+<span class="sd">**Title:**        ValidPath Toolbox - Uncertainty Analysis module</span>
+
+<span class="sd">**Description:**  This is the Uncertainty Analysis module of the ValidPath toolbox. It is includes Uncertainty_Analysis class and several methods</span>
+<span class="sd">              </span>
+<span class="sd">**Classes:**      Uncertainty_Analysis</span>
+<span class="sd">              </span>
+
+<span class="sd">**Methods:**      get_report, auc_keras_, ci_, Delong_CI, compute_midrank, compute_midrank_weight, calc_pvalue, compute_ground_truth_statistics, delong_roc_variance, bootstrapping</span>
+
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
+<span class="sd">Version =&#39;1.0&#39;</span>
+<span class="sd">---------------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
 <span class="kn">import</span> <span class="nn">scipy.stats</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>

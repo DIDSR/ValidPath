@@ -4,18 +4,18 @@ Created on Fri Feb  4 11:42:52 2023
 
 ----------------------------------------------------------------------------
 
-Title:        ValidPath Toolbox - Annotation Module
+**Title:**       ValidPath Toolbox - Annotation Extraction Module
 
-Description:  This is the AnnotationExtractor module for the whole slide image processing toolbox. It is includes AnnotationExtractor class and several methods.
+**Description:**  This is the Annotation Extraction module for the ValidPath toolbox. It is includes AnnotationExtractor class and several methods.
               
-Classes:      AnnotationExtractor
+**Classes:**      AnnotationExtractor
               
 
-Methods:      extract_ann, make_folder
+**Methods:**      extract_ann, make_folder
 
 ---------------------------------------------------------------------------
 Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
-Version ='3.0'
+Version ='1.0'
 ---------------------------------------------------------------------------
 """
 
@@ -42,7 +42,7 @@ class AnnotationExtractor :
         This method creates a directory if not exist.
 
         :Parameters:
-            directory : str
+            directory : string
                 Directory to be created.
 
         :Returns:
@@ -60,7 +60,7 @@ class AnnotationExtractor :
         The output directory will be generated based on the strucutr of the input directories.
 
         :Parameters:
-            save_dir : str
+            save_dir : string
                 Output Directory to save the extracted annotations
 
             WSIs : list

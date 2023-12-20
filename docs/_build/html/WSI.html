@@ -60,6 +60,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="annotation.html">Annotation Extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ann_generator.html">Annotation File Generator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="assessment.html">ML Assessment</a></li>
 </ul>
 
@@ -92,10 +93,10 @@
 <section id="module-WSI.readwsi">
 <span id="wsi-readwsi-module"></span><h2>WSI.readwsi module<a class="headerlink" href="#module-WSI.readwsi" title="Permalink to this heading"></a></h2>
 <hr class="docutils" />
-<p>Title:        Whole Slide Image Processing Toolbox - reader module</p>
-<p>Description:  This is the reader module for the ValidPath toolbox. It is includes ReadWsi class and several methods</p>
-<p>Classes:      WSIReader</p>
-<p>Methods:      wsi_reader, extract_region, extract_bounds, wsi_xml_list</p>
+<p><strong>Title:</strong>        ValidPath Toolbox - WSI Handler module</p>
+<p><strong>Description:</strong>  This is the WSI Handler module for the ValidPath toolbox. It is includes ReadWsi class and several methods</p>
+<p><strong>Classes:</strong>      WSIReader</p>
+<p><strong>Methods:</strong>      wsi_reader, extract_region, extract_bounds, wsi_xml_list</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="WSI.readwsi.WSIReader">
@@ -110,7 +111,7 @@
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
-<dt>wsi_obj<span class="classifier">obj</span></dt><dd><p>recieve the WSI object</p>
+<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>recieve the WSI object</p>
 </dd>
 <dt>bounds<span class="classifier">tuple</span></dt><dd><p>recieve the locations for extracting image from WSI</p>
 </dd>
@@ -136,7 +137,7 @@
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
-<dt>wsi_obj<span class="classifier">obj</span></dt><dd><p>recieve the WSI object</p>
+<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>recieve the WSI object</p>
 </dd>
 </dl>
 <dl class="field-list simple">
@@ -166,13 +167,13 @@ Generic tiled TIFF (.tif)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>WSI_path<span class="classifier">str</span></dt><dd><p>The address to the WSI file.</p>
+<dt>WSI_path<span class="classifier">string</span></dt><dd><p>The address to the WSI file.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>wsi_obj<span class="classifier">obj</span></dt><dd><p>WSI object</p>
+<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>WSI object</p>
 </dd>
 </dl>
 </dd>
@@ -189,7 +190,7 @@ Only WSI are included if there is an XML file with the same name.</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
-<dt>wsis_dir<span class="classifier">str</span></dt><dd><p>Input Directory which has the original WSIs and XML files</p>
+<dt>wsis_dir<span class="classifier">string</span></dt><dd><p>Input Directory which has the original WSIs and XML files</p>
 </dd>
 </dl>
 <dl class="field-list simple">
