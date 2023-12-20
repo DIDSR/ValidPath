@@ -27,8 +27,8 @@ We are continuously working on this toolbox, and we welcome any contributions.
 
 ### Modules
 There are several modules in this package including
-1.	WSI Handler: Includes functions and classes for general WSI analysis such as reading whole slide images, tissue segmentation, and normalization.
-2.	Annotation Extraction: Includes several functions for processing annotations such as annotation extraction.
+1.	WSI Handler: Includes functions and classes for general WSI analysis such as reading whole slide images, extract sub region, and visualize thumbnail.
+2.	Annotation Extraction: Includes several functions for extracting annotated ROIs.
 3.	Patch Extraction: Assists pathologists and developers in extracting image patches from a whole slide image's region of interest.
 4.	Annotation File Generator: Maps ROIs back into the image scope visualizer for the pathologist validation process
 5.	Performance Assessment: Includes different modules for assessing the performance of ML models.
