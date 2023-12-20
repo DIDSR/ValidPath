@@ -47,14 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="inputrequirements.html">Data (Input/Output) Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="WSI.html">WSI Handler</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Annotation Extraction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#wsi-annotation-module">WSI.annotation module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#WSI.annotation.AnnotationExtractor"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#WSI.annotation.AnnotationExtractor.extract_ann"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor.extract_ann()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#WSI.annotation.AnnotationExtractor.make_folder"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor.make_folder()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#wsi-annotation-module">WSI.annotation module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="patch.html">Patch Extraction</a></li>
@@ -90,65 +83,6 @@
 <h1>Annotation Extraction<a class="headerlink" href="#annotation-extraction" title="Permalink to this heading"></a></h1>
 <section id="wsi-annotation-module">
 <h2>WSI.annotation module<a class="headerlink" href="#wsi-annotation-module" title="Permalink to this heading"></a></h2>
-<span class="target" id="module-WSI.annotation"></span><hr class="docutils" />
-<p><strong>Title:</strong>       ValidPath Toolbox - Annotation Extraction Module</p>
-<p><strong>Description:</strong>  This is the Annotation Extraction module for the ValidPath toolbox. It is includes AnnotationExtractor class and several methods.</p>
-<p><strong>Classes:</strong>      AnnotationExtractor</p>
-<p><strong>Methods:</strong>      extract_ann, make_folder</p>
-<hr class="docutils" />
-<dl class="py class">
-<dt class="sig sig-object py" id="WSI.annotation.AnnotationExtractor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">WSI.annotation.</span></span><span class="sig-name descname"><span class="pre">AnnotationExtractor</span></span><a class="reference internal" href="_modules/WSI/annotation.html#AnnotationExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.annotation.AnnotationExtractor" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="WSI.annotation.AnnotationExtractor.extract_ann">
-<span class="sig-name descname"><span class="pre">extract_ann</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">save_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">XMLs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WSIs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/WSI/annotation.html#AnnotationExtractor.extract_ann"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.annotation.AnnotationExtractor.extract_ann" title="Permalink to this definition"></a></dt>
-<dd><p>This method extracts different types for annotations from Whole Slide Images.
-It can save the extracted annottions to the output directory as defined in inputs.
-This code also handles several annotations per slide. 
-The output directory will be generated based on the strucutr of the input directories.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt>save_dir<span class="classifier">string</span></dt><dd><p>Output Directory to save the extracted annotations</p>
-</dd>
-<dt>WSIs<span class="classifier">list</span></dt><dd><p>List of included WSIs</p>
-</dd>
-<dt>XMLs<span class="classifier">list</span></dt><dd><p>List of XML files associated with included WSIs</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="WSI.annotation.AnnotationExtractor.make_folder">
-<span class="sig-name descname"><span class="pre">make_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/WSI/annotation.html#AnnotationExtractor.make_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.annotation.AnnotationExtractor.make_folder" title="Permalink to this definition"></a></dt>
-<dd><p>This method creates a directory if not exist.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt>directory<span class="classifier">string</span></dt><dd><p>Directory to be created.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 
