@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Annotation package &mdash; ValidPath 2.0.0 documentation</title>
+  <title>Assessment package &mdash; ValidPath 2.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -43,15 +43,32 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Packages and Modules</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="WSI.html">WSI package</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Annotation package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-assessment.annotation">assessment.annotation module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#assessment.annotation.Annotation_Generator"><code class="docutils literal notranslate"><span class="pre">Annotation_Generator</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="WSI.html">WSI package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Assessment package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-assessment.annotation">assessment.annotation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#assessment.annotation.Annotation_Generator"><code class="docutils literal notranslate"><span class="pre">Annotation_Generator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.annotation.Annotation_Generator.create_xml"><code class="docutils literal notranslate"><span class="pre">Annotation_Generator.create_xml()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.annotation.Annotation_Generator.generate_map_file"><code class="docutils literal notranslate"><span class="pre">Annotation_Generator.generate_map_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.annotation.Annotation_Generator.make_region"><code class="docutils literal notranslate"><span class="pre">Annotation_Generator.make_region()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#module-assessment.uncertainty">assessment.uncertainty module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-assessment.uncertainty">assessment.uncertainty module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.Delong_CI"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.Delong_CI()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.auc_keras_"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.auc_keras_()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.bootstrapping"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.bootstrapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.calc_pvalue"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.calc_pvalue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.ci_"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.ci_()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.compute_ground_truth_statistics"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.compute_ground_truth_statistics()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.compute_midrank"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.compute_midrank()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.compute_midrank_weight"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.compute_midrank_weight()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.delong_roc_variance"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.delong_roc_variance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.fastDeLong"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.fastDeLong()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.fastDeLong_no_weights"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.fastDeLong_no_weights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.fastDeLong_weights"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.fastDeLong_weights()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assessment.uncertainty.Uncertainty_Analysis.get_report"><code class="docutils literal notranslate"><span class="pre">Uncertainty_Analysis.get_report()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -74,8 +91,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">Packages and Modules</a></li>
-      <li class="breadcrumb-item active">Annotation package</li>
+      <li class="breadcrumb-item active">Assessment package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/assessment.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -85,8 +101,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="annotation-package">
-<h1>Annotation package<a class="headerlink" href="#annotation-package" title="Permalink to this heading"></a></h1>
+  <section id="assessment-package">
+<h1>Assessment package<a class="headerlink" href="#assessment-package" title="Permalink to this heading"></a></h1>
 <section id="module-assessment.annotation">
 <span id="assessment-annotation-module"></span><h2>assessment.annotation module<a class="headerlink" href="#module-assessment.annotation" title="Permalink to this heading"></a></h2>
 <hr class="docutils" />

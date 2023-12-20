@@ -54,7 +54,8 @@ To see a demo of the functions in this toolbox, please refer to the Jupyter Note
    
    
    installation
-   modules
+   WSI
+   assessment
 
 
 

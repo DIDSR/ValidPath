@@ -1,4 +1,4 @@
-Annotation package
+Assessment package
 ==================
 
 assessment.annotation module

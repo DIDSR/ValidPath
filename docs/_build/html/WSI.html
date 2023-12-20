@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Annotation package" href="assessment.html" />
-    <link rel="prev" title="Packages and Modules" href="modules.html" /> 
+    <link rel="next" title="Assessment package" href="assessment.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,26 +44,42 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Packages and Modules</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">WSI package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-WSI.readwsi">WSI.readwsi module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#WSI.readwsi.WSIReader"><code class="docutils literal notranslate"><span class="pre">WSIReader</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#wsi-annotation-module">WSI.annotation module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#WSI.annotation.AnnotationExtractor"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-WSI.patch">WSI.patch module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#WSI.patch.PatchExtractor"><code class="docutils literal notranslate"><span class="pre">PatchExtractor</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#WSI.patch.WSIpatch_extractor"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">WSI package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-WSI.readwsi">WSI.readwsi module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#WSI.readwsi.WSIReader"><code class="docutils literal notranslate"><span class="pre">WSIReader</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.readwsi.WSIReader.extract_bounds"><code class="docutils literal notranslate"><span class="pre">WSIReader.extract_bounds()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.readwsi.WSIReader.extract_region"><code class="docutils literal notranslate"><span class="pre">WSIReader.extract_region()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.readwsi.WSIReader.wsi_reader"><code class="docutils literal notranslate"><span class="pre">WSIReader.wsi_reader()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.readwsi.WSIReader.wsi_xml_list"><code class="docutils literal notranslate"><span class="pre">WSIReader.wsi_xml_list()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="assessment.html">Annotation package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wsi-annotation-module">WSI.annotation module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#WSI.annotation.AnnotationExtractor"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.annotation.AnnotationExtractor.extract_ann"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor.extract_ann()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.annotation.AnnotationExtractor.make_folder"><code class="docutils literal notranslate"><span class="pre">AnnotationExtractor.make_folder()</span></code></a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-WSI.patch">WSI.patch module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#WSI.patch.PatchExtractor"><code class="docutils literal notranslate"><span class="pre">PatchExtractor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.patch.PatchExtractor.find_between"><code class="docutils literal notranslate"><span class="pre">PatchExtractor.find_between()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.patch.PatchExtractor.gen_patch"><code class="docutils literal notranslate"><span class="pre">PatchExtractor.gen_patch()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#WSI.patch.WSIpatch_extractor"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.patch.WSIpatch_extractor.patch_extraction"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor.patch_extraction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.patch.WSIpatch_extractor.patch_extraction_of_tissue"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor.patch_extraction_of_tissue()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#WSI.patch.WSIpatch_extractor.patch_extraction_with_normalized_tiles"><code class="docutils literal notranslate"><span class="pre">WSIpatch_extractor.patch_extraction_with_normalized_tiles()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assessment.html">Assessment package</a></li>
 </ul>
 
         </div>
@@ -80,7 +96,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">Packages and Modules</a></li>
       <li class="breadcrumb-item active">WSI package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/WSI.rst.txt" rel="nofollow"> View page source</a>
@@ -382,8 +397,8 @@ random_state : bool</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-left" title="Packages and Modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="assessment.html" class="btn btn-neutral float-right" title="Annotation package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="assessment.html" class="btn btn-neutral float-right" title="Assessment package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
