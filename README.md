@@ -39,11 +39,11 @@ Please refer to the code documentation and email  **[seyed.kahaki@fda.hhs.gov](m
 
 
 ### Testing Examples
-1. WSI Reader: Read Whole slide Image, Extract WSI Regions
-2. Extract Annotations: Extract annotations and masks from Whole Slide Images
-3. Patch Extraction: Extract patch images from annotated regions
-4. Annotation Generator: Generate Aperio ImageScope Annotation file
-5. Performance Assessmet: including different methods for assessing the performance of ML models
+1. [WSI Reader: Read Whole slide Image, Extract WSI Regions](https://github.com/mousavikahaki/ValidPath/blob/main/01_read_wsi.ipynb)
+2. [Extract Annotations: Extract annotations and masks from Whole Slide Images](https://github.com/mousavikahaki/ValidPath/blob/main/02_annotation_extraction.ipynb)
+3. [Patch Extraction: Extract patch images from annotated regions](https://github.com/mousavikahaki/ValidPath/blob/main/03_patch_extraction.ipynb)
+4. [Annotation Generator: Generate Aperio ImageScope Annotation file](https://github.com/mousavikahaki/ValidPath/blob/main/4_annotation_generator.ipynb)
+5. [Performance Assessmet: including different methods for assessing the performance of ML models](https://github.com/mousavikahaki/ValidPath/blob/main/05_performance_assessment.ipynb)
 
 ## Installation
 This section will help you to install the packages needed for ValidPath.
