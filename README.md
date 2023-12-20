@@ -66,6 +66,7 @@ To install a python package with specific version of a package using pip, you ca
 pip install lxml==4.9.1
 ```
 Please follow the same procedure to install these python packages:
+```sh
 •	lxml==4.9.1
 •	opencv-python==4.8.1.78
 •	openslide-python==1.1.2
@@ -80,7 +81,8 @@ Please follow the same procedure to install these python packages:
 •	glob
 •	pandas
 •	numpy
-•	For the full list of the requirements, please see the requirement.txt file in the project root directory 
+```
+For the full list of the requirements, please see the requirement.txt file in the project root directory 
 
   
 In order to check the current package version installed on you system, you can use “pip freeze” or “.___version___” as follows:
