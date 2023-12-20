@@ -34,7 +34,7 @@ There are several modules in this package including
 5.	Performance Assessment: Includes different modules for assessing the performance of ML models.
 
 ### Information for Developers
-Code Documentation: [Link][https://htmlpreview.github.io/?https://github.com/mousavikahaki/ValidPath/blob/main/docs/_build/html/index.html)
+Code Documentation: [Link](https://htmlpreview.github.io/?https://github.com/mousavikahaki/ValidPath/blob/main/docs/_build/html/index.html)
 Please refer to the code documentation and email  **[seyed.kahaki@fda.hhs.gov](mailto:seyed.kahaki@fda.hhs.gov)** if you have any questions.
 
 
@@ -53,8 +53,7 @@ This section will help you to install the packages needed for ValidPath.
 
 If you wish to use our python package, perhaps without developing them further, run the command pip install ValidPath or pip install --ignore-installed --upgrade ValidPath to upgrade from an existing installation (This will be enabled when the first version is ready and submitted to pypi).
 
-Detailed installation instructions can be found in the [documentation]([Link to Installation Guide dependencies](https://htmlpreview.github.io/?https%3A%2F%2Fraw.githubusercontent.com%2Fmousavikahaki%2FValidPath%2Fmain%2Fdocs%2F_build%2Fhtml%2Finstallation.html=)).
-
+Detailed installation instructions can be found in the [documentation]([Link to Installation Guide dependencies](https://htmlpreview.github.io/?https://github.com/mousavikahaki/ValidPath/blob/main/docs/_build/html/index.html)
 To understand better how the programs work, study the jupyter notebooks referred to under the heading **Examples Taster**.
 
 ### Pre-requirements
