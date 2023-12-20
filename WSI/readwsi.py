@@ -97,7 +97,7 @@ class WSIReader:
             print("error in bounds , try again")
             return 0
         
-        size = (size_h,size_w)
+        size = (size_w,size_h)
         
         location = ( bounds[0] , bounds[1] )
         
