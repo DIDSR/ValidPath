@@ -132,8 +132,13 @@ $ conda activate ValidPath-dev
 
 ### Cite this repository
 
-If you find that ValidPath is useful or if you use it in your project, please consider citing this paper:
+If you find that ValidPath is useful or if you use it in your project, please consider citing the code:
 
+```
+Seyed Kahaki, Arian Arab, Weijie Chen. (2024) ValidPath [Source Code] https://github.com/mousavikahaki/ValidPath
+```
+
+And this pape:
 ```
 @article{
     Pocock2022,
