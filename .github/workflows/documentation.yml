@@ -16,9 +16,8 @@ jobs:
           pip install sphinx sphinx_rtd_theme myst_parser
       - name: Sphinx build
         run: |
-          cd docs/
-          make -C docs clean
-          make -C docs html
+          ./docs/make -C docs clean
+          ./docs/make -C docs html
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
