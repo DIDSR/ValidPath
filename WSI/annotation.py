@@ -22,7 +22,7 @@ Version ='1.0'
 import cv2
 import numpy as np
 import os
-#import openslide
+import openslide
 import lxml.etree as ET
 import matplotlib.pyplot as plt
 from glob import glob

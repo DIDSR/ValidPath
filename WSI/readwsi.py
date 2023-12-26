@@ -34,8 +34,8 @@ from skimage.io import imsave, imread
 from PIL import Image
 import os
 from glob import glob
-#import openslide
-#Sfrom openslide.deepzoom import DeepZoomGenerator
+import openslide
+from openslide.deepzoom import DeepZoomGenerator
 import numpy as np
 from pathlib import Path
 import tifffile as tiff
