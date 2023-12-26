@@ -19,7 +19,7 @@ LONG_DESCRIPTION = 'A package that Allows processing of digital pathology whole 
 
 # Setting up
 setup(
-    name="slidepro",
+    name="ValidPath",
     version=VERSION,
     author="Seyed Mostafa Mousavi Kahaki",
     author_email="<mousavikahaki@gmail.com>",
