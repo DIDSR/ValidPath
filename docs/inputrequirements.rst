@@ -90,6 +90,13 @@ Performance Assessment
  
 	**Output:** Performance Assessment Results
 	
-	Example of the results output
+	Example of the results output:
+
+
 	
-.. image:: https://github.com/mousavikahaki/ValidPath/tree/main/img/assessment_output_example.png
+.. image:: ../img/assessment_output_example1.png
+   :width: 300px
+   :align: center
+.. image:: ../img/assessment_output_example2.png
+   :width: 300px
+   :align: center

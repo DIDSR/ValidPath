@@ -87,7 +87,7 @@
 <span class="sd">**Classes:**      AnnotationExtractor</span>
 <span class="sd">              </span>
 
-<span class="sd">**Methods:**      extract_ann, make_folder</span>
+<span class="sd">**Methods:**      AnnotationExtractor.extract_ann (Save_dir: str,XMLs: array , WSIs: array)</span>
 
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
@@ -137,17 +137,16 @@
 
 <span class="sd">        :Parameters:</span>
 <span class="sd">            save_dir : string</span>
-<span class="sd">                Output Directory to save the extracted annotations</span>
+<span class="sd">                The path to the directory in order to save the annotations</span>
 
 <span class="sd">            WSIs : list</span>
-<span class="sd">                List of included WSIs</span>
+<span class="sd">                List of whole slide image files</span>
 
 <span class="sd">            XMLs : list</span>
-<span class="sd">                List of XML files associated with included WSIs</span>
+<span class="sd">                List of annotation files in XML format</span>
 
 <span class="sd">        :Returns:</span>
-<span class="sd">            None : None</span>
-<span class="sd">                None.</span>
+<span class="sd">            Image (array) – annotation files</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">})</span>
 

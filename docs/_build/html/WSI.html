@@ -96,7 +96,14 @@
 <p><strong>Title:</strong>        ValidPath Toolbox - WSI Handler module</p>
 <p><strong>Description:</strong>  This is the WSI Handler module for the ValidPath toolbox. It is includes ReadWsi class and several methods</p>
 <p><strong>Classes:</strong>      WSIReader</p>
-<p><strong>Methods:</strong>      wsi_reader, extract_region, extract_bounds, wsi_xml_list</p>
+<p><strong>Methods:</strong> There are three methods in the ReadWSI module as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Reader: wsi_obj = WSIReader.wsi_reader(path)</p></li>
+<li><p>Region Extractor: WSIReader.extract_region(wsi_obj,location,level,size)</p></li>
+<li><p>Extract Bounds: WSIReader.extract_bounds(wsi_obj,bounds,level)</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="WSI.readwsi.WSIReader">

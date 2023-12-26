@@ -100,7 +100,13 @@
 <p><strong>Title:</strong>        ValidPath Toolbox - patch extraction module</p>
 <p><strong>Description:</strong>  This is the patch extraction module for the ValidPath toolbox. It is includes two classes and several methods</p>
 <p><strong>Classes:</strong>      WSIpatch_extractor, PatchExtractor</p>
-<p><strong>Methods:</strong>      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch</p>
+<p><strong>Methods:</strong>      There are two methods in the patch extraction module as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>PatchExtractor.gen_patch(INPUTDIR: str, PatchSize: tuple, Number_of_Patches: int, intensity_check: boolean, OUTPUTDIR:str)</p></li>
+<li><p>WSIpatch_extractor.patch_extraction(wsi_obj: object, PatchSize: tuple, OUTPUTDIR:str, Random: boolean, Visualize: boolean, Intensity_check: boolean, Number_of_Patches: (int)</p></li>
+</ul>
+</div></blockquote>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="WSI.patch.PatchExtractor">
@@ -119,22 +125,25 @@ It can save the extracted annottions to the output directory as defined in input
 Before running this function, please call annotation.ann_extractor.extract_ann(save_dir, XMLs, WSIs) to generate annotations. 
 The output directory will be generated based on the strucutr of the input directories.
 IF the WSI Magnification is 13X or 20X, this code will automaticall convert to 20X.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>root_directory<span class="classifier">string</span></dt><dd><p>Output Directory to save the extracted annotations</p>
+<dt>INPUTDIR<span class="classifier">string</span></dt><dd><p>the path to the input directory</p>
 </dd>
-<dt>WSIs<span class="classifier">list</span></dt><dd><p>List of included WSIs</p>
+<dt>PatchSize<span class="classifier">tuple</span></dt><dd><p>the size of image patches to be extracted</p>
 </dd>
-<dt>XMLs<span class="classifier">list</span></dt><dd><p>List of XML files associated with included WSIs</p>
+<dt>Number_of_Patches<span class="classifier">int</span></dt><dd><p>the number of patches per annotation to be extracted</p>
+</dd>
+<dt>intensity_check<span class="classifier">boolean</span></dt><dd><p>to filter the image patches and eliminate empty ones</p>
 </dd>
 </dl>
+<ul class="simple">
+<li><p>OUTPUTDIR  : string
+the path to the output directory to save image patches</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
-</dd>
-</dl>
+<dd class="field-even"><p>Image – extracted image patches from the annotated area.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -156,15 +165,25 @@ then  processing and saving each tile to local directory.</p>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <dl class="simple">
-<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>WSI object.</p>
+<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>an object containing WSI file and its information</p>
 </dd>
-<dt>patch_size: integer</dt><dd><p>size tiles</p>
+<dt>patch_size: integer</dt><dd><p>the size of image patches to be extracted</p>
 </dd>
-<dt>output_folder<span class="classifier">string</span></dt><dd><p>path root folder to save tiles</p>
+<dt>output_folder<span class="classifier">string</span></dt><dd><p>the path to the output directory to save image patches</p>
+</dd>
+<dt>random_state<span class="classifier">boolean    </span></dt><dd><p>extract patches randomly or in order</p>
+</dd>
+<dt>visualize: boolean</dt><dd><p>either to plot extracted patches or not</p>
+</dd>
+<dt>intensity_check: boolean</dt><dd><p>to filter the image patches and eliminate empty ones</p>
+</dd>
+<dt>intensity_threshold: integer</dt><dd><p>the threshold to include image patches</p>
+</dd>
+<dt>std_threshold: integer</dt><dd><p>the standard deviation threhold to include image patches</p>
+</dd>
+<dt>patch_number<span class="classifier">boolean</span></dt><dd><p>the number of patches to be extracted. Set to ‘-1’ to extract all possible image patches</p>
 </dd>
 </dl>
-<p>perform_segmentation_state: boolean
-random_state : boolean</p>
 </dd></dl>
 
 <dl class="py method">

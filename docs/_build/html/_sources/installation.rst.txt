@@ -26,8 +26,7 @@ Please follow the same procedure to install these python packages:
 
 .. code-block:: console
 
-	conda create --name WSIProcessing python= Python 3.8.8
-	conda activate WSIProcessing
+	python -m venv ValidPath
 	pip install lxml==4.9.1
 	pip install opencv-python==4.8.1.78
 	pip install openslide-python==1.1.2
@@ -39,8 +38,8 @@ Please follow the same procedure to install these python packages:
 	pip install tifffile==2022.10.10
 	pip install mpmath==1.2.1
 	pip install h5py
-	pip install    scikit-learn
-	pip  install openpyxl
+	pip install scikit-learn
+	pip install openpyxl
 	pip install pandas    
 	
 	

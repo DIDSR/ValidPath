@@ -11,7 +11,7 @@ Created on Fri Feb  4 11:42:52 2023
 **Classes:**      AnnotationExtractor
               
 
-**Methods:**      extract_ann, make_folder
+**Methods:**      AnnotationExtractor.extract_ann (Save_dir: str,XMLs: array , WSIs: array)
 
 ---------------------------------------------------------------------------
 Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
@@ -61,17 +61,16 @@ class AnnotationExtractor :
 
         :Parameters:
             save_dir : string
-                Output Directory to save the extracted annotations
+                The path to the directory in order to save the annotations
 
             WSIs : list
-                List of included WSIs
+                List of whole slide image files
 
             XMLs : list
-                List of XML files associated with included WSIs
+                List of annotation files in XML format
 
         :Returns:
-            None : None
-                None.
+            Image (array) – annotation files
         """
         plt.rcParams.update({'font.size': 6})
 

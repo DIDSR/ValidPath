@@ -117,6 +117,15 @@
 Also can compute variance of a single ROC AUC estimate. X. Sun and W. Xu, “Fast Implementation of DeLong’s Algorithm for Comparing the 
 Areas Under Correlated Receiver Operating Characteristic Curves,” in IEEE Signal Processing Letters, vol. 21, no. 11, pp. 1389-1393, Nov. 2014, 
 doi: 10.1109/LSP.2014.2337313.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p>y_truth: ground_truth -  np.array of 0 and 1
+y_pred:  predictions - np.array of floats of the probability of being class 1</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>auc, ci, lower_upper_q, auc_cov, auc_std</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -125,12 +134,11 @@ doi: 10.1109/LSP.2014.2337313.</p>
 <dd><p>Estimates confidence interval for Bernoulli p</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p>tp: number of positive outcomes, TP in this case
-n: number of attemps, TP+FP for Precision, TP+FN for Recall
-alpha: confidence level</p>
+<dd class="field-odd"><p>fpr_keras: False Positive Rate Values
+tpr_keras: True Positive Rate Values</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Tuple[float, float]: lower and upper bounds of the confidence interval</p>
+<dd class="field-even"><p>AUC: Area Under the ROC Curve</p>
 </dd>
 </dl>
 </dd></dl>
@@ -296,15 +304,22 @@ publisher={IEEE}</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="assessment.uncertainty.Uncertainty_Analysis.get_report">
 <span class="sig-name descname"><span class="pre">get_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_truth</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/assessment/uncertainty.html#Uncertainty_Analysis.get_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#assessment.uncertainty.Uncertainty_Analysis.get_report" title="Permalink to this definition"></a></dt>
-<dd><p>Estimates confidence interval for Bernoulli p</p>
+<dd><p>This method recieve the machine learning prediction output and the ground truth and report several metrics. This is the main metod of the Uncertainty_Analysis class which calls other methods to procude results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p>tp: number of positive outcomes, TP in this case
-n: number of attemps, TP+FP for Precision, TP+FN for Recall
-alpha: confidence level</p>
+<dd class="field-odd"><p>y_truth: ground_truth -  np.array of 0 and 1
+y_pred:  predictions - np.array of floats of the probability of being class 1</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Tuple[float, float]: lower and upper bounds of the confidence interval</p>
+<dd class="field-even"><p>precision
+Precision Conficenc Interval
+Recall
+Recall Conficenc Interval
+AUC based on delong method and its Conficenc Interval and COV 
+False Positive Rate
+True Positive Rate
+AUC
+Confusion Matrix</p>
 </dd>
 </dl>
 </dd></dl>

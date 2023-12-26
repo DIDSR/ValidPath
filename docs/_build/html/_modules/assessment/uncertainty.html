@@ -120,15 +120,22 @@
 
 
 <div class="viewcode-block" id="Uncertainty_Analysis.get_report"><a class="viewcode-back" href="../../assessment.html#assessment.uncertainty.Uncertainty_Analysis.get_report">[docs]</a>    <span class="k">def</span> <span class="nf">get_report</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y_pred</span> <span class="p">,</span><span class="n">y_truth</span><span class="p">)</span> <span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot; Estimates confidence interval for Bernoulli p</span>
+        <span class="sd">&quot;&quot;&quot; This method recieve the machine learning prediction output and the ground truth and report several metrics. This is the main metod of the Uncertainty_Analysis class which calls other methods to procude results.</span>
 <span class="sd">        </span>
 <span class="sd">        :Parameters:</span>
-<span class="sd">          tp: number of positive outcomes, TP in this case</span>
-<span class="sd">          n: number of attemps, TP+FP for Precision, TP+FN for Recall</span>
-<span class="sd">          alpha: confidence level</span>
-<span class="sd">        </span>
+<span class="sd">           y_truth: ground_truth -  np.array of 0 and 1</span>
+<span class="sd">           y_pred:  predictions - np.array of floats of the probability of being class 1</span>
 <span class="sd">        :Returns:</span>
-<span class="sd">          Tuple[float, float]: lower and upper bounds of the confidence interval</span>
+<span class="sd">            precision</span>
+<span class="sd">            Precision Conficenc Interval</span>
+<span class="sd">            Recall</span>
+<span class="sd">            Recall Conficenc Interval</span>
+<span class="sd">            AUC based on delong method and its Conficenc Interval and COV </span>
+<span class="sd">            False Positive Rate</span>
+<span class="sd">            True Positive Rate</span>
+<span class="sd">            AUC</span>
+<span class="sd">            Confusion Matrix</span>
+<span class="sd">                        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">cmtx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
@@ -207,12 +214,12 @@
         <span class="sd">&quot;&quot;&quot; Estimates confidence interval for Bernoulli p</span>
 <span class="sd">        </span>
 <span class="sd">        :Parameters:</span>
-<span class="sd">          tp: number of positive outcomes, TP in this case</span>
-<span class="sd">          n: number of attemps, TP+FP for Precision, TP+FN for Recall</span>
-<span class="sd">          alpha: confidence level</span>
+<span class="sd">          fpr_keras: False Positive Rate Values</span>
+<span class="sd">          tpr_keras: True Positive Rate Values</span>
+
 <span class="sd">        </span>
 <span class="sd">        :Returns:</span>
-<span class="sd">          Tuple[float, float]: lower and upper bounds of the confidence interval</span>
+<span class="sd">          AUC: Area Under the ROC Curve</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="n">auc_keras</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr_keras</span><span class="p">,</span> <span class="n">tpr_keras</span><span class="p">)</span></div>
@@ -241,6 +248,13 @@
 <span class="sd">        Also can compute variance of a single ROC AUC estimate. X. Sun and W. Xu, &quot;Fast Implementation of DeLong’s Algorithm for Comparing the </span>
 <span class="sd">        Areas Under Correlated Receiver Operating Characteristic Curves,&quot; in IEEE Signal Processing Letters, vol. 21, no. 11, pp. 1389-1393, Nov. 2014, </span>
 <span class="sd">        doi: 10.1109/LSP.2014.2337313.</span>
+<span class="sd">        </span>
+<span class="sd">        :Parameters:</span>
+<span class="sd">           y_truth: ground_truth -  np.array of 0 and 1</span>
+<span class="sd">           y_pred:  predictions - np.array of floats of the probability of being class 1</span>
+<span class="sd">        :Returns:</span>
+<span class="sd">            auc, ci, lower_upper_q, auc_cov, auc_std</span>
+<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.95</span>
         

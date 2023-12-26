@@ -44,15 +44,22 @@ class Uncertainty_Analysis:
 
 
     def get_report (self, y_pred ,y_truth) :
-        """ Estimates confidence interval for Bernoulli p
+        """ This method recieve the machine learning prediction output and the ground truth and report several metrics. This is the main metod of the Uncertainty_Analysis class which calls other methods to procude results.
         
         :Parameters:
-          tp: number of positive outcomes, TP in this case
-          n: number of attemps, TP+FP for Precision, TP+FN for Recall
-          alpha: confidence level
-        
+           y_truth: ground_truth -  np.array of 0 and 1
+           y_pred:  predictions - np.array of floats of the probability of being class 1
         :Returns:
-          Tuple[float, float]: lower and upper bounds of the confidence interval
+            precision
+            Precision Conficenc Interval
+            Recall
+            Recall Conficenc Interval
+            AUC based on delong method and its Conficenc Interval and COV 
+            False Positive Rate
+            True Positive Rate
+            AUC
+            Confusion Matrix
+                        
         """
 
         cmtx = pd.DataFrame(
@@ -131,12 +138,12 @@ class Uncertainty_Analysis:
         """ Estimates confidence interval for Bernoulli p
         
         :Parameters:
-          tp: number of positive outcomes, TP in this case
-          n: number of attemps, TP+FP for Precision, TP+FN for Recall
-          alpha: confidence level
+          fpr_keras: False Positive Rate Values
+          tpr_keras: True Positive Rate Values
+
         
         :Returns:
-          Tuple[float, float]: lower and upper bounds of the confidence interval
+          AUC: Area Under the ROC Curve
         """
         
         auc_keras = auc(fpr_keras, tpr_keras)
@@ -165,6 +172,13 @@ class Uncertainty_Analysis:
         Also can compute variance of a single ROC AUC estimate. X. Sun and W. Xu, "Fast Implementation of DeLong’s Algorithm for Comparing the 
         Areas Under Correlated Receiver Operating Characteristic Curves," in IEEE Signal Processing Letters, vol. 21, no. 11, pp. 1389-1393, Nov. 2014, 
         doi: 10.1109/LSP.2014.2337313.
+        
+        :Parameters:
+           y_truth: ground_truth -  np.array of 0 and 1
+           y_pred:  predictions - np.array of floats of the probability of being class 1
+        :Returns:
+            auc, ci, lower_upper_q, auc_cov, auc_std
+        
         """
         alpha = .95
         

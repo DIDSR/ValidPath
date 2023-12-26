@@ -11,7 +11,13 @@ Created on Fri Feb  4 11:42:52 2023
 **Classes:**      Annotation_Generator
               
 
-**Methods:**      make_region, create_xml, generate_map_file
+**Methods:**     There are three methods in the Annotation File Generation module as follows:
+
+                    •	ROI_Generator.generate_map_file(input_DIR: str, output_DIR: str, file_Name: str)
+                    
+                    •	ROI_Generator.create_xml(input_DIR,file_Name,path_size,ROI_output_DIR,tag_name)
+                    
+                    •	make_region(self, x , y , id , txt,path_size,Regions)
 
 ---------------------------------------------------------------------------
 Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
@@ -31,24 +37,23 @@ class Annotation_Generator:
         
     def make_region(self, x , y , id , txt,path_size,Regions):
         """
-        This method extracts different types for annotations from Whole Slide Images.
-        It can save the extracted annottions to the output directory as defined in inputs.
-        This code also handles several annotations per slide. 
-        The output directory will be generated based on the strucutr of the input directories.
+        This method generate the XMl file structure and fill the content based on the Aperio ImageScope standard
 
         :Parameters:
-            save_dir : string
+            x : integer
                 Output Directory to save the extracted annotations
-
-            WSIs : list
+            x : integer
                 List of included WSIs
-
-            XMLs : list
+            txt : string
                 List of XML files associated with included WSIs
+            path_size : integer
+                Patch size
+            Regions : object
+                the corresponsing XML region object
+            
 
         :Returns:
-            None : None
-                None.
+            XML strycture
         """
         print(x)
         print(path_size)
@@ -78,24 +83,24 @@ class Annotation_Generator:
 
     def create_xml(self,input_DIR, file_path  ,path_size , save_xml_path):
         """
-        This method extracts different types for annotations from Whole Slide Images.
-        It can save the extracted annottions to the output directory as defined in inputs.
-        This code also handles several annotations per slide. 
-        The output directory will be generated based on the strucutr of the input directories.
+        This method reads the map file generated uisng the ROI_Generator.generate_map_file and generated the XML annotation file based on Aperio ImageScope standard.
 
         :Parameters:
             input_DIR : string
-                Input Directory
+                the path to the input directory of mapping file
 
             file_path : string
-                WSIs
+                map file name (csv)
 
             path_size : integer
                 Size of image patch
+                
+            save_xml_path: string
+                output directory
+            
 
         :Returns:
-            None : None
-                None.
+            XML – the XML files
         """
 
         csv_file = pd.read_csv(input_DIR+file_path,index_col='WSI')
@@ -153,17 +158,19 @@ class Annotation_Generator:
 
         :Parameters:
             input_DIR : string
-                Input Directory
+                the path to the input directory of image patches
 
-            file_path : str
-                WSIs
+            output_DIR : str
+                the path to the output directory to save the map file
 
-            path_size : integer
-                Size of image patch
+            file_Name : string
+                map file name (csv)
+                
+            tag_name : string   
+                Tag name
 
         :Returns:
-            None : None
-                None.
+            CSV – the map file
         """
 
         

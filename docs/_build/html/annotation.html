@@ -94,7 +94,7 @@
 <p><strong>Title:</strong>       ValidPath Toolbox - Annotation Extraction Module</p>
 <p><strong>Description:</strong>  This is the Annotation Extraction module for the ValidPath toolbox. It is includes AnnotationExtractor class and several methods.</p>
 <p><strong>Classes:</strong>      AnnotationExtractor</p>
-<p><strong>Methods:</strong>      extract_ann, make_folder</p>
+<p><strong>Methods:</strong>      AnnotationExtractor.extract_ann (Save_dir: str,XMLs: array , WSIs: array)</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="WSI.annotation.AnnotationExtractor">
@@ -110,19 +110,16 @@ The output directory will be generated based on the strucutr of the input direct
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
-<dt>save_dir<span class="classifier">string</span></dt><dd><p>Output Directory to save the extracted annotations</p>
+<dt>save_dir<span class="classifier">string</span></dt><dd><p>The path to the directory in order to save the annotations</p>
 </dd>
-<dt>WSIs<span class="classifier">list</span></dt><dd><p>List of included WSIs</p>
+<dt>WSIs<span class="classifier">list</span></dt><dd><p>List of whole slide image files</p>
 </dd>
-<dt>XMLs<span class="classifier">list</span></dt><dd><p>List of XML files associated with included WSIs</p>
+<dt>XMLs<span class="classifier">list</span></dt><dd><p>List of annotation files in XML format</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>None<span class="classifier">None</span></dt><dd><p>None.</p>
-</dd>
-</dl>
+<dd class="field-even"><p>Image (array) – annotation files</p>
 </dd>
 </dl>
 </dd></dl>

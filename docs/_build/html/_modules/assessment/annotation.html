@@ -87,7 +87,13 @@
 <span class="sd">**Classes:**      Annotation_Generator</span>
 <span class="sd">              </span>
 
-<span class="sd">**Methods:**      make_region, create_xml, generate_map_file</span>
+<span class="sd">**Methods:**     There are three methods in the Annotation File Generation module as follows:</span>
+
+<span class="sd">                    •	ROI_Generator.generate_map_file(input_DIR: str, output_DIR: str, file_Name: str)</span>
+<span class="sd">                    </span>
+<span class="sd">                    •	ROI_Generator.create_xml(input_DIR,file_Name,path_size,ROI_output_DIR,tag_name)</span>
+<span class="sd">                    </span>
+<span class="sd">                    •	make_region(self, x , y , id , txt,path_size,Regions)</span>
 
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
@@ -107,24 +113,23 @@
         
 <div class="viewcode-block" id="Annotation_Generator.make_region"><a class="viewcode-back" href="../../ann_generator.html#assessment.annotation.Annotation_Generator.make_region">[docs]</a>    <span class="k">def</span> <span class="nf">make_region</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="p">,</span> <span class="nb">id</span> <span class="p">,</span> <span class="n">txt</span><span class="p">,</span><span class="n">path_size</span><span class="p">,</span><span class="n">Regions</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This method extracts different types for annotations from Whole Slide Images.</span>
-<span class="sd">        It can save the extracted annottions to the output directory as defined in inputs.</span>
-<span class="sd">        This code also handles several annotations per slide. </span>
-<span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
+<span class="sd">        This method generate the XMl file structure and fill the content based on the Aperio ImageScope standard</span>
 
 <span class="sd">        :Parameters:</span>
-<span class="sd">            save_dir : string</span>
+<span class="sd">            x : integer</span>
 <span class="sd">                Output Directory to save the extracted annotations</span>
-
-<span class="sd">            WSIs : list</span>
+<span class="sd">            x : integer</span>
 <span class="sd">                List of included WSIs</span>
-
-<span class="sd">            XMLs : list</span>
+<span class="sd">            txt : string</span>
 <span class="sd">                List of XML files associated with included WSIs</span>
+<span class="sd">            path_size : integer</span>
+<span class="sd">                Patch size</span>
+<span class="sd">            Regions : object</span>
+<span class="sd">                the corresponsing XML region object</span>
+<span class="sd">            </span>
 
 <span class="sd">        :Returns:</span>
-<span class="sd">            None : None</span>
-<span class="sd">                None.</span>
+<span class="sd">            XML strycture</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">path_size</span><span class="p">)</span>
@@ -154,24 +159,24 @@
 
 <div class="viewcode-block" id="Annotation_Generator.create_xml"><a class="viewcode-back" href="../../ann_generator.html#assessment.annotation.Annotation_Generator.create_xml">[docs]</a>    <span class="k">def</span> <span class="nf">create_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">input_DIR</span><span class="p">,</span> <span class="n">file_path</span>  <span class="p">,</span><span class="n">path_size</span> <span class="p">,</span> <span class="n">save_xml_path</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This method extracts different types for annotations from Whole Slide Images.</span>
-<span class="sd">        It can save the extracted annottions to the output directory as defined in inputs.</span>
-<span class="sd">        This code also handles several annotations per slide. </span>
-<span class="sd">        The output directory will be generated based on the strucutr of the input directories.</span>
+<span class="sd">        This method reads the map file generated uisng the ROI_Generator.generate_map_file and generated the XML annotation file based on Aperio ImageScope standard.</span>
 
 <span class="sd">        :Parameters:</span>
 <span class="sd">            input_DIR : string</span>
-<span class="sd">                Input Directory</span>
+<span class="sd">                the path to the input directory of mapping file</span>
 
 <span class="sd">            file_path : string</span>
-<span class="sd">                WSIs</span>
+<span class="sd">                map file name (csv)</span>
 
 <span class="sd">            path_size : integer</span>
 <span class="sd">                Size of image patch</span>
+<span class="sd">                </span>
+<span class="sd">            save_xml_path: string</span>
+<span class="sd">                output directory</span>
+<span class="sd">            </span>
 
 <span class="sd">        :Returns:</span>
-<span class="sd">            None : None</span>
-<span class="sd">                None.</span>
+<span class="sd">            XML – the XML files</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">csv_file</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_DIR</span><span class="o">+</span><span class="n">file_path</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;WSI&#39;</span><span class="p">)</span>
@@ -229,17 +234,19 @@
 
 <span class="sd">        :Parameters:</span>
 <span class="sd">            input_DIR : string</span>
-<span class="sd">                Input Directory</span>
+<span class="sd">                the path to the input directory of image patches</span>
 
-<span class="sd">            file_path : str</span>
-<span class="sd">                WSIs</span>
+<span class="sd">            output_DIR : str</span>
+<span class="sd">                the path to the output directory to save the map file</span>
 
-<span class="sd">            path_size : integer</span>
-<span class="sd">                Size of image patch</span>
+<span class="sd">            file_Name : string</span>
+<span class="sd">                map file name (csv)</span>
+<span class="sd">                </span>
+<span class="sd">            tag_name : string   </span>
+<span class="sd">                Tag name</span>
 
 <span class="sd">        :Returns:</span>
-<span class="sd">            None : None</span>
-<span class="sd">                None.</span>
+<span class="sd">            CSV – the map file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         

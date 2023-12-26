@@ -11,8 +11,12 @@ Created on Fri Feb  4 11:42:52 2023
 **Classes:**      WSIpatch_extractor, PatchExtractor
               
 
-**Methods:**      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch
+**Methods:**      There are two methods in the patch extraction module as follows:
 
+        •	PatchExtractor.gen_patch(INPUTDIR: str, PatchSize: tuple, Number_of_Patches: int, intensity_check: boolean, OUTPUTDIR:str)
+        
+        •	WSIpatch_extractor.patch_extraction(wsi_obj: object, PatchSize: tuple, OUTPUTDIR:str, Random: boolean, Visualize: boolean, Intensity_check: boolean, Number_of_Patches: (int)
+        
 ---------------------------------------------------------------------------
 Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
 Version ='1.0'
@@ -56,13 +60,23 @@ class WSIpatch_extractor:
           
         :Parameters:
         wsi_obj : object
-            WSI object.
+            an object containing WSI file and its information
         patch_size: integer
-            size tiles
+            the size of image patches to be extracted
         output_folder : string
-            path root folder to save tiles
-        perform_segmentation_state: boolean
-        random_state : boolean
+            the path to the output directory to save image patches
+        random_state : boolean    
+            extract patches randomly or in order
+        visualize: boolean
+            either to plot extracted patches or not
+        intensity_check: boolean
+            to filter the image patches and eliminate empty ones
+        intensity_threshold: integer
+            the threshold to include image patches
+        std_threshold: integer
+            the standard deviation threhold to include image patches
+        patch_number : boolean
+            the number of patches to be extracted. Set to ‘-1’ to extract all possible image patches
             
         """
         # Generate object for tiles using the DeepZoomGenerator
@@ -390,18 +404,19 @@ class PatchExtractor :
         IF the WSI Magnification is 13X or 20X, this code will automaticall convert to 20X.
               
         :Parameters:
-            root_directory : string
-                Output Directory to save the extracted annotations
-                
-            WSIs : list
-                List of included WSIs
-                
-            XMLs : list
-                List of XML files associated with included WSIs
+            INPUTDIR : string
+                the path to the input directory
+            PatchSize : tuple
+                the size of image patches to be extracted 
+            Number_of_Patches : int
+                the number of patches per annotation to be extracted
+            intensity_check : boolean
+                to filter the image patches and eliminate empty ones
+            •	OUTPUTDIR  : string
+                the path to the output directory to save image patches
                 
         :Returns:
-            None : None
-                None.
+            Image – extracted image patches from the annotated area.
         """
               
         std_threshold = 15

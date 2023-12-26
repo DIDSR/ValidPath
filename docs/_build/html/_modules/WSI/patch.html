@@ -87,8 +87,12 @@
 <span class="sd">**Classes:**      WSIpatch_extractor, PatchExtractor</span>
 <span class="sd">              </span>
 
-<span class="sd">**Methods:**      patch_extraction, patch_extraction_of_tissue, patch_extraction_with_normalized_tiles, find_between, gen_patch</span>
+<span class="sd">**Methods:**      There are two methods in the patch extraction module as follows:</span>
 
+<span class="sd">        •	PatchExtractor.gen_patch(INPUTDIR: str, PatchSize: tuple, Number_of_Patches: int, intensity_check: boolean, OUTPUTDIR:str)</span>
+<span class="sd">        </span>
+<span class="sd">        •	WSIpatch_extractor.patch_extraction(wsi_obj: object, PatchSize: tuple, OUTPUTDIR:str, Random: boolean, Visualize: boolean, Intensity_check: boolean, Number_of_Patches: (int)</span>
+<span class="sd">        </span>
 <span class="sd">---------------------------------------------------------------------------</span>
 <span class="sd">Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)</span>
 <span class="sd">Version =&#39;1.0&#39;</span>
@@ -132,13 +136,23 @@
 <span class="sd">          </span>
 <span class="sd">        :Parameters:</span>
 <span class="sd">        wsi_obj : object</span>
-<span class="sd">            WSI object.</span>
+<span class="sd">            an object containing WSI file and its information</span>
 <span class="sd">        patch_size: integer</span>
-<span class="sd">            size tiles</span>
+<span class="sd">            the size of image patches to be extracted</span>
 <span class="sd">        output_folder : string</span>
-<span class="sd">            path root folder to save tiles</span>
-<span class="sd">        perform_segmentation_state: boolean</span>
-<span class="sd">        random_state : boolean</span>
+<span class="sd">            the path to the output directory to save image patches</span>
+<span class="sd">        random_state : boolean    </span>
+<span class="sd">            extract patches randomly or in order</span>
+<span class="sd">        visualize: boolean</span>
+<span class="sd">            either to plot extracted patches or not</span>
+<span class="sd">        intensity_check: boolean</span>
+<span class="sd">            to filter the image patches and eliminate empty ones</span>
+<span class="sd">        intensity_threshold: integer</span>
+<span class="sd">            the threshold to include image patches</span>
+<span class="sd">        std_threshold: integer</span>
+<span class="sd">            the standard deviation threhold to include image patches</span>
+<span class="sd">        patch_number : boolean</span>
+<span class="sd">            the number of patches to be extracted. Set to ‘-1’ to extract all possible image patches</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Generate object for tiles using the DeepZoomGenerator</span>
@@ -466,18 +480,19 @@
 <span class="sd">        IF the WSI Magnification is 13X or 20X, this code will automaticall convert to 20X.</span>
 <span class="sd">              </span>
 <span class="sd">        :Parameters:</span>
-<span class="sd">            root_directory : string</span>
-<span class="sd">                Output Directory to save the extracted annotations</span>
-<span class="sd">                </span>
-<span class="sd">            WSIs : list</span>
-<span class="sd">                List of included WSIs</span>
-<span class="sd">                </span>
-<span class="sd">            XMLs : list</span>
-<span class="sd">                List of XML files associated with included WSIs</span>
+<span class="sd">            INPUTDIR : string</span>
+<span class="sd">                the path to the input directory</span>
+<span class="sd">            PatchSize : tuple</span>
+<span class="sd">                the size of image patches to be extracted </span>
+<span class="sd">            Number_of_Patches : int</span>
+<span class="sd">                the number of patches per annotation to be extracted</span>
+<span class="sd">            intensity_check : boolean</span>
+<span class="sd">                to filter the image patches and eliminate empty ones</span>
+<span class="sd">            •	OUTPUTDIR  : string</span>
+<span class="sd">                the path to the output directory to save image patches</span>
 <span class="sd">                </span>
 <span class="sd">        :Returns:</span>
-<span class="sd">            None : None</span>
-<span class="sd">                None.</span>
+<span class="sd">            Image – extracted image patches from the annotated area.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
               
         <span class="n">std_threshold</span> <span class="o">=</span> <span class="mi">15</span>

@@ -11,7 +11,16 @@ Created on Fri Feb  4 11:42:52 2023
 **Classes:**      WSIReader
               
 
-**Methods:**      wsi_reader, extract_region, extract_bounds, wsi_xml_list
+**Methods:** There are three methods in the ReadWSI module as follows:
+        
+        •	Reader: wsi_obj = WSIReader.wsi_reader(path)
+        
+        
+        •	Region Extractor: WSIReader.extract_region(wsi_obj,location,level,size)
+        
+        
+        •	Extract Bounds: WSIReader.extract_bounds(wsi_obj,bounds,level)
+
 
 ---------------------------------------------------------------------------
 Author: SeyedM.MousaviKahaki (seyed.kahaki@fda.hhs.gov)
