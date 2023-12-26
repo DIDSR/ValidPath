@@ -16,6 +16,7 @@ jobs:
           pip install sphinx sphinx_rtd_theme myst_parser
       - name: Sphinx build
         run: |
+          cd docs
           make -C docs clean
           make -C docs html
       - name: Deploy to GitHub Pages
