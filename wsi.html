@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WSI Handler &mdash; ValidPath 2.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=51b770b3"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ValidPath
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputrequirements.html">Data (Input/Output) Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="annotation.html">Annotation Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patch.html">Patch Extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ann_generator.html">Annotation File Generator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assessment.html">ML Assessment</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ValidPath</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">WSI Handler</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/wsi.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wsi-handler">
+<h1>WSI Handler<a class="headerlink" href="#wsi-handler" title="Link to this heading"></a></h1>
+<section id="module-WSI.readwsi">
+<span id="wsi-readwsi-module"></span><h2>WSI.readwsi module<a class="headerlink" href="#module-WSI.readwsi" title="Link to this heading"></a></h2>
+<hr class="docutils" />
+<p><strong>Title:</strong>        ValidPath Toolbox - WSI Handler module</p>
+<p><strong>Description:</strong>  This is the WSI Handler module for the ValidPath toolbox. It is includes ReadWsi class and several methods</p>
+<p><strong>Classes:</strong>      WSIReader</p>
+<p><strong>Methods:</strong> There are three methods in the ReadWSI module as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Reader: wsi_obj = WSIReader.wsi_reader(path)</p></li>
+<li><p>Region Extractor: WSIReader.extract_region(wsi_obj,location,level,size)</p></li>
+<li><p>Extract Bounds: WSIReader.extract_bounds(wsi_obj,bounds,level)</p></li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="WSI.readwsi.WSIReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">WSI.readwsi.</span></span><span class="sig-name descname"><span class="pre">WSIReader</span></span><a class="reference internal" href="_modules/WSI/readwsi.html#WSIReader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.readwsi.WSIReader" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="WSI.readwsi.WSIReader.extract_bounds">
+<span class="sig-name descname"><span class="pre">extract_bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/WSI/readwsi.html#WSIReader.extract_bounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.readwsi.WSIReader.extract_bounds" title="Link to this definition"></a></dt>
+<dd><p>This method process the WSIs and extract image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>recieve the WSI object</p>
+</dd>
+<dt>bounds<span class="classifier">tuple</span></dt><dd><p>recieve the locations for extracting image from WSI</p>
+</dd>
+<dt>level<span class="classifier">int</span></dt><dd><p>WSI level to extract image from</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>IMG<span class="classifier">Image</span></dt><dd><p>Image data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="WSI.readwsi.WSIReader.extract_region">
+<span class="sig-name descname"><span class="pre">extract_region</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/WSI/readwsi.html#WSIReader.extract_region"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.readwsi.WSIReader.extract_region" title="Link to this definition"></a></dt>
+<dd><p>This method process the WSIs and extract regions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>recieve the WSI object</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>IMG<span class="classifier">Image</span></dt><dd><p>Image data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="WSI.readwsi.WSIReader.wsi_reader">
+<span class="sig-name descname"><span class="pre">wsi_reader</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/WSI/readwsi.html#WSIReader.wsi_reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.readwsi.WSIReader.wsi_reader" title="Link to this definition"></a></dt>
+<dd><p>This code read a WSI and return the WSI object.
+This code can read the WSIs with the following formats:
+Aperio (.svs, .tif)
+Hamamatsu (.vms, .vmu, .ndpi)
+Leica (.scn)
+MIRAX (.mrxs)
+Philips (.tiff)
+Sakura (.svslide)
+Trestle (.tif)
+Ventana (.bif, .tif)
+Generic tiled TIFF (.tif)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>WSI_path<span class="classifier">string</span></dt><dd><p>The address to the WSI file.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>wsi_obj<span class="classifier">object</span></dt><dd><p>WSI object</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="WSI.readwsi.WSIReader.wsi_xml_list">
+<span class="sig-name descname"><span class="pre">wsi_xml_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/WSI/readwsi.html#WSIReader.wsi_xml_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#WSI.readwsi.WSIReader.wsi_xml_list" title="Link to this definition"></a></dt>
+<dd><p>This code process the WSIs and XML list and returns these lists.
+Only WSI are included if there is an XML file with the same name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>wsis_dir<span class="classifier">string</span></dt><dd><p>Input Directory which has the original WSIs and XML files</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<dl class="simple">
+<dt>WSIs<span class="classifier">list</span></dt><dd><p>List of included WSIs</p>
+</dd>
+<dt><a href="#id1"><span class="problematic" id="id2">xml_</span></a><span class="classifier">list</span></dt><dd><p>List of XML files associated with included WSIs</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Seyed Kahaki.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
