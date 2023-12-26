@@ -161,6 +161,8 @@ And this pape:
 
 Example of input data can be found here: [Link](https://github.com/mousavikahaki/ValidPath/tree/main/data).
 
+### Contact
+For any questions/suggestions/collaborations, please contact Seyed Kahaki either via this GitHub repo or via email (seyed.kahaki@fda.hhs.gov).
 
 ### Acknowledgment 
 This project was supported in part by an appointment to the ORISE Research Participation Program at the Center for Devices and Radiological Health, U.S. Food and Drug Administration, administered by the Oak Ridge Institute for Science and Education through an interagency agreement between the U.S. Department of Energy and FDA/CDRH.
