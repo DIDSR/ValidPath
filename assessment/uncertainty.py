@@ -148,7 +148,7 @@ class Uncertainty_Analysis:
         
         auc_keras = auc(fpr_keras, tpr_keras)
 
-        #return auc_keras
+        return auc_keras
     
     def ci_(self, tp, n, alpha=0.05):
         """ Estimates confidence interval for Bernoulli p

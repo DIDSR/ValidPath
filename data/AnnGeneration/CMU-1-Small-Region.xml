@@ -3,58 +3,58 @@
     <Regions>
       <Region Type="1" Id="1" Text="0_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="1187" Y="2488" Z="0"/>
-          <Vertex X="1442" Y="2488" Z="0"/>
-          <Vertex X="1442" Y="2743" Z="0"/>
-          <Vertex X="1187" Y="2743" Z="0"/>
+          <Vertex X="1109" Y="2302" Z="0"/>
+          <Vertex X="1364" Y="2302" Z="0"/>
+          <Vertex X="1364" Y="2557" Z="0"/>
+          <Vertex X="1109" Y="2557" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="2" Text="9_CMU-1-Small-Region">
+      <Region Type="1" Id="2" Text="5_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="1037" Y="2427" Z="0"/>
-          <Vertex X="1292" Y="2427" Z="0"/>
-          <Vertex X="1292" Y="2682" Z="0"/>
-          <Vertex X="1037" Y="2682" Z="0"/>
+          <Vertex X="974" Y="2039" Z="0"/>
+          <Vertex X="1229" Y="2039" Z="0"/>
+          <Vertex X="1229" Y="2294" Z="0"/>
+          <Vertex X="974" Y="2294" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="3" Text="8_CMU-1-Small-Region">
+      <Region Type="1" Id="3" Text="5_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="968" Y="2378" Z="0"/>
-          <Vertex X="1223" Y="2378" Z="0"/>
-          <Vertex X="1223" Y="2633" Z="0"/>
-          <Vertex X="968" Y="2633" Z="0"/>
+          <Vertex X="982" Y="2368" Z="0"/>
+          <Vertex X="1237" Y="2368" Z="0"/>
+          <Vertex X="1237" Y="2623" Z="0"/>
+          <Vertex X="982" Y="2623" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="4" Text="8_CMU-1-Small-Region">
+      <Region Type="1" Id="4" Text="6_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="1056" Y="2485" Z="0"/>
-          <Vertex X="1311" Y="2485" Z="0"/>
-          <Vertex X="1311" Y="2740" Z="0"/>
-          <Vertex X="1056" Y="2740" Z="0"/>
+          <Vertex X="1027" Y="2410" Z="0"/>
+          <Vertex X="1282" Y="2410" Z="0"/>
+          <Vertex X="1282" Y="2665" Z="0"/>
+          <Vertex X="1027" Y="2665" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="5" Text="8_CMU-1-Small-Region">
+      <Region Type="1" Id="5" Text="6_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="1050" Y="2335" Z="0"/>
-          <Vertex X="1305" Y="2335" Z="0"/>
-          <Vertex X="1305" Y="2590" Z="0"/>
-          <Vertex X="1050" Y="2590" Z="0"/>
+          <Vertex X="1062" Y="2193" Z="0"/>
+          <Vertex X="1317" Y="2193" Z="0"/>
+          <Vertex X="1317" Y="2448" Z="0"/>
+          <Vertex X="1062" Y="2448" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="6" Text="7_CMU-1-Small-Region">
+      <Region Type="1" Id="6" Text="6_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="968" Y="2268" Z="0"/>
-          <Vertex X="1223" Y="2268" Z="0"/>
-          <Vertex X="1223" Y="2523" Z="0"/>
-          <Vertex X="968" Y="2523" Z="0"/>
+          <Vertex X="1182" Y="2329" Z="0"/>
+          <Vertex X="1437" Y="2329" Z="0"/>
+          <Vertex X="1437" Y="2584" Z="0"/>
+          <Vertex X="1182" Y="2584" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="7" Text="7_CMU-1-Small-Region">
+      <Region Type="1" Id="7" Text="6_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="1161" Y="2186" Z="0"/>
-          <Vertex X="1416" Y="2186" Z="0"/>
-          <Vertex X="1416" Y="2441" Z="0"/>
-          <Vertex X="1161" Y="2441" Z="0"/>
+          <Vertex X="945" Y="2251" Z="0"/>
+          <Vertex X="1200" Y="2251" Z="0"/>
+          <Vertex X="1200" Y="2506" Z="0"/>
+          <Vertex X="945" Y="2506" Z="0"/>
         </Vertices>
       </Region>
       <Region Type="1" Id="8" Text="7_CMU-1-Small-Region">
@@ -65,47 +65,87 @@
           <Vertex X="1118" Y="2448" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="9" Text="6_CMU-1-Small-Region">
+      <Region Type="1" Id="9" Text="5_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="945" Y="2251" Z="0"/>
-          <Vertex X="1200" Y="2251" Z="0"/>
-          <Vertex X="1200" Y="2506" Z="0"/>
-          <Vertex X="945" Y="2506" Z="0"/>
+          <Vertex X="1066" Y="2277" Z="0"/>
+          <Vertex X="1321" Y="2277" Z="0"/>
+          <Vertex X="1321" Y="2532" Z="0"/>
+          <Vertex X="1066" Y="2532" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="10" Text="6_CMU-1-Small-Region">
+      <Region Type="1" Id="10" Text="7_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="1182" Y="2329" Z="0"/>
-          <Vertex X="1437" Y="2329" Z="0"/>
-          <Vertex X="1437" Y="2584" Z="0"/>
-          <Vertex X="1182" Y="2584" Z="0"/>
+          <Vertex X="1161" Y="2186" Z="0"/>
+          <Vertex X="1416" Y="2186" Z="0"/>
+          <Vertex X="1416" Y="2441" Z="0"/>
+          <Vertex X="1161" Y="2441" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="11" Text="6_CMU-1-Small-Region">
+      <Region Type="1" Id="11" Text="7_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="1027" Y="2410" Z="0"/>
-          <Vertex X="1282" Y="2410" Z="0"/>
-          <Vertex X="1282" Y="2665" Z="0"/>
-          <Vertex X="1027" Y="2665" Z="0"/>
+          <Vertex X="968" Y="2268" Z="0"/>
+          <Vertex X="1223" Y="2268" Z="0"/>
+          <Vertex X="1223" Y="2523" Z="0"/>
+          <Vertex X="968" Y="2523" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="12" Text="5_CMU-1-Small-Region">
+      <Region Type="1" Id="12" Text="8_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="982" Y="2368" Z="0"/>
-          <Vertex X="1237" Y="2368" Z="0"/>
-          <Vertex X="1237" Y="2623" Z="0"/>
-          <Vertex X="982" Y="2623" Z="0"/>
+          <Vertex X="1050" Y="2335" Z="0"/>
+          <Vertex X="1305" Y="2335" Z="0"/>
+          <Vertex X="1305" Y="2590" Z="0"/>
+          <Vertex X="1050" Y="2590" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="13" Text="5_CMU-1-Small-Region">
+      <Region Type="1" Id="13" Text="8_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="974" Y="2039" Z="0"/>
-          <Vertex X="1229" Y="2039" Z="0"/>
-          <Vertex X="1229" Y="2294" Z="0"/>
-          <Vertex X="974" Y="2294" Z="0"/>
+          <Vertex X="1056" Y="2485" Z="0"/>
+          <Vertex X="1311" Y="2485" Z="0"/>
+          <Vertex X="1311" Y="2740" Z="0"/>
+          <Vertex X="1056" Y="2740" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="14" Text="5_CMU-1-Small-Region">
+      <Region Type="1" Id="14" Text="8_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1081" Y="2384" Z="0"/>
+          <Vertex X="1336" Y="2384" Z="0"/>
+          <Vertex X="1336" Y="2639" Z="0"/>
+          <Vertex X="1081" Y="2639" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="15" Text="8_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="968" Y="2378" Z="0"/>
+          <Vertex X="1223" Y="2378" Z="0"/>
+          <Vertex X="1223" Y="2633" Z="0"/>
+          <Vertex X="968" Y="2633" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="16" Text="9_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1037" Y="2427" Z="0"/>
+          <Vertex X="1292" Y="2427" Z="0"/>
+          <Vertex X="1292" Y="2682" Z="0"/>
+          <Vertex X="1037" Y="2682" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="17" Text="9_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1098" Y="2153" Z="0"/>
+          <Vertex X="1353" Y="2153" Z="0"/>
+          <Vertex X="1353" Y="2408" Z="0"/>
+          <Vertex X="1098" Y="2408" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="18" Text="7_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1196" Y="2494" Z="0"/>
+          <Vertex X="1451" Y="2494" Z="0"/>
+          <Vertex X="1451" Y="2749" Z="0"/>
+          <Vertex X="1196" Y="2749" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="19" Text="5_CMU-1-Small-Region">
         <Vertices>
           <Vertex X="1059" Y="2060" Z="0"/>
           <Vertex X="1314" Y="2060" Z="0"/>
@@ -113,7 +153,7 @@
           <Vertex X="1059" Y="2315" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="15" Text="4_CMU-1-Small-Region">
+      <Region Type="1" Id="20" Text="4_CMU-1-Small-Region">
         <Vertices>
           <Vertex X="1200" Y="2384" Z="0"/>
           <Vertex X="1455" Y="2384" Z="0"/>
@@ -121,7 +161,7 @@
           <Vertex X="1200" Y="2639" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="16" Text="4_CMU-1-Small-Region">
+      <Region Type="1" Id="21" Text="4_CMU-1-Small-Region">
         <Vertices>
           <Vertex X="1044" Y="2223" Z="0"/>
           <Vertex X="1299" Y="2223" Z="0"/>
@@ -129,95 +169,15 @@
           <Vertex X="1044" Y="2478" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="17" Text="4_CMU-1-Small-Region">
+      <Region Type="1" Id="22" Text="0_CMU-1-Small-Region">
         <Vertices>
-          <Vertex X="1043" Y="2411" Z="0"/>
-          <Vertex X="1298" Y="2411" Z="0"/>
-          <Vertex X="1298" Y="2666" Z="0"/>
-          <Vertex X="1043" Y="2666" Z="0"/>
+          <Vertex X="1187" Y="2488" Z="0"/>
+          <Vertex X="1442" Y="2488" Z="0"/>
+          <Vertex X="1442" Y="2743" Z="0"/>
+          <Vertex X="1187" Y="2743" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="18" Text="3_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="997" Y="2044" Z="0"/>
-          <Vertex X="1252" Y="2044" Z="0"/>
-          <Vertex X="1252" Y="2299" Z="0"/>
-          <Vertex X="997" Y="2299" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="19" Text="3_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="978" Y="2383" Z="0"/>
-          <Vertex X="1233" Y="2383" Z="0"/>
-          <Vertex X="1233" Y="2638" Z="0"/>
-          <Vertex X="978" Y="2638" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="20" Text="3_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="1145" Y="2383" Z="0"/>
-          <Vertex X="1400" Y="2383" Z="0"/>
-          <Vertex X="1400" Y="2638" Z="0"/>
-          <Vertex X="1145" Y="2638" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="21" Text="2_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="931" Y="1966" Z="0"/>
-          <Vertex X="1186" Y="1966" Z="0"/>
-          <Vertex X="1186" Y="2221" Z="0"/>
-          <Vertex X="931" Y="2221" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="22" Text="2_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="1065" Y="2154" Z="0"/>
-          <Vertex X="1320" Y="2154" Z="0"/>
-          <Vertex X="1320" Y="2409" Z="0"/>
-          <Vertex X="1065" Y="2409" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="23" Text="2_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="1054" Y="2295" Z="0"/>
-          <Vertex X="1309" Y="2295" Z="0"/>
-          <Vertex X="1309" Y="2550" Z="0"/>
-          <Vertex X="1054" Y="2550" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="24" Text="1_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="986" Y="2276" Z="0"/>
-          <Vertex X="1241" Y="2276" Z="0"/>
-          <Vertex X="1241" Y="2531" Z="0"/>
-          <Vertex X="986" Y="2531" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="25" Text="1_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="1162" Y="2454" Z="0"/>
-          <Vertex X="1417" Y="2454" Z="0"/>
-          <Vertex X="1417" Y="2709" Z="0"/>
-          <Vertex X="1162" Y="2709" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="26" Text="1_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="1066" Y="2217" Z="0"/>
-          <Vertex X="1321" Y="2217" Z="0"/>
-          <Vertex X="1321" Y="2472" Z="0"/>
-          <Vertex X="1066" Y="2472" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="27" Text="0_CMU-1-Small-Region">
-        <Vertices>
-          <Vertex X="963" Y="2255" Z="0"/>
-          <Vertex X="1218" Y="2255" Z="0"/>
-          <Vertex X="1218" Y="2510" Z="0"/>
-          <Vertex X="963" Y="2510" Z="0"/>
-        </Vertices>
-      </Region>
-      <Region Type="1" Id="28" Text="0_CMU-1-Small-Region">
+      <Region Type="1" Id="23" Text="0_CMU-1-Small-Region">
         <Vertices>
           <Vertex X="963" Y="1990" Z="0"/>
           <Vertex X="1218" Y="1990" Z="0"/>
@@ -225,7 +185,127 @@
           <Vertex X="963" Y="2245" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="29" Text="9_CMU-1-Small-Region">
+      <Region Type="1" Id="24" Text="0_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="963" Y="2255" Z="0"/>
+          <Vertex X="1218" Y="2255" Z="0"/>
+          <Vertex X="1218" Y="2510" Z="0"/>
+          <Vertex X="963" Y="2510" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="25" Text="1_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1066" Y="2217" Z="0"/>
+          <Vertex X="1321" Y="2217" Z="0"/>
+          <Vertex X="1321" Y="2472" Z="0"/>
+          <Vertex X="1066" Y="2472" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="26" Text="1_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1121" Y="2335" Z="0"/>
+          <Vertex X="1376" Y="2335" Z="0"/>
+          <Vertex X="1376" Y="2590" Z="0"/>
+          <Vertex X="1121" Y="2590" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="27" Text="1_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1162" Y="2454" Z="0"/>
+          <Vertex X="1417" Y="2454" Z="0"/>
+          <Vertex X="1417" Y="2709" Z="0"/>
+          <Vertex X="1162" Y="2709" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="28" Text="1_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="986" Y="2276" Z="0"/>
+          <Vertex X="1241" Y="2276" Z="0"/>
+          <Vertex X="1241" Y="2531" Z="0"/>
+          <Vertex X="986" Y="2531" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="29" Text="2_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1054" Y="2295" Z="0"/>
+          <Vertex X="1309" Y="2295" Z="0"/>
+          <Vertex X="1309" Y="2550" Z="0"/>
+          <Vertex X="1054" Y="2550" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="30" Text="2_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1065" Y="2154" Z="0"/>
+          <Vertex X="1320" Y="2154" Z="0"/>
+          <Vertex X="1320" Y="2409" Z="0"/>
+          <Vertex X="1065" Y="2409" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="31" Text="2_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="931" Y="1966" Z="0"/>
+          <Vertex X="1186" Y="1966" Z="0"/>
+          <Vertex X="1186" Y="2221" Z="0"/>
+          <Vertex X="931" Y="2221" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="32" Text="2_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="997" Y="2318" Z="0"/>
+          <Vertex X="1252" Y="2318" Z="0"/>
+          <Vertex X="1252" Y="2573" Z="0"/>
+          <Vertex X="997" Y="2573" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="33" Text="3_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1145" Y="2383" Z="0"/>
+          <Vertex X="1400" Y="2383" Z="0"/>
+          <Vertex X="1400" Y="2638" Z="0"/>
+          <Vertex X="1145" Y="2638" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="34" Text="3_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1195" Y="2368" Z="0"/>
+          <Vertex X="1450" Y="2368" Z="0"/>
+          <Vertex X="1450" Y="2623" Z="0"/>
+          <Vertex X="1195" Y="2623" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="35" Text="3_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="978" Y="2383" Z="0"/>
+          <Vertex X="1233" Y="2383" Z="0"/>
+          <Vertex X="1233" Y="2638" Z="0"/>
+          <Vertex X="978" Y="2638" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="36" Text="3_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="997" Y="2044" Z="0"/>
+          <Vertex X="1252" Y="2044" Z="0"/>
+          <Vertex X="1252" Y="2299" Z="0"/>
+          <Vertex X="997" Y="2299" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="37" Text="4_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1011" Y="2299" Z="0"/>
+          <Vertex X="1266" Y="2299" Z="0"/>
+          <Vertex X="1266" Y="2554" Z="0"/>
+          <Vertex X="1011" Y="2554" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="38" Text="4_CMU-1-Small-Region">
+        <Vertices>
+          <Vertex X="1043" Y="2411" Z="0"/>
+          <Vertex X="1298" Y="2411" Z="0"/>
+          <Vertex X="1298" Y="2666" Z="0"/>
+          <Vertex X="1043" Y="2666" Z="0"/>
+        </Vertices>
+      </Region>
+      <Region Type="1" Id="39" Text="9_CMU-1-Small-Region">
         <Vertices>
           <Vertex X="934" Y="2067" Z="0"/>
           <Vertex X="1189" Y="2067" Z="0"/>
@@ -233,7 +313,7 @@
           <Vertex X="934" Y="2322" Z="0"/>
         </Vertices>
       </Region>
-      <Region Type="1" Id="30" Text="9_CMU-1-Small-Region">
+      <Region Type="1" Id="40" Text="9_CMU-1-Small-Region">
         <Vertices>
           <Vertex X="980" Y="2337" Z="0"/>
           <Vertex X="1235" Y="2337" Z="0"/>
