@@ -28,24 +28,23 @@ Version ='1.0'
 ---------------------------------------------------------------------------
 """
 
-import numpy as np
-import cv2
-from skimage.io import imsave, imread
-from PIL import Image
+#import numpy as np
+#import cv2
+#from skimage.io import imsave, imread
+#from PIL import Image
 import os
-from glob import glob
+#from glob import glob
 import openslide
-from openslide.deepzoom import DeepZoomGenerator
-import numpy as np
-from pathlib import Path
-import tifffile as tiff
-import random
-import matplotlib.pyplot as plt
+#from openslide.deepzoom import DeepZoomGenerator
+#from pathlib import Path
+#import tifffile as tiff
+#import random
+#import matplotlib.pyplot as plt
 #from readwsi.TissueSegmentation import TissueSegmentation
-from shapely.geometry import Polygon, Point
+#from shapely.geometry import Polygon, Point
 #from readwsi.normalization import Normalization
 #from readwsi import normalization
-import PIL
+#import PIL
 
 class WSIReader:
     def __init__(self):
