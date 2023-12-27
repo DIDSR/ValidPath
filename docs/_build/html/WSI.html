@@ -56,6 +56,14 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#about-this-module">About this module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#methods">Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-required-packages">Loading Required Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read-whole-slide-image">Read Whole Slide Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#thumbnail-visualization">Thumbnail Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extract-wsi-region">Extract WSI Region</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read-rectangle">Read Rectangle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extract-bound">Extract bound</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="annotation.html">Annotation Extraction</a></li>
@@ -214,6 +222,164 @@ Only WSI are included if there is an XML file with the same name.</p>
 
 </dd></dl>
 
+</section>
+<section id="about-this-module">
+<h2>About this module<a class="headerlink" href="#about-this-module" title="Permalink to this heading"></a></h2>
+<p>This demonstration guides you through the process of utilizing ValidPath to interact with a whole slide image (WSI). The objective is to provide you with an understanding of how to load a WSI, extract relevant information, and subsequently retrieve WSI sub image. In the first part of this demo, we focus on loading a sample WSI. This involves utilizing ValidPath’s built-in functions to successfully read the image file. These functions are designed to handle the complexities of WSI files, which can be vast and multi-layered, ensuring that the image is loaded.
+After successfully loading the WSI, we proceed to extract key information about the image. This involves identifying and WSI characteristics such as the WSI’s dimensions, the number of image layers, and the magnification levels. By understanding these attributes, we can more effectively analyze the slide and extract relevant sections for further study. Let’s start with the environment configuration.</p>
+<a class="reference internal image-reference" href="_images/handler1.PNG"><img alt="_images/handler1.PNG" class="align-center" src="_images/handler1.PNG" style="width: 300px;" /></a>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this heading"></a></h2>
+<p>There are three methods in the ReadWSI module as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">•       Reader: wsi_obj = WSIReader.wsi_reader(path)</span>
+<span class="go">•       Region Extractor: WSIReader.extract_region(wsi_obj,location,level,size)</span>
+<span class="go">•       Extract Bounds: WSIReader.extract_bounds(wsi_obj,bounds,level)</span>
+</pre></div>
+</div>
+<p>In this section, we will go through each one of these methods and provided detailed instruction on how to use them.</p>
+</section>
+<section id="loading-required-packages">
+<h2>Loading Required Packages<a class="headerlink" href="#loading-required-packages" title="Permalink to this heading"></a></h2>
+<p>In this step, we will import several Python modules that are needed for our analysis.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">import os</span>
+<span class="go">from WSI.readwsi import WSIReader</span>
+<span class="go">import matplotlib.pyplot as plt</span>
+<span class="go">import numpy as np</span>
+</pre></div>
+</div>
+<p>Note:
+If you got a dll error for reading openslide dll (‘libopenslide-0.dll’) you can set this line before import openslide:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">import os</span>
+<span class="go">os.environ[&#39;path&#39;] =&quot;...\\openslide...\\bin&quot;+&quot;;&quot;+os.environ[&#39;path&#39;]</span>
+</pre></div>
+</div>
+</section>
+<section id="read-whole-slide-image">
+<h2>Read Whole Slide Image<a class="headerlink" href="#read-whole-slide-image" title="Permalink to this heading"></a></h2>
+<p>In this section, we load a WSI and create the WSI object. This is enabled using the wsi_reader method in the WSIReader package.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">WSIReader.wsi_reader(WSI_path: str) → WSI object</span>
+</pre></div>
+</div>
+<p>Loads a whole slide image and create the object file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Parameters:</span>
+
+<span class="go">•       WSI_path (str) – WSI file path.</span>
+
+<span class="go">Returns:</span>
+<span class="go">•       WSI_object (object) – an object containing WSI file and its information.</span>
+</pre></div>
+</div>
+<p>Supported file formats: .SVS, .TIF, .NDPI</p>
+<p>In order to use the wsi_reader, we will set up a directory which contains our WSI files, we will then create a list in Python and append WSI names in this list and load the WSI using the wsi_reader using an index.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">WSIs_ = glob(dir_file+&#39;/*.svs&#39;)</span>
+<span class="go">wsi_obj = WSIReader.wsi_reader(WSIs_[0])</span>
+</pre></div>
+</div>
+<p>After reading the WSI using the wsi_reader, we have an object which has the loaded WSI. To validate if the object is loaded correctly, we print the object and also print the available pyramid levels of the WSI using the “.level_dimensions” method.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">print(wsi_obj)</span>
+<span class="go">print(wsi_obj.level_dimensions)</span>
+</pre></div>
+</div>
+</section>
+<section id="thumbnail-visualization">
+<h2>Thumbnail Visualization<a class="headerlink" href="#thumbnail-visualization" title="Permalink to this heading"></a></h2>
+<p>To see a thumbnail of the WSI, we use the get_thumbnail method of WSIReader. We load the thumbnail as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">size_ = (600,300)</span>
+<span class="go">tile= wsi_obj.get_thumbnail(size=size_)</span>
+<span class="go">plt.imshow(tile)</span>
+<span class="go">plt.title(&quot;WSI thumbnail&quot;)</span>
+</pre></div>
+</div>
+<p>after running the code and provide the x and y size of the thumbnail and plot it, the output should look like this:</p>
+<a class="reference internal image-reference" href="_images/handler2.PNG"><img alt="_images/handler2.PNG" class="align-center" src="_images/handler2.PNG" style="width: 300px;" /></a>
+</section>
+<section id="extract-wsi-region">
+<h2>Extract WSI Region<a class="headerlink" href="#extract-wsi-region" title="Permalink to this heading"></a></h2>
+<p>The next stage of this demonstration involves extracting image regions from the WSI. We achieve this through using ValidPath’s extract_region method. This is a critical step as it enables us to focus on specific areas of the slide, which can then be subjected to detailed analysis.
+.. code-block:: console</p>
+<blockquote>
+<div><p>WSIReader. extract_region(WSI_Obj: object, Region_location: tuple, WSI_level: int, Region_size: tuple) → Image</p>
+</div></blockquote>
+<p>Gets a WSI object and extract a region from the whole slide image.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Parameters:</span>
+<span class="go">•       WSI_object (object) – an object containing WSI file and its information.</span>
+<span class="go">•       Region_location (tuple) – x and y coordinate of the region location (top left)</span>
+<span class="go">•       WSI_level (int) – the WSI pyramid level to extract the region</span>
+<span class="go">•       Region_size (tuple) – the size of the region to be extracted</span>
+<span class="go">Returns:</span>
+<span class="go">•       Image (array) – an array containing the extracted region from the WSI.</span>
+</pre></div>
+</div>
+<p>Let’s jump into the code by setting up plotting properties. Here we import matplotlib and set some options for plotting results to make the output looks better.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>Import and setting up packages
+<span class="go">import matplotlib.pyplot as plt</span>
+<span class="go">import matplotlib as mpl</span>
+<span class="go">mpl.rcParams[&quot;figure.dpi&quot;] = 70  # for high resolution figure in notebook</span>
+<span class="go">mpl.rcParams[&quot;figure.facecolor&quot;] = &quot;white&quot;  # To make sure text is visible in dark mode</span>
+<span class="go">plt.rcParams.update({&quot;font.size&quot;: 5})</span>
+</pre></div>
+</div>
+<p>Now we call the reader from the WSI object and plot a small size WSI:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span>Call the reader
+<span class="go">location = (0,0)                              #location (tuple) – (x, y)</span>
+<span class="go">level =1                                      # level(int)</span>
+<span class="go">size =  wsi_obj.level_dimensions[level]</span>
+<span class="go">file= WSIReader.extract_region(wsi_obj,location,level,size)</span>
+<span class="go">print(&quot;Wsi size = &quot;,file.size ,&quot; in level &quot;,level)</span>
+<span class="go">plt.imshow(np.asarray(file).astype(np.uint32), cmap=&#39;gray&#39;)</span>
+<span class="go">plt.show()</span>
+</pre></div>
+</div>
+<p>Output Example:</p>
+<a class="reference internal image-reference" href="_images/handler3.PNG"><img alt="_images/handler3.PNG" class="align-center" src="_images/handler3.PNG" style="width: 300px;" /></a>
+</section>
+<section id="read-rectangle">
+<h2>Read Rectangle<a class="headerlink" href="#read-rectangle" title="Permalink to this heading"></a></h2>
+<p>Next, we will read a region of the whole slide image at a given location and size using the read_rect method. Running this code will ask the user to set the x and y coordinates (start points), the WSI pyramid level (set level to 0 for the best resolution), and the size of the area (in x and y directions).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">location = (2500,8500)</span>
+<span class="go">level =0</span>
+<span class="go">size = (500,500)</span>
+<span class="go">file= WSIReader.extract_region(wsi_obj,location,level,size)</span>
+<span class="go">print(&quot;Wsi size = &quot;,file.size ,&quot; in level &quot;,level)</span>
+<span class="go">plt.imshow(np.asarray(file).astype(np.uint32), cmap=&#39;gray&#39;)</span>
+<span class="go">plt.show()</span>
+</pre></div>
+</div>
+<p>After running the code and entering the requested information, the code will plot the region of the WSI, similar to the following image.</p>
+<a class="reference internal image-reference" href="_images/handler4.PNG"><img alt="_images/handler4.PNG" class="align-center" src="_images/handler4.PNG" style="width: 300px;" /></a>
+</section>
+<section id="extract-bound">
+<h2>Extract bound<a class="headerlink" href="#extract-bound" title="Permalink to this heading"></a></h2>
+<p>In this section, we will show how to read a region of the whole slide image within given bounds using the extract_bounds method. Bounds is a tuple of (top left, bottom left, top right, bottom right) of the region.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">WSIReader.extract_bounds(WSI_Obj: object,Bounds: tuple, WSI_level: int) → Image</span>
+<span class="go">Gets an WSI object and extract a part of the whole slide image.</span>
+<span class="go">Parameters:</span>
+<span class="go">•       WSI_Obj (object) – an object containing WSI file and its information</span>
+<span class="go">•       Bounds (tuple) – contains the four locations (top left coordinate, bottom left coordinate, top right coordinate, bottom right coordinate)</span>
+<span class="go">•       WSI_level (int) – the WSI pyramid level to extract the region</span>
+
+<span class="go">Returns:</span>
+<span class="go">•       Image (array) – an array containing the extracted region from the WSI.</span>
+</pre></div>
+</div>
+<p>First Let’s check the dimensions of the WSI:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Print(wsi_obj.level_dimensions)</span>
+</pre></div>
+</div>
+<p>This will give you output similar to this which each paired numbers are the size of the image in different pyramid level of the WSI</p>
+<p>Now, let’s set the start and end points and get the WSI region using the coordinates. Running the following code will ask the user to enter four values and will extract the specified WSI region and plot the result.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">bounds = [3600, 28000, 4500, 30000]</span>
+<span class="go">level = 0</span>
+<span class="go">file= WSIReader.extract_bounds(wsi_obj,bounds,level)</span>
+<span class="go">print(&quot;Wsi size = &quot;,file.size ,&quot; in level &quot;,level)</span>
+<span class="go">file = np.array(file)</span>
+<span class="go">plt.imshow(np.asarray(file).astype(np.uint32), cmap=&#39;gray&#39;)</span>
+<span class="go">plt.show()</span>
+</pre></div>
+</div>
+<p>The output should look like this:</p>
+<a class="reference internal image-reference" href="_images/handler5.PNG"><img alt="_images/handler5.PNG" class="align-center" src="_images/handler5.PNG" style="width: 300px;" /></a>
 </section>
 </section>
 

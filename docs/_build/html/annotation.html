@@ -55,6 +55,11 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#about-this-module">About this module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-required-packages">Loading Required Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read-whole-slide-image-and-xml-files">Read Whole Slide Image and XML files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extracting-annotation">Extracting Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extracting-annotation-and-mask">Extracting Annotation and Mask</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="patch.html">Patch Extraction</a></li>
@@ -146,6 +151,75 @@ The output directory will be generated based on the strucutr of the input direct
 
 </dd></dl>
 
+</section>
+<section id="about-this-module">
+<h2>About this module<a class="headerlink" href="#about-this-module" title="Permalink to this heading"></a></h2>
+<p>This demonstration guides you through the process extracting image regions from the WSI. We achieve this through using ValidPath’s Annotation Extractor class. This demonstration should provide you with the instruction to use ValidPath for extracting annotations and the annotation masks.</p>
+<a class="reference internal image-reference" href="_images/ann_extraction.PNG"><img alt="_images/ann_extraction.PNG" class="align-center" src="_images/ann_extraction.PNG" style="width: 300px;" /></a>
+</section>
+<section id="loading-required-packages">
+<h2>Loading Required Packages<a class="headerlink" href="#loading-required-packages" title="Permalink to this heading"></a></h2>
+<p>This step involves importing various Python modules that are needed for our analysis.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">from WSI.annotation import AnnotationExtractor</span>
+</pre></div>
+</div>
+<p>Note: if you get an error related to openCV, please re-install it using the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">pip3 uninstall opencv-python-headless</span>
+<span class="go">pip3 install opencv-python-headless</span>
+</pre></div>
+</div>
+</section>
+<section id="read-whole-slide-image-and-xml-files">
+<h2>Read Whole Slide Image and XML files<a class="headerlink" href="#read-whole-slide-image-and-xml-files" title="Permalink to this heading"></a></h2>
+<p>In this section, we read WSIs and XML files from a given directory and create a list for further processing. Please note that for each WSI file, there should be an XML file containing annotations with the same filename as the WSI filename. For example: Aperio1.svs and Aperio1.xml. In this part, you will also enter and set the output directory which the extracted annotation will be stored.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">dir_file = “C:/Users/data”</span>
+<span class="go">wsis=[]</span>
+<span class="go">xmls=[]</span>
+<span class="go">files = os.listdir(dir_file)</span>
+<span class="go">for i in files :</span>
+<span class="gp">        #</span>extract all wsi files and xml files
+<span class="go">        if i.endswith(&quot;.svs&quot;)==True :</span>
+<span class="go">                if os.path.exists(dir_file+&#39;\\&#39;+i[:-4]+&quot;.xml&quot;):</span>
+<span class="go">                        wsis.append(i)</span>
+<span class="go">                        xmls.append(i[:-4]+&quot;.xml&quot;)</span>
+<span class="go">WSIs_ = [os.path.join(dir_file,f) for f in wsis]</span>
+<span class="go">XMLs_ = [os.path.join(dir_file,f) for f in xmls]</span>
+<span class="go">print(WSIs_,XMLs_)</span>
+<span class="go">save_dir = “C:/Users/data/output”</span>
+</pre></div>
+</div>
+<p>After reading the list of WSIs and XML files, you should be able to see the list of loaded files similar to the following output:</p>
+<a class="reference internal image-reference" href="_images/ann_extraction1.PNG"><img alt="_images/ann_extraction1.PNG" class="align-center" src="_images/ann_extraction1.PNG" style="width: 800px;" /></a>
+</section>
+<section id="extracting-annotation">
+<h2>Extracting Annotation<a class="headerlink" href="#extracting-annotation" title="Permalink to this heading"></a></h2>
+<p>In this section, we will use the extract_ann method of the AnnotationExtractor class to extract the annotations. First, we need to define an object from the AnnotationExtractor class, and call the extract_ann method. There are three inputs required to call the extract_ann method which are, &lt;save directory&gt;, &lt;a variable with list of XMLs&gt;, and &lt;a variable with list of WSIs&gt;. These variables are defined in the previous section (Read Whole Slide Image and XML files).</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">AnnotationExtractor.extract_ann (Save_dir: str,XMLs: array , WSIs: array) → Image</span>
+
+<span class="go">Loads whole slide images and corresponding annotation files and extracts the annotations.</span>
+</pre></div>
+</div>
+<p>You also can set the visualization parameter to “True” in order to extract the annotations and visualize the results. You can run the following code to do this:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ann = AnnotationExtractor()</span>
+<span class="go">Visualization = True</span>
+<span class="go">ann.extract_ann (save_dir ,XMLs_ , WSIs_,Visualization)</span>
+</pre></div>
+</div>
+<p>This will plot each extracted annotation in the output similar to the following:</p>
+<a class="reference internal image-reference" href="_images/ann_extraction2.PNG"><img alt="_images/ann_extraction2.PNG" class="align-center" src="_images/ann_extraction2.PNG" style="width: 300px;" /></a>
+</section>
+<section id="extracting-annotation-and-mask">
+<h2>Extracting Annotation and Mask<a class="headerlink" href="#extracting-annotation-and-mask" title="Permalink to this heading"></a></h2>
+<p>The extract_ann method of the AnnotationExtractor class allows you to extract both annotations and the mask at the same time and save them into the save directory as specified earlier. For this goal, you can run the following code and setting the save_mask parameter to “True” as follows.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ann = AnnotationExtractor()</span>
+<span class="go">Visualization = True</span>
+<span class="go">save_mask = True</span>
+<span class="gp">#</span>Extracting all annotations and their mask save them <span class="k">in</span> the save directory and plotting.
+<span class="go">ann.extract_ann (save_dir ,XMLs_ , WSIs_,Visualization,save_mask)</span>
+</pre></div>
+</div>
+<p>running this code will extract both annotations and corresponding mask, save them into the save directory and visualize the mask and annotation in the output similar to the following screenshot.</p>
+<a class="reference internal image-reference" href="_images/ann_extraction3.PNG"><img alt="_images/ann_extraction3.PNG" class="align-center" src="_images/ann_extraction3.PNG" style="width: 300px;" /></a>
 </section>
 </section>
 

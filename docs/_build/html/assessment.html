@@ -68,6 +68,9 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#about-this-module">About this module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-required-packages">Loading Required Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generate-results">Generate Results</a></li>
 </ul>
 </li>
 </ul>
@@ -326,6 +329,65 @@ Confusion Matrix</p>
 
 </dd></dl>
 
+</section>
+<section id="about-this-module">
+<h2>About this module<a class="headerlink" href="#about-this-module" title="Permalink to this heading"></a></h2>
+<p>This demonstration guides you through the process of using ValidPath to for performance evaluation of ML models. This is enabled using the get_report method of the UncertaintyAnalysis class in the ValidPath. The input to this method are the probability results of the ML model as well as the truth values. The output of this method include:</p>
+<blockquote>
+<div><p>Confusion Matrix</p>
+</div></blockquote>
+<a class="reference internal image-reference" href="_images/assessment6.PNG"><img alt="_images/assessment6.PNG" class="align-center" src="_images/assessment6.PNG" style="width: 300px;" /></a>
+<p>For the confidence interval calculation, we first define J=  TP/(TP+FN+FP) , and computed its 95% CI [JL, JU] based on the binomial distribution. Then because F1=  2J/(1+J) , the 95% CI of F1 is [2JL/(1+JL), 2JU/(1+JU)].</p>
+</section>
+<section id="loading-required-packages">
+<h2>Loading Required Packages<a class="headerlink" href="#loading-required-packages" title="Permalink to this heading"></a></h2>
+<p>This step involves importing various Python modules that are needed for our analysis.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">import numpy as np</span>
+<span class="go">import pandas as pd</span>
+<span class="go">from assessment.uncertainty import Uncertainty_Analysis</span>
+<span class="go">UncertaintyAnalysis = Uncertainty_Analysis()</span>
+</pre></div>
+</div>
+</section>
+<section id="generate-results">
+<h2>Generate Results<a class="headerlink" href="#generate-results" title="Permalink to this heading"></a></h2>
+<p>Having the output of the binary classification results, we can now generate the performance results. In order to generate the annotation files, we can use the get_report method of the UncertaintyAnalysis class.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">UncertaintyAnalysis. get_report(y_pred , y_truth) → Array</span>
+<span class="go">Receive the classification probabilities and the truth and generate the results.</span>
+<span class="go">Parameters:</span>
+<span class="go">        y_pred (arr) – prediction results (probabilities)</span>
+<span class="go">        y_truth (arr) – truth</span>
+<span class="go">Returns:</span>
+<span class="go">        Array – the classification report</span>
+</pre></div>
+</div>
+<p>You can run the following code to generate classification report:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">import numpy as np</span>
+<span class="go">import pandas as pd</span>
+<span class="go">from assessment.uncertainty import Uncertainty_Analysis</span>
+<span class="go">UncertaintyAnalysis = Uncertainty_Analysis()</span>
+<span class="go">xls_file = &quot;C:/Results/ResultsExample.xlsx&quot;</span>
+<span class="go">UncertaintyAnalysis.perform_Bootstrap= True</span>
+<span class="go">UncertaintyAnalysis.plot_roc= True</span>
+<span class="go">UncertaintyAnalysis.perform_Delong= True</span>
+<span class="go">UncertaintyAnalysis.tag = “TEST”</span>
+<span class="gp">#</span>loading file tnto dataframe
+<span class="go">df = pd.read_excel(xls_file)</span>
+<span class="gp">#</span>define two list to save values
+<span class="go">y_pred=[]</span>
+<span class="go">y_truth= []</span>
+<span class="gp">#</span>extraction columns values
+<span class="go">for i in df.values:</span>
+<span class="go">        y_truth.append(i[0])</span>
+<span class="go">        y_pred.append(i[1])</span>
+<span class="gp">#</span>convert list to ndarray
+<span class="go">y_pred = np.array(y_pred)</span>
+<span class="go">y_truth = np.array(y_truth)</span>
+<span class="go">Results = UncertaintyAnalysis.get_report(y_pred , y_truth)</span>
+</pre></div>
+</div>
+<p>After running the code and provide the input data, you will see the performance report like the following:</p>
+<a class="reference internal image-reference" href="_images/assessment7.PNG"><img alt="_images/assessment7.PNG" class="align-center" src="_images/assessment7.PNG" style="width: 300px;" /></a>
 </section>
 </section>
 

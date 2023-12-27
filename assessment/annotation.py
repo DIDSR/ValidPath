@@ -154,7 +154,7 @@ class Annotation_Generator:
         This method extracts different types for annotations from Whole Slide Images.
         It can save the extracted annottions to the output directory as defined in inputs.
         This code also handles several annotations per slide. 
-        The output directory will be generated based on the strucutr of the input directories.
+        The output directory will be generated based on the structure of the input directories.
 
         :Parameters:
             input_DIR : string

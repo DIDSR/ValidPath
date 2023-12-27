@@ -62,6 +62,10 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#about-this-module">About this module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-required-packages">Loading Required Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#patch-extraction-from-annotated-area">Patch Extraction from Annotated Area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#patch-extraction-from-the-entire-wsi">Patch Extraction from the entire WSI</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="ann_generator.html">Annotation File Generator</a></li>
@@ -215,6 +219,81 @@ random_state : boolean</p>
 
 </dd></dl>
 
+</section>
+<section id="about-this-module">
+<h2>About this module<a class="headerlink" href="#about-this-module" title="Permalink to this heading"></a></h2>
+<p>This demonstration guides you through the process of using ValidPath to extract patches within annotations. This feature enabled using the patch_extraction method.</p>
+<a class="reference internal image-reference" href="_images/patch_extraction.PNG"><img alt="_images/patch_extraction.PNG" class="align-center" src="_images/patch_extraction.PNG" style="width: 300px;" /></a>
+</section>
+<section id="loading-required-packages">
+<h2>Loading Required Packages<a class="headerlink" href="#loading-required-packages" title="Permalink to this heading"></a></h2>
+<p>This step involves importing various Python modules that are needed for our analysis.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">import os</span>
+<span class="go">from WSI.readwsi import WSIReader</span>
+<span class="go">from WSI.patch import WSIpatch_extractor</span>
+<span class="go">from WSI.patch import PatchExtractor</span>
+<span class="go">import matplotlib.pyplot as plt</span>
+</pre></div>
+</div>
+</section>
+<section id="patch-extraction-from-annotated-area">
+<h2>Patch Extraction from Annotated Area<a class="headerlink" href="#patch-extraction-from-annotated-area" title="Permalink to this heading"></a></h2>
+<p>In this section, we show you how to extract image patches from the annotations which are already extracted. We do this by using ValidPath’s PatchExtractor class. This step should be run after extracting the annotated area of the WSI. If you haven’t extracted the annotations, in order to extract the image patches. please follow the steps in this Notebook github.com/DIDSR/wsi_processing_toolbox/02_annotation_extraction.ipynb. After extracting the annotations, you can call the gen_patch method from the annotation.patch_extractor class to extract image patches. Please make sure that you imported the PatchExtractor class using “from annotation.patch_extractor import PatchExtractor”. Please run the following code to generate image patches from the annotated area.</p>
+<p>let’s call the method and extract annotations. This can be done using the following code (please modify the variables as needed):</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">PatchExtractor = PatchExtractor()</span>
+<span class="go">INPUTDIR = &#39;C:/DATA/0_Washu-Aperio/input_output/&#39;</span>
+<span class="go">PatchSize = (255,255)</span>
+<span class="go">Number_of_Patches = 10</span>
+<span class="go">OUTPUTDIR = &#39;C:/DATA/0_Washu-Aperio/out_dir/&#39;</span>
+<span class="go">intensity_check = True</span>
+<span class="go">intensity_threshold = 250</span>
+<span class="go">PatchExtractor.gen_patch(INPUTDIR,PatchSize,Number_of_Patches,intensity_check,intensity_threshold,OUTPUTDIR)</span>
+</pre></div>
+</div>
+<p>Extracted annotations are based on defined inputs. For example, you can specify the number of patches you would like to extract from each annotation. You may also set ‘intensity_check’ to ‘True’ if you would like to filter the generated image patches. When ‘intensity_check’ is set to ‘True,’ only patches from annotated regions with at least three corners having high intensity (e.g., intensity higher than 240) will be extracted.</p>
+<p>Note: the size of the annotation should be at least two times larger than the patch size.</p>
+</section>
+<section id="patch-extraction-from-the-entire-wsi">
+<h2>Patch Extraction from the entire WSI<a class="headerlink" href="#patch-extraction-from-the-entire-wsi" title="Permalink to this heading"></a></h2>
+<p>In this section, we will demonstrate how to load a WSI and extract image patches from the entire WSI. This step can be done independently without the need to extract annotations since we will work directly with WSI. Please make sure that you imported the WSIpatch_extractor class using ” from WSI.readwsi import WSIpatch_extractor”. We extract image patches by using patch_extraction method of the WSIpatch_extractor class:</p>
+<p>Since this method extract image patches from the entire WSI (not annotated regions), we need to call the wsi_reader to read a WSI. Therefore, we need to load a WSI and create the WSI object. This is enabled using the wsi_reader method in the ReadWsi package. For this, we will set up a directory which contains our WSI files, we will create a list in Python and append WSI names in this list and load the WSI using the wsi_reader using an index.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">dir_file = “C:\DATA\0_Washu-Aperio”</span>
+
+<span class="go"> file_name = “aperio-002-0.svs”</span>
+<span class="go">path = dir_file + &quot;\\&quot; + file_name</span>
+<span class="go"> if os.path.exists(path):</span>
+<span class="go">                wsi_obj =WSI.wsi_reader(path)</span>
+<span class="go">                break</span>
+<span class="go">        else:</span>
+<span class="go">                print(&quot;File path error!&quot; )</span>
+
+<span class="go">print(&quot; Done...&quot;)</span>
+</pre></div>
+</div>
+<p>After reading the WSI using the wsi_reader, we have an object which has the loaded WSI. To validate if the object is loaded correctly, we print the object and also print the available pyramid levels of the WSI using the “.level_dimensions” method.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">print(wsi_obj)</span>
+<span class="go">print(wsi_obj.level_dimensions)</span>
+</pre></div>
+</div>
+<p>To see a thumbnail of the WSI, we use the get_thumbnail method of wsi_reader. We load the thumbnail as follows:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">for example: size_ = (600,300)</span>
+<span class="go">tile= wsi_obj.get_thumbnail(size=size_)</span>
+<span class="go">plt.imshow(tile)</span>
+<span class="go">plt.title(&quot;WSI thumbnail&quot;)</span>
+</pre></div>
+</div>
+<p>Now we can call the patch_extraction method of the WSIpatch_extractor class to extract image patches. You can use the following code to call this methos.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">patchsize = 256</span>
+<span class="go">output_directory = &quot;C:/DATA/0_Washu-Aperio/out_dir/&quot;</span>
+<span class="go">random= False</span>
+<span class="go">visualize = True</span>
+<span class="go">intensity_check = False</span>
+<span class="go">num_patches = 10 # set to -1 to extract all patches</span>
+<span class="go">intensity_threshold = 250</span>
+<span class="go">std_threshold = 15</span>
+<span class="go">WSIpatch_extractor.patch_extraction(wsi_obj,patchsize,output_directory,random,visualize,intensity_check,intensity_threshold,std_threshold,num_patches)</span>
+</pre></div>
+</div>
 </section>
 </section>
 
