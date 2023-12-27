@@ -25,8 +25,8 @@ from scipy import stats
 import os, os.path
 import pandas as pd
 from sklearn.metrics import roc_curve
-from sklearn.metrics import precision_recall_curve
-from sklearn.metrics import classification_report, confusion_matrix
+#from sklearn.metrics import precision_recall_curve
+#from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, cohen_kappa_score
 from scipy.stats import norm
 from sklearn.metrics import auc
