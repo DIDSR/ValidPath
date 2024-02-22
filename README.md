@@ -34,16 +34,16 @@ There are several modules in this package including
 5.	Performance Assessment: Includes different modules for assessing the performance of ML models.
 
 ### Information for Developers
-Code Documentation: [Link](https://mousavikahaki.github.io/ValidPath/index.html)
+Code Documentation: [Link](https://didsr.github.io/ValidPath/index.html)
 Please refer to the code documentation and email  **[seyed.kahaki@fda.hhs.gov](mailto:seyed.kahaki@fda.hhs.gov)** if you have any questions.
 
 
 ### Testing Examples
-1. [WSI Reader: Read Whole slide Image, Extract WSI Regions](https://github.com/mousavikahaki/ValidPath/blob/main/01_read_wsi.ipynb)
-2. [Extract Annotations: Extract annotations and masks from Whole Slide Images](https://github.com/mousavikahaki/ValidPath/blob/main/02_annotation_extraction.ipynb)
-3. [Patch Extraction: Extract patch images from annotated regions](https://github.com/mousavikahaki/ValidPath/blob/main/03_patch_extraction.ipynb)
-4. [Annotation Generator: Generate Aperio ImageScope Annotation file](https://github.com/mousavikahaki/ValidPath/blob/main/4_annotation_generator.ipynb)
-5. [Performance Assessmet: including different methods for assessing the performance of ML models](https://github.com/mousavikahaki/ValidPath/blob/main/05_performance_assessment.ipynb)
+1. [WSI Reader: Read Whole slide Image, Extract WSI Regions](https://github.com/didsr/ValidPath/blob/main/01_read_wsi.ipynb)
+2. [Extract Annotations: Extract annotations and masks from Whole Slide Images](https://github.com/didsr/ValidPath/blob/main/02_annotation_extraction.ipynb)
+3. [Patch Extraction: Extract patch images from annotated regions](https://github.com/didsr/ValidPath/blob/main/03_patch_extraction.ipynb)
+4. [Annotation Generator: Generate Aperio ImageScope Annotation file](https://github.com/didsr/ValidPath/blob/main/4_annotation_generator.ipynb)
+5. [Performance Assessmet: including different methods for assessing the performance of ML models](https://github.com/didsr/ValidPath/blob/main/05_performance_assessment.ipynb)
 
 ## Installation
 This section will help you to install the packages needed for ValidPath.
@@ -52,8 +52,8 @@ This section will help you to install the packages needed for ValidPath.
 
 If you wish to use our python package, perhaps without developing them further, run the command pip install ValidPath or pip install --ignore-installed --upgrade ValidPath to upgrade from an existing installation (This will be enabled when the first version is ready and submitted to pypi).
 
-Detailed installation instructions can be found in the [documentation]([Link to Installation Guide dependencies](https://mousavikahaki.github.io/ValidPath/installation.html)
-To understand better how the programs work, study the jupyter notebooks referred to under the heading [**Examples Taster**](https://github.com/mousavikahaki/ValidPath/blob/main/README.md#testing-examples).
+Detailed installation instructions can be found in the [documentation]([Link to Installation Guide dependencies](https://didsr.github.io/ValidPath/installation.html)
+To understand better how the programs work, study the jupyter notebooks referred to under the heading [**Examples Taster**](https://github.com/didsr/ValidPath/blob/main/README.md#testing-examples).
 
 ### Pre-requirements
 
@@ -107,7 +107,7 @@ Prepare a computer as a convenient platform for further development of the Pytho
 ```
 4.	Download a complete copy of the ** ValidPath **.
 ```sh
-  $ git clone https://github.com/mousavikahaki/ValidPath/
+  $ git clone https://github.com/didsr/ValidPath/
 ```
 5.	Change directory to ValidPath
 ```sh
@@ -135,7 +135,7 @@ $ conda activate ValidPath-dev
 If you find that ValidPath is useful or if you use it in your project, please consider citing the code:
 
 ```
-Seyed Kahaki, Arian Arab, Weijie Chen. (2024) ValidPath [Source Code] https://github.com/mousavikahaki/ValidPath
+Seyed Kahaki, Arian Arab, Weijie Chen. (2024) ValidPath [Source Code] https://github.com/didsr/ValidPath
 ```
 
 And this pape:
@@ -159,7 +159,7 @@ And this pape:
 
 ### Auxiliary Files
 
-Example of input data can be found here: [Link](https://github.com/mousavikahaki/ValidPath/tree/main/data).
+Example of input data can be found here: [Link](https://github.com/didsr/ValidPath/tree/main/data).
 
 ### Contact
 For any questions/suggestions/collaborations, please contact Seyed Kahaki either via this GitHub repo or via email (seyed.kahaki@fda.hhs.gov).
