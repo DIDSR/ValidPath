@@ -140,20 +140,18 @@ Seyed Kahaki, Arian Arab, Weijie Chen. (2024) ValidPath [Source Code] https://gi
 
 And this pape:
 ```
-@article{
-    Pocock2022,
-    author = {Seyed M. M. Kahaki, U.S. Food and Drug Administration (United States); Ian S. Hagemann, Washington Univ. School of Medicine in St. Louis (United States); Kenny Cha, Christopher J. Trindade, Nicholas Petrick, Weijie Chen, U.S. Food and Drug Administration (United States)},
-    doi = {TBD},
-    issn = {TBD},
-    journal = {SPIE Medical Imaging},
-    month = {feb},
-    number = {1},
-    pages = {1},
-    publisher = {SPIE Medical Imaging},
-    title = {{Weakly supervised deep learning for predicting the response to hormonal treatment of women with atypical endometrial hyperplasia: a feasibility study}},
-    url = {https://spie.org/medical-imaging/presentation/Weakly-supervised-deep-learning-for-predicting-the-response-to-hormonal/12471-31},
-    volume = {2},
-    year = {2023}
+@article{10.1117/1.JMI.11.1.017502,
+  author = {Seyed Mostafa M. Kahaki and Ian S. Hagemann and Kenny H. Cha and Christopher J. Trindade and Nicholas A. Petrick and Nicolas Kostelecky and Lindsay E. Borden and Doaa Atwi and Kar-Ming Fung and Weijie Chen},
+  title = {{End-to-end deep learning method for predicting hormonal treatment response in women with atypical endometrial hyperplasia or endometrial cancer}},
+  volume = {11},
+  journal = {Journal of Medical Imaging},
+  number = {1},
+  publisher = {SPIE},
+  pages = {017502},
+  keywords = {mixed supervised learning, deep learning, hormonal treatment, atypical endometrial hyperplasia, Data modeling, Deep learning, Education and training, Feature extraction, Performance modeling, Machine learning, Radiomics, RGB color model, Tumor growth modeling, Statistical modeling},
+  year = {2024},
+  doi = {10.1117/1.JMI.11.1.017502},
+  URL = {https://doi.org/10.1117/1.JMI.11.1.017502}
 }
 ```
 
