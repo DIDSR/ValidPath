@@ -129,7 +129,7 @@ or
 $ conda activate ValidPath-dev
 ```
 
-
+<!--  
 ### Cite this repository
 
 If you find that ValidPath is useful or if you use it in your project, please consider citing the code:
@@ -154,7 +154,7 @@ And this pape:
   URL = {https://doi.org/10.1117/1.JMI.11.1.017502}
 }
 ```
-
+-->
 ### Auxiliary Files
 
 Example of input data can be found here: [Link](https://github.com/didsr/ValidPath/tree/main/data).
