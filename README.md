@@ -176,7 +176,10 @@ For more information about the Catalog of Regulatory Science Tools, email [RST_C
 •	Date of Publication: 06/20/2024
 
 •	Recommended Citation: 
-```U.S. Food and Drug Administration. (2024). ValidPath: Whole Slide Image Processing and Machine Learning Performance Assessment Tool (RST24CV11.01). [Link](https://cdrh-rst.fda.gov/validpath-whole-slide-image-processing-and-machine-learning-performance-assessment-tool)```
+
+```
+U.S. Food and Drug Administration. (2024). ValidPath: Whole Slide Image Processing and Machine Learning Performance Assessment Tool (RST24CV11.01). [Link](https://cdrh-rst.fda.gov/validpath-whole-slide-image-processing-and-machine-learning-performance-assessment-tool)
+```
 
 
 
